@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,600&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 20px;
+}
+
+.formulario input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-size: 16;
+}
+
+.formulario form {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form .username {
+  position: relative;
+  margin: 20px 0;
+}
+
+.username input,
+.password input {
+  width: 25%;
+  padding: 10px 3px 10px 32px; /*mover donde se escribe*/
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 5px center; /* posicion imagen */
+  background-size: 20px; /* Tamaño imagen */
+}
+
+.username input {
+  background-image: url("../images/groupLogo.png");
+}
+.password input {
+  background-image: url("../images/lock.logo.png");
+}
+
+.image-button {
+  background: none;
+  border: none;
+  margin-right: 20px;
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.image-button img {
+  width: 300px;
+  height: auto;
+}
+
+.image2-button {
+  background: none;
+  border: none;
+  margin-right: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.image2-button img {
+  width: 400px;
+  height: auto;
+}
+
+.image3-button {
+  background: none;
+  border: none;
+  margin-left: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.image3-button img {
+  width: 300px;
+  height: auto;
+}
+
+.miniLogos {
+  display: none;
+}
