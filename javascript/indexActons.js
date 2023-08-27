@@ -1,6 +1,6 @@
 
 function redirectionColaboradores(){
-  location.href = "../html/login.html"
+  location.href = "../html/loginC.html"
 }
 
 

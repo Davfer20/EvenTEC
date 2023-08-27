@@ -3,6 +3,11 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+:root {
+  --accentColorBG: #F2F6F9;
+  --accentColorBD: #C2C2C2;
+  --color-fondo: #F2F2F2;
+}
 
 .container {
   display: flex;
@@ -41,13 +46,12 @@ body {
   box-sizing: border-box;
 }
 
-form .username {
+form .inputT1 {
   position: relative;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
-.username input,
-.password input {
+.inputT1 input {
   width: 25%;
   padding: 10px 3px 10px 32px; /*mover donde se escribe*/
   border-radius: 20px;
@@ -59,11 +63,34 @@ form .username {
   background-size: 20px; /* Tamaño imagen */
 }
 
-.username input {
-  background-image: url("../images/groupLogo.png");
+
+.usernameC input {
+  background-image: url("../images/colabLogo.svg");
+}
+.usernameA input {
+  background-image: url("../images/asoLogo.svg");
+
+}
+.usernameE input {
+  background-image: url("../images/studentLogo.svg");
 }
 .password input {
-  background-image: url("../images/lock.logo.png");
+  background-image: url("../images/PSWLogo.svg");
+}
+.carreraID input {
+  background-image: url("../images/carreerLogo.svg");
+}
+.phone input {
+  background-image: url("../images/phoneLogo.svg");
+}
+.email input {
+  background-image: url("../images/emailLogo.svg");
+}
+.carnet input {
+  background-image: url("../images/carnetLogo.svg");
+}
+.sede input {
+  background-image: url("../images/sedeLogo.svg");
 }
 
 .image-button {
@@ -92,18 +119,24 @@ form .username {
   height: auto;
 }
 
-.image3-button {
-  background: none;
-  border: none;
-  margin-left: 20px;
+.buttonT1 {
+  width: 25%;
+  border-radius: 10px;
+  padding: 7px 0px 7px 0px;
+  margin-left: 28px;
   margin-top: 10px;
   cursor: pointer;
+  font-size: 18px;
+  background-color: var(--accentColorBG);
+  border-color: var(--accentColorBD);
 }
 
-.image3-button img {
-  width: 300px;
-  height: auto;
+.buttonT1:hover {
+
+  border-color: lightskyblue;
 }
+
+
 
 .miniLogos {
   display: none;
