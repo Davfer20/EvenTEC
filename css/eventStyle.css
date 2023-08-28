@@ -80,69 +80,68 @@ h3 {
     margin-top: 0px;
 }
 
-=======margin: 0;
-}
-
 .headder {
     display: flex;
-    height: 57px;
-    background-color: aqua;
-    border-color: blueviolet;
-    border: 4px;
+    height: 60px;
+    border-bottom: 1px solid #dedede;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
     align-items: center;
-
+    top: 0;
+    left: 0;
+    right: 0;
     position: fixed;
 }
 
 .left-section {
-    align-items: center;
-    padding: 10px 0;
     display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .left-image {
-    width: 30px;
+    width: 45px;
     height: auto;
     margin-left: 20px;
 }
 
 .buttonLeft {
-    padding: 8px 40px;
     background-color: white;
     color: black;
     border: none;
+    font-size: large;
+
     border-radius: 4px;
     cursor: pointer;
+    height: 100%;
+    max-width: 140px;
+    min-width: 100px;
 }
 
 .middle-section {
-    flex: 1;
-    margin-left: 80px;
-    margin-right: 35px;
-    max-width: 500px;
     display: flex;
     align-items: center;
+    flex: auto;
 }
 
 .searchBar {
+    height: 40px;
     flex: 1;
-    height: 30px;
-    padding-left: 12px;
+    background-color: transparent;
+    min-width: 0;
+    padding-left: 52px;
     font-size: 16px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: lightgrey;
-    border-radius: 2px;
-    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #cccccc;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 2px #eeeeee;
 }
 
 .search-button {
-    width: auto;
-    height: auto;
-    border-width: 2px;
-    border-color: lightgrey;
-    margin-left: -5px;
+    width: 44px;
+    border: none;
+    background: none;
     cursor: pointer;
+    margin-right: -48px;
 }
 
 .search-button img {
@@ -152,16 +151,17 @@ h3 {
 
 .right-section {
     display: flex;
-    padding-left: 100px;
-    gap: 40px;
     align-items: center;
-    width: 60px;
+    width: 182px;
+    justify-content: space-between;
+    margin-right: 24px;
+    margin-left: 29px;
+    flex-shrink: 0;
 }
 
 .niceButtons {
     width: auto;
     height: auto;
-    border-width: 2px;
     background-color: transparent;
     border: none;
     transition: color 0.3s ease-in-out;
@@ -169,14 +169,14 @@ h3 {
 }
 
 .niceButtons img {
-    width: 30px;
+    width: 35px;
     height: auto;
 }
 
-.image-container {
-    margin-right: 10px;
+.imageContainer {
     /* Espaciado entre la imagen y los botones */
     margin-bottom: 0px;
+    margin-right: 20px;
 }
 
 .bullet {
@@ -186,8 +186,4 @@ h3 {
 
 form .input-buscar {
     position: relative;
-}
-
-.buttonInicio {
-    margin-left: 50px;
 }
