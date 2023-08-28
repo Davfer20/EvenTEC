@@ -3,10 +3,27 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
 :root {
   --accentColorBG: #F2F6F9;
   --accentColorBD: #C2C2C2;
   --color-fondo: #F2F2F2;
+}
+
+.title {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.7;
+  margin-top: 40px;
+}
+
+.subtitle {
+  margin-top: 3;
+  font-size: 28px;
+  font-style: small;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -14,7 +31,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 .container2 {
@@ -52,53 +69,70 @@ form .inputT1 {
 }
 
 .inputT1 input {
-  width: 25%;
-  padding: 10px 3px 10px 32px; /*mover donde se escribe*/
+  width: 30%;
+  padding: 10px 3px 10px 36px;
+  /*mover donde se escribe*/
   border-radius: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   outline: none;
-  font-size: 16px;
+  font-size: 20px;
   background-repeat: no-repeat;
-  background-position: 5px center; /* posicion imagen */
-  background-size: 20px; /* Tamaño imagen */
+  background-position: 8px center;
+  /* posicion imagen */
+  background-size: 25px;
+  /* Tamaño imagen */
 }
 
 
 .usernameC input {
   background-image: url("../images/colabLogo.svg");
 }
+
 .usernameA input {
   background-image: url("../images/asoLogo.svg");
 
 }
+
 .usernameE input {
   background-image: url("../images/studentLogo.svg");
 }
+
 .password input {
   background-image: url("../images/PSWLogo.svg");
 }
+
 .carreraID input {
   background-image: url("../images/carreerLogo.svg");
 }
+
 .phone input {
   background-image: url("../images/phoneLogo.svg");
 }
+
 .email input {
   background-image: url("../images/emailLogo.svg");
 }
+
 .carnet input {
   background-image: url("../images/carnetLogo.svg");
 }
+
 .sede input {
   background-image: url("../images/sedeLogo.svg");
 }
 
 .image-button {
-  background: none;
   border: none;
   margin-right: 20px;
-  margin-top: 40px;
+  margin-left: 20px;
   cursor: pointer;
+  background-color: #FFF;
+  box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.25);
+}
+
+.image-button.pressed {
+  background-color: var(--accentColorBG);
+  box-shadow: inset 3px 3px 8px 3px rgba(0, 0, 0, 0.25)
 }
 
 .image-button img {
@@ -106,38 +140,19 @@ form .inputT1 {
   height: auto;
 }
 
-.image2-button {
-  background: none;
-  border: none;
-  margin-right: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.image2-button img {
-  width: 400px;
-  height: auto;
-}
-
 .buttonT1 {
-  width: 25%;
+  width: 30%;
   border-radius: 10px;
-  padding: 7px 0px 7px 0px;
-  margin-left: 28px;
-  margin-top: 10px;
+  padding: 13px 0px 13px 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
   font-size: 18px;
+  transition: border-color 0.8s;
   background-color: var(--accentColorBG);
   border-color: var(--accentColorBD);
 }
 
 .buttonT1:hover {
-
   border-color: lightskyblue;
-}
-
-
-
-.miniLogos {
-  display: none;
 }
