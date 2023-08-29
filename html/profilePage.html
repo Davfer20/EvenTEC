@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Perfil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/eventStyle.css" />
+</head>
+
+<body>
+  <div id="headerContainer"></div>
+  <p class="pageTitle">Perfil</p>
+
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        const headerContainer = document.getElementById('headerContainer');
+        headerContainer.innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

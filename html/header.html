@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/eventStyle.css" />
-  <title>Botones en Fila</title>
 </head>
 
 <body>
@@ -14,8 +13,8 @@
       <div class="imageContainer">
         <img src="../images/favicon.png" alt="logoEvenTEC" class="left-image" />
       </div>
-      <button class="buttonLeft">Inicio</button>
-      <button class="buttonLeft">Calendario</button>
+      <button class="buttonLeft" onclick="location.href = 'eventPage.html';">Inicio</button>
+      <button class="buttonLeft" onclick="location.href = 'calendarPage.html';">Calendario</button>
       <button class="buttonLeft">Crear</button>
     </div>
 
@@ -31,7 +30,7 @@
       <button class="niceButtons">
         <img src="../images/bellLogo.svg" />
       </button>
-      <button class="niceButtons">
+      <button class="niceButtons" onclick="location.href = 'profilePage.html';">
         <img src="../images/userLogo.svg" />
       </button>
       <button class="niceButtons">
@@ -39,10 +38,6 @@
       </button>
     </div>
   </div>
-
-  <p class="pageTitle">EvenTEC</p>
-  <p class="pageSubtitle">Eventos más populares</p>
-
 </body>
 
 </html>
