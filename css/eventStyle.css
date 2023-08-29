@@ -114,11 +114,10 @@ h3 {
   color: black;
   border: none;
   font-size: large;
-
   cursor: pointer;
   height: 60px;
   max-width: 140px;
-  min-width: 100px;
+  min-width: 130px;
 }
 
 .buttonLeft:hover {

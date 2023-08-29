@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Colaborador</title>
-    <link
-      rel="shortcut icon"
-      href="../images/favicon.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="../css/normalize.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-  </head>
 
-  <body>
-    <header class="header">
-      <div class="formulario">
-        <p class="title">Inicio de Sesión</p>
-        <p class="subtitle">Colaborador</p>
-        <form method="post">
-          <div class="inputT1 usernameC">
-            <input type="text" placeholder="Username" required />
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Colaborador</title>
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/normalize.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
 
-          <div class="inputT1 password">
-            <input type="password" placeholder="Password" required />
-          </div>
+<body>
+  <header class="header">
+    <div class="formulario">
+      <p class="title">Inicio de Sesión</p>
+      <p class="subtitle">Colaborador</p>
+      <form method="post">
+        <div class="inputT1 usernameC">
+          <input type="text" placeholder="Username" required />
+        </div>
 
-          <div>
-            <button class="buttonT1" type="button">Iniciar Sesión</button>
-          </div>
-        </form>
-      </div>
-    </header>
+        <div class="inputT1 password">
+          <input type="password" placeholder="Password" required />
+        </div>
 
-    <script>
-      src = "./javascript/";
-    </script>
-  </body>
+        <div>
+          <button class="buttonT1" type="button" onclick="location.href = 'eventPage.html';">Iniciar Sesión</button>
+        </div>
+      </form>
+    </div>
+  </header>
+
+  <script>
+    src = "./javascript/";
+  </script>
+</body>
+
 </html>
