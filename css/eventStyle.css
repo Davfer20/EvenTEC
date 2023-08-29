@@ -1,213 +1,213 @@
 body {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    max-width: 800px;
-    width: fit-content;
-    margin-top: 20px;
-    margin-left: 20px;
-    border-radius: 18px;
-    border-right: 3px solid #BBB;
-    border-bottom: 3px solid #BBB;
-    background: #FFF;
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  width: fit-content;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 18px;
+  border-right: 3px solid #bbb;
+  border-bottom: 3px solid #bbb;
+  background: #fff;
 }
 
 .Evento {
-    width: 60%;
-    background: white;
-    padding-left: 10px;
-    padding-top: 10px;
+  width: 60%;
+  background: white;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .Evento img {
-    width: 100%;
-    border-radius: 6px;
+  width: 100%;
+  border-radius: 6px;
 }
 
 .Evento h2 {
-    font-size: 1.2em;
-    margin: 10px 0;
+  font-size: 1.2em;
+  margin: 10px 0;
 }
 
 .Evento p {
-    color: darkgray;
+  color: darkgray;
 }
 
 .sidebar {
-    flex-basis: 30%;
-    background-color: white;
-    padding: 20px;
+  flex-basis: 30%;
+  background-color: white;
+  padding: 20px;
 }
 
 .sidebar-item {
-    display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    border-radius: 0px 7px 7px 7px;
-    border-right: 2px solid darkgray;
-    border-bottom: 2px solid darkgray;
-    background: lightblue;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-radius: 0px 7px 7px 7px;
+  border-right: 2px solid darkgray;
+  border-bottom: 2px solid darkgray;
+  background: lightblue;
 }
 
 .sidebar-item p {
-    margin: 0;
+  margin: 0;
 }
 
 .user {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .user img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .eventDetail {
-    display: block;
+  display: block;
 }
 
 h1 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 h3 {
-    margin-bottom: 5px;
-    margin-top: 0px;
+  margin-bottom: 5px;
+  margin-top: 0px;
 }
 
 .headder {
-    display: flex;
-    height: 60px;
-    border-bottom: 1px solid #dedede;
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.25);
-    justify-content: space-between;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    position: fixed;
+  display: flex;
+  height: 60px;
+  border-bottom: 1px solid #dedede;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.25);
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
 }
 
 .left-section {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .left-image {
-    width: 45px;
-    height: auto;
-    margin-left: 20px;
+  width: 45px;
+  height: auto;
+  margin-left: 20px;
 }
 
 .buttonLeft {
-    background-color: white;
-    color: black;
-    border: none;
-    font-size: large;
-    cursor: pointer;
-    height: 60px;
-    max-width: 140px;
-    min-width: 130px;
+  background-color: white;
+  color: black;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+  height: 60px;
+  max-width: 140px;
+  min-width: 130px;
 }
 
 .buttonLeft:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .middle-section {
-    display: flex;
-    align-items: center;
-    flex: auto;
+  display: flex;
+  align-items: center;
+  flex: auto;
 }
 
 .searchBar {
-    height: 40px;
-    flex: 1;
-    background-color: transparent;
-    min-width: 0;
-    padding-left: 52px;
-    font-size: 16px;
-    border: 1px solid #cccccc;
-    border-radius: 50px;
-    box-shadow: inset 0px 1px 2px #eeeeee;
+  height: 40px;
+  flex: 1;
+  background-color: transparent;
+  min-width: 0;
+  padding-left: 52px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 2px #eeeeee;
 }
 
 .search-button {
-    width: 44px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-right: -48px;
+  width: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-right: -48px;
 }
 
 .search-button img {
-    width: 25px;
-    height: auto;
+  width: 25px;
+  height: auto;
 }
 
 .right-section {
-    display: flex;
-    align-items: center;
-    width: 182px;
-    justify-content: space-between;
-    margin-right: 24px;
-    margin-left: 29px;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  width: 182px;
+  justify-content: space-between;
+  margin-right: 24px;
+  margin-left: 29px;
+  flex-shrink: 0;
 }
 
 .niceButtons {
-    width: auto;
-    height: auto;
-    background-color: transparent;
-    border: none;
-    transition: color 0.3s ease-in-out;
-    cursor: pointer;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .niceButtons img {
-    width: 35px;
-    height: auto;
+  width: 35px;
+  height: auto;
 }
 
 .imageContainer {
-    /* Espaciado entre la imagen y los botones */
-    margin-bottom: 0px;
-    margin-right: 20px;
+  /* Espaciado entre la imagen y los botones */
+  margin-bottom: 0px;
+  margin-right: 20px;
 }
 
 .bullet {
-    font-size: 24px;
-    margin: 0 10px;
+  font-size: 24px;
+  margin: 0 10px;
 }
 
 form .input-buscar {
-    position: relative;
+  position: relative;
 }
 
 p {
-    margin-top: 80px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 0.7;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.7;
 }
 
 .pageSubtitle {
-    margin-top: 0px;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 0.7;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 0.7;
 }
