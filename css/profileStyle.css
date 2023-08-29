@@ -1,0 +1,57 @@
+:root {
+  --accentColorBG: #f2f6f9;
+  --accentColorBD: #c2c2c2;
+  --color-fondo: #f2f2f2;
+}
+
+.profile-container {
+  max-width: 300px;
+  max-height: 100px;
+}
+
+.imageUserContainer {
+  display: flex;
+  width: 200px;
+  height: auto;
+  margin-left: 120px;
+  margin-top: 110px; /* Ajusta este valor para cambiar la distancia hacia abajo */
+}
+
+.profile-button {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px 20px 5px 20px;
+  margin-top: 20px;
+  margin-left: 70px;
+  cursor: pointer;
+  font-size: 36px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--accentColorBG);
+  border-color: var(--accentColorBD);
+}
+
+.profile-button:hover {
+  border-color: lightskyblue;
+}
+
+.contact-container {
+  padding-left: 500px;
+  gap: 30px;
+  width: 300px;
+  height: auto;
+  flex-direction: column;
+  display: flex;
+  margin-top: 10px;
+}
+
+.contact-container input {
+  padding: 10px 20px 10px 20px;
+  flex: 1;
+  border: none;
+  box-shadow: 0px -2px 0px gray;
+  padding: 10px;
+  min-width: 0;
+}
