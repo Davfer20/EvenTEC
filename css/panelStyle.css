@@ -1,0 +1,30 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.panelContainer {
+  width: 1400px;
+  height: 600px;
+  background-color: lightgreen;
+  margin: auto;
+}
+
+.square {
+  width: 300px;
+  height: 250px;
+  background-color: tomato;
+  width: 43%;
+  float: left;
+  margin-right: 2%;
+  margin-left: 4%;
+  margin-bottom: 6%;
+  text-align: center;
+}
+
+.square h2 {
+  margin-top: 20px;
+}
+
+.square p {
+  margin-top: 20px;
+}

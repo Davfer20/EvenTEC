@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crear Evento</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/eventCreatorStyle.css" />
+  </head>
+
+  <body>
+    <p class="pageTitle">Crear Evento</p>
+    <div id="headerContainer"></div>
+    <div class="eventoMainContainer">
+      <div class="ImagenEvento">
+        <h2>Titulo de la info</h2>
+      </div>
+
+      <div class="dividedContainer">
+        <div class="inputEv">
+          <input type="text" placeholder="Nombre del evento" required />
+        </div>
+
+        <div class="category-item">
+          <p>Categoria 1</p>
+        </div>
+        <div class="category-item">
+          <p>Categoria 2</p>
+        </div>
+        <div class="category-item">
+          <p>Categoria 3</p>
+        </div>
+        <div class="publicar-container">
+          <button class="buttonPublicar" type="button">Publicar Evento</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cargar el encabezado usando fetch y insertarlo en el contenedor
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerContainer = document.getElementById("headerContainer");
+          headerContainer.innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
