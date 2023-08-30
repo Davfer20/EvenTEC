@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Crear Evento</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/eventCreatorStyle.css" />
-  </head>
 
-  <body>
-    <p class="pageTitle">Crear Evento</p>
-    <div id="headerContainer"></div>
-    <div class="eventoMainContainer">
-      <div class="ImagenEvento">
-        <h2>Titulo de la info</h2>
+<head>
+  <title>Crear Evento</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/eventCreatorStyle.css" />
+</head>
+
+<body>
+  <div id="headerContainer"></div>
+
+  <div class="item">
+    <input class="image" type="file"></input>
+    <div class="content">
+      <input class="title" type="text" placeholder="Titulo del Evento" required>
+      <div class="categories">
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
       </div>
+      <textarea class="description" placeholder="Descripción del evento" rows="5" cols="54"></textarea>
+      <textarea class="requirements" placeholder=" - Requerimientos" rows="5" cols="30"></textarea>
+      <input type="datetime-local" placeholder="Rango de fecha"></input>
+      <span> - </span>
+      <input type="datetime-local" placeholder="Rango de fecha"></input>
 
-      <div class="dividedContainer">
-        <div class="inputEv">
-          <input type="text" placeholder="Nombre del evento" required />
-        </div>
-
-        <div class="category-item">
-          <p>Categoria 1</p>
-        </div>
-        <div class="category-item">
-          <p>Categoria 2</p>
-        </div>
-        <div class="category-item">
-          <p>Categoria 3</p>
-        </div>
-        <div class="publicar-container">
-          <button class="buttonPublicar" type="button">Publicar Evento</button>
-        </div>
-      </div>
+      <button class="buttonT1">Publicar Evento</button>
+      <input type="number" class="capacity" placeholder="Capacidad"></input>
     </div>
+  </div>
 
-    <script>
-      // Cargar el encabezado usando fetch y insertarlo en el contenedor
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const headerContainer = document.getElementById("headerContainer");
-          headerContainer.innerHTML = data;
-        });
-    </script>
-  </body>
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerContainer = document.getElementById("headerContainer");
+        headerContainer.innerHTML = data;
+      });
+  </script>
+</body>
+
 </html>
