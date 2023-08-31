@@ -4,44 +4,50 @@
   --color-fondo: #f2f2f2;
 }
 
+.content {
+  padding: 20px 50px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+  right: 0;
+}
+
 .profile-container {
-  max-width: 300px;
-  max-height: 100px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 50px;
+  padding: 0px 60px;
 }
 
 .imageUserContainer {
   display: flex;
   width: 200px;
   height: auto;
-  margin-left: 120px;
-  margin-top: 55px;
-  /* Ajusta este valor para cambiar la distancia hacia abajo */
+  border-radius: 500px;
 }
 
-.profile-button {
-  width: 100%;
-  border-radius: 10px;
-  padding: 5px 20px 5px 20px;
+.buttonT1 {
+  min-width: 200px;
+  padding: 10px 50px;
   margin-top: 20px;
-  margin-left: 70px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 36px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 18px;
+  transition: border-color 0.8s;
   background-color: var(--accentColorBG);
   border-color: var(--accentColorBD);
 }
 
-.profile-button:hover {
+.buttonT1:hover {
   border-color: lightskyblue;
 }
 
 .contact-container {
-  padding-left: 500px;
   gap: 30px;
-  width: 300px;
+  flex: 1;
   height: auto;
   flex-direction: column;
   display: flex;
@@ -49,10 +55,12 @@
 }
 
 .contact-container input {
+  font-size: medium;
   padding: 10px 20px 10px 20px;
-  flex: 1;
   border: none;
-  border-top: 4px blue;
+  border-bottom: 2px solid grey;
   padding: 10px;
   min-width: 0;
+  width: 60%;
+  transition: width 0.4s ease-in-out;
 }
