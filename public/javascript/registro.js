@@ -1,6 +1,7 @@
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { app } from "./firebaseconfig.js"
 
-const database = getDatabase()
+const database = getDatabase(app)
 
 // Funcion para manejar el registro de estudiantes
 function submitEstudianteListener(event) {
@@ -19,7 +20,7 @@ function submitEstudianteListener(event) {
         if (snapshot.exists()) {
             console.log(snapshot.val());
         } else {
-            set(ref(db, `users/${username}`), {
+            set(ref(database, `users/${username}`), {
                 username: username,
                 carnet: carnet,
                 password: password,
@@ -35,4 +36,5 @@ function submitEstudianteListener(event) {
 
 // Attach an event listener to the form's submit event
 const estudianteForm = document.getElementById('registrarEstudianteForm');
+console.log(estudianteForm);
 estudianteForm.addEventListener('submit', submitEstudianteListener);
