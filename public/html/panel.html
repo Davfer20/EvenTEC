@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Panel</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/eventStyle.css" />
+    <link rel="stylesheet" href="../css/panelStyle.css" />
+  </head>
+
+  <body>
+    <p class="pageTitle">Panel</p>
+    <div id="headerContainer"></div>
+    <div class="panelContainer">
+      <div class="square">
+        <h2>Titulo de la info</h2>
+        <p>info:</p>
+        <p>info:</p>
+      </div>
+      <div class="square">
+        <h2>Titulo de la info</h2>
+        <p>info:</p>
+        <p>info:</p>
+      </div>
+      <div class="square">
+        <h2>Titulo de la info</h2>
+        <p>info:</p>
+        <p>info:</p>
+      </div>
+      <div class="square">
+        <h2>Titulo de la info</h2>
+        <p>info:</p>
+        <p>info:</p>
+      </div>
+    </div>
+
+    <script>
+      // Cargar el encabezado usando fetch y insertarlo en el contenedor
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerContainer = document.getElementById("headerContainer");
+          headerContainer.innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

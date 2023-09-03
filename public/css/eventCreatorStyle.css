@@ -1,0 +1,193 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --accentColorBG: #f2f6f9;
+  --accentColorBD: #c2c2c2;
+  --color-fondo: #f2f2f2;
+}
+
+.item {
+  margin-top: 70px;
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.image {
+  width: 355px;
+  height: 210px;
+  background-color: #f0f0f0;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.content input {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-style: normal;
+  padding: 7px 5px;
+  width: 50%;
+}
+
+.categories input {
+  text-align: center;
+}
+
+.description {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.capacity {
+  display: block;
+  width: 88px;
+}
+
+
+.requirements {
+  display: block;
+}
+
+.buttonT1 {
+  padding: 10px 30px;
+  border-radius: 10px;
+  margin-left: 80px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: border-color 0.8s;
+  background-color: var(--accentColorBG);
+  border-color: var(--accentColorBD);
+}
+
+.buttonT1:hover {
+  border-color: lightskyblue;
+}
+
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 15px 20px;
+}
+
+.column {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 1, 0.25);
+
+}
+
+.evento {
+  background-color: transparent;
+  margin-left: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  margin: 7px 0px;
+
+}
+
+.user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0px 5px 0px 0px;
+}
+
+.activity {
+  font-size: 16px;
+  width: auto;
+  margin-right: 30px;
+}
+
+.eventDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  gap: 5px;
+}
+
+.addActivity {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: rgba(211, 211, 211, 0.337);
+  border-radius: 10px;
+  font-size: 200px;
+  color: lightgray;
+  transition: all 0.4s;
+}
+
+.addActivity:hover {
+  color: rgba(211, 211, 211, 0.596);
+}
+
+.addActivity:active {
+  background: rgba(211, 211, 211, 0.537);
+}
+
+.barra-inferior {
+  background-color: #ededed;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  padding: 10px;
+  bottom: 0;
+
+  width: 100%;
+}
+
+.colabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 50px;
+}
+
+.colabs img {
+  align-self: center;
+  /* Alinea el elemento verticalmente en el centro */
+  border-radius: 50px;
+  height: 68px;
+  width: auto;
+}
+
+/* Estilos para el texto en la barra inferior */
+.colabs span {
+  width: 100%;
+  font-size: 26px;
+  align-self: center;
+  font-weight: bold;
+  color: black;
+}
+
+.colabs input {
+  height: 40px;
+  font-size: 20px;
+  width: 150px;
+}
+
+.addPeople {
+  border-radius: 50px;
+  height: 68px;
+  width: 68px;
+}
+
+.addPeople img {
+  height: 48px;
+  width: auto;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Perfil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/profileStyle.css" />
+</head>
+
+<body>
+  <div id="headerContainer"></div>
+
+  <p class="pageTitle">Perfil</p>
+
+  <div class="content">
+    <div class="profile-container">
+      <img class="imageUserContainer" src="../images/test.jpg" />
+      <button class="buttonT1">Editar</button>
+      <button class="buttonT1">Eliminar</button>
+    </div>
+
+    <div class="contact-container">
+      <input type="text" class="attribute" placeholder="Campo 1"></input>
+      <input type="text" class="attribute" placeholder="Campo 2"></input>
+      <input type="text" class="attribute" placeholder="Campo 3"></input>
+      <input type="text" class="attribute" placeholder="Campo 4"></input>
+    </div>
+
+  </div>
+
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        const headerContainer = document.getElementById('headerContainer');
+        headerContainer.innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

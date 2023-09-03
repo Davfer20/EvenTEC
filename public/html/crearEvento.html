@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Crear Evento</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/eventCreatorStyle.css" />
+</head>
+
+<body>
+  <div id="headerContainer"></div>
+
+  <div class="item">
+    <input class="image" type="file"></input>
+    <div class="content">
+      <input class="title" type="text" placeholder="Titulo del Evento" required>
+      <div class="categories">
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
+        <input placeholder="+ Categoria"></input>
+      </div>
+      <textarea class="description" placeholder="Descripción del evento" rows="5" cols="54"></textarea>
+      <textarea class="requirements" placeholder=" - Requerimientos" rows="5" cols="30"></textarea>
+      <input type="datetime-local" placeholder="Rango de fecha"></input>
+      <span> - </span>
+      <input type="datetime-local" placeholder="Rango de fecha"></input>
+
+      <button class="buttonT1">Publicar Evento</button>
+      <input type="number" class="capacity" placeholder="Capacidad"></input>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <input class="image" type="file"></input>
+      <input class="title activity" type="text" placeholder="Titulo de la Actividad" required>
+      <div class="user">
+        <img src="../images/test.jpg" alt="Usuario">
+        <div class="eventDetail">
+          <input placeholder="Moderador"></input>
+          <input type="datetime-local" placeholder="Rango de fecha"></input>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="column">
+      <button class="addActivity">+</button>
+    </div>
+  </div>
+
+  <footer class="barra-inferior">
+    <div class="colabs">
+      <img src="../images/test.jpg" alt="Usuario">
+      <span>Asocia</span>
+    </div>
+
+    <div class="colabs">
+      <img src="../images/userLogo.svg" alt="Usuario">
+      <input placeholder="Colaborador" type="text"></input>
+    </div>
+
+    <div class="colabs">
+      <button class="addPeople"><img src="../images/addPeople.svg" alt="Usuario"></button>
+    </div>
+  </footer>
+
+
+
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerContainer = document.getElementById("headerContainer");
+        headerContainer.innerHTML = data;
+      });
+  </script>
+</body>
+
+</html>

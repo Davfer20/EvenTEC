@@ -15,7 +15,6 @@ function singinButton() {
   location.href = singinRefs[currentOption]
 }
 
-
 const botones = document.querySelectorAll('.image-button');
 
 botones.forEach(boton => {
