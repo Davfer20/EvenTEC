@@ -16,43 +16,54 @@ body {
   padding: 10px;
 }
 
-.image {
+.eventImage {
   width: 355px;
-  height: 210px;
+  height: auto;
   background-color: #f0f0f0;
   margin-right: 10px;
   margin-top: 10px;
 }
 
-.content input {
-  flex: 1;
-  margin-bottom: 20px;
+.activityImage {
+  width: 340px;
+  height: auto;
+  background-color: #f0f0f0;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .title {
-  font-size: 20px;
-  font-style: normal;
-  padding: 7px 5px;
+  font-size: 28px;
+  font-weight: bold;
   width: 50%;
 }
 
-.categories input {
+.categories {
   text-align: center;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.description {
-  display: block;
+.sidebar-item {
+  padding: 3px 8PX;
+  min-width: 90px;
+  height: fit-content;
+  border-radius: 0px 7px 7px 7px;
+  border-right: 2px solid darkgray;
+  border-bottom: 2px solid darkgray;
+  background: lightgray;
+}
+
+.info {
   margin-bottom: 10px;
+  width: 70%;
 }
 
 .capacity {
   display: block;
   width: 88px;
-}
-
-
-.requirements {
-  display: block;
 }
 
 .buttonT1 {
@@ -112,6 +123,12 @@ body {
   margin-right: 30px;
 }
 
+.activityTitle {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
 .eventDetail {
   display: flex;
   flex-direction: column;
@@ -120,35 +137,14 @@ body {
   gap: 5px;
 }
 
-.addActivity {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: rgba(211, 211, 211, 0.337);
-  border-radius: 10px;
-  font-size: 200px;
-  color: lightgray;
-  transition: all 0.4s;
-}
-
-.addActivity:hover {
-  color: rgba(211, 211, 211, 0.596);
-}
-
-.addActivity:active {
-  background: rgba(211, 211, 211, 0.537);
-}
 
 .barra-inferior {
-  background-color: #ededed;
-  color: #FFFFFF;
+  border: 1px solid #ccc;
   display: flex;
   flex-direction: row;
   align-items: start;
   padding: 10px;
   bottom: 0;
-
-  width: 100%;
 }
 
 .colabs {
@@ -173,21 +169,4 @@ body {
   align-self: center;
   font-weight: bold;
   color: black;
-}
-
-.colabs input {
-  height: 40px;
-  font-size: 20px;
-  width: 150px;
-}
-
-.addPeople {
-  border-radius: 50px;
-  height: 68px;
-  width: 68px;
-}
-
-.addPeople img {
-  height: 48px;
-  width: auto;
 }

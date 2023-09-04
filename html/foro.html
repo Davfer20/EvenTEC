@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja de Comentarios</title>
+    <link rel="stylesheet" href="../css/foroStyle.css">
+</head>
+
+<body>
+    <div id="headerContainer"></div>
+    <div class="comentarios">
+        <!-- Caja de comentarios con scroll -->
+        <div class="comentarios-scroll">
+            <div class="comentario">
+                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
+                <div class="contenido-comentario">
+                    <p class="comentario-texto">
+                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <div class="informacion-adicional">
+                        <p class="nombre">Nombre de Usuario</p>
+                        <p class="fecha">10 de Agosto, 2023</p>
+                    </div>
+                    <div class="acciones">
+                        <button class="btn-responder">Responder</button>
+                        <button class="btn-like">Like</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplo de una respuesta a un comentario -->
+            <div class="comentario respuesta">
+                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
+                <div class="contenido-comentario">
+                    <p class="comentario-texto">
+                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <div class="informacion-adicional">
+                        <p class="nombre">Nombre de Usuario</p>
+                        <p class="fecha">10 de Agosto, 2023</p>
+                    </div>
+                    <div class="acciones">
+                        <button class="btn-responder">Responder</button>
+                        <button class="btn-like">Like</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comentario">
+                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
+                <div class="contenido-comentario">
+                    <p class="comentario-texto">
+                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <div class="informacion-adicional">
+                        <p class="nombre">Nombre de Usuario</p>
+                        <p class="fecha">10 de Agosto, 2023</p>
+                    </div>
+                    <div class="acciones">
+                        <button class="btn-responder">Responder</button>
+                        <button class="btn-like">Like</button>
+                    </div>
+                </div>
+            </div>
+            <div class="comentario">
+                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
+                <div class="contenido-comentario">
+                    <p class="comentario-texto">
+                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <div class="informacion-adicional">
+                        <p class="nombre">Nombre de Usuario</p>
+                        <p class="fecha">10 de Agosto, 2023</p>
+                    </div>
+                    <div class="acciones">
+                        <button class="btn-responder">Responder</button>
+                        <button class="btn-like">Like</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="formulario-comentario">
+        <textarea placeholder="Escribe un comentario" class="input-comentario" rows="5" cols="54"></textarea></textarea>
+        <button class="btn-enviar">Enviar</button>
+    </div>
+
+    <script>
+        // Cargar el encabezado usando fetch y insertarlo en el contenedor
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                const headerContainer = document.getElementById('headerContainer');
+                headerContainer.innerHTML = data;
+            });
+    </script>
+</body>
+
+</html>
