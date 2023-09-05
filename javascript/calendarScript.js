@@ -19,7 +19,6 @@
     Calendar.prototype.draw = function () {
         //Create Header
         this.drawHeader();
-
         //Draw Month
         this.drawMonth();
 
@@ -343,10 +342,6 @@
     ];
 
 
-
-    function addDate(ev) {
-
-    }
 
     var calendar = new Calendar('#calendar', data);
 
