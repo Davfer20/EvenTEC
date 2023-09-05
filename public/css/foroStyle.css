@@ -1,0 +1,120 @@
+/* Resetear márgenes y relleno de la página */
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos generales de la página */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Estilos de la caja de comentarios */
+.comentario {
+    background-color: #ffffff;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    /* Alinea elementos verticalmente arriba */
+}
+
+.respuesta {
+    margin-left: 70px;
+    /* Respuestas tienen un margen a la izquierda mayor */
+}
+
+/* Estilos de la foto de perfil */
+.foto-perfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Estilos del texto del comentario */
+.comentario-texto {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Estilos de la información adicional */
+.informacion-adicional {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+/* Estilos del nombre y la fecha */
+.nombre {
+    font-size: 14px;
+    color: darkgrey
+}
+
+/* Estilos de los botones de acción */
+.acciones {
+    margin-top: 10px;
+}
+
+.btn-responder,
+.btn-like {
+    background-color: #3498DB;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Estilos de los botones de acción al pasar el mouse */
+.btn-responder:hover,
+.btn-like:hover {
+    background-color: #2980B9;
+}
+
+/* Estilos para la caja de comentarios con scroll */
+.comentarios {
+    max-height: 400px;
+    /* Altura máxima del cuadro de comentarios con scroll */
+    overflow-y: auto;
+    /* Habilitar la barra de desplazamiento vertical si es necesario */
+    margin: 90px 20px 20px 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Estilos para el formulario de comentarios */
+.formulario-comentario {
+    margin: 20px;
+    display: flex;
+}
+
+.input-comentario {
+    flex: 0.8;
+    /* El campo de entrada se expandirá para llenar el espacio disponible */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-enviar {
+    background-color: #3498DB;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Estilos del botón de enviar al pasar el mouse */
+.btn-enviar:hover {
+    background-color: #2980B9;
+}
