@@ -216,6 +216,7 @@
     -webkit-animation: fadeIn .3s ease both;
     -moz-animation: fadeIn .3s ease both;
     animation: fadeIn .3s ease both;
+    background-color: lightgray;
 }
 
 .events.in {

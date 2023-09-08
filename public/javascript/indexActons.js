@@ -1,6 +1,6 @@
 let currentOption = 0
-let loginRefs = ["../html/loginE.html", "../html/loginA.html", "../html/loginC.html"]
-let singinRefs = ["../html/signinE.html", "../html/signinA.html", "../html/signinC.html"]
+let loginRefs = ["html/loginE.html", "html/loginA.html", "html/loginC.html"]
+let singinRefs = ["html/signinE.html", "html/signinA.html", "html/signinC.html"]
 
 
 function selectMethod(n) {
