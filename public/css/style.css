@@ -68,7 +68,8 @@ form .inputT1 {
   margin: 10px 0;
 }
 
-.inputT1 input {
+.inputT1 input,
+select {
   width: 30%;
   padding: 10px 3px 10px 36px;
   /*mover donde se escribe*/
@@ -81,7 +82,12 @@ form .inputT1 {
   /* posicion imagen */
   background-size: 25px;
   /* Tamaño imagen */
+  border: none;
+  height: 40%;
 }
+
+
+
 
 
 .usernameC input {
@@ -117,7 +123,7 @@ form .inputT1 {
   background-image: url("../images/carnetLogo.svg");
 }
 
-.sede input {
+.sede select {
   background-image: url("../images/sedeLogo.svg");
 }
 
