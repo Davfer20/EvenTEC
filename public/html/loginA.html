@@ -15,25 +15,23 @@
     <div class="formulario">
       <p class="title">Inicio de Sesión</p>
       <p class="subtitle">Asociación</p>
-      <form method="post">
+      <form id="loginAsociacionForm" method="post">
         <div class="inputT1 usernameA">
-          <input type="text" placeholder="Asocianame" required />
+          <input id="nameAsoLog" type="text" placeholder="Nombre de asociación" required />
         </div>
 
         <div class="inputT1 password">
-          <input type="password" placeholder="Password" required />
+          <input id="passwordAsoLog" type="password" placeholder="Password" required />
         </div>
 
         <div>
-          <button class="buttonT1" type="button" onclick="location.href = 'eventPage.html';">Iniciar Sesión</button>
+          <button class="buttonT1" type="submit">Iniciar Sesión</button>
         </div>
       </form>
     </div>
   </header>
 
-  <script>
-    src = "./javascript/";
-  </script>
+  <script type="module" src = "../javascript/loginAsociacion.js"></script>
 </body>
 
 </html>

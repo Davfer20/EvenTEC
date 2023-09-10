@@ -18,7 +18,7 @@
       <p class="subtitle">Estudiante</p>
       <form id="registrarEstudianteForm" method="post">
         <div class="inputT1 usernameE">
-          <input id="usernameEstReg" type="text" placeholder="Username" required>
+          <input id="usernameEstReg" type="text" placeholder="Nombre completo" required>
         </div>
 
         <div class="inputT1 carnet">
@@ -47,12 +47,14 @@
 
       </form>
     </div>
-
-
-
   </header>
 
-  <script type="module" src = "../javascript/registro.js"></script>
+  <div id="errorContainer" class="errorContainer">
+    <p class="title">Alerta</p>
+    <p class="errorText" id="errorText"></p>
+    <button id="errorButton" class="buttonT1 errorButton">Cerrar</button>
+  </div>
+  <script type="module" src = "../javascript/registroEstudiante.js"></script>
 </body>
 
 </html>
