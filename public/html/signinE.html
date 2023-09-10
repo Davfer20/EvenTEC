@@ -16,47 +16,43 @@
     <div class="formulario">
       <p class="title">Registro</p>
       <p class="subtitle">Estudiante</p>
-      <form method="post">
+      <form id="registrarEstudianteForm" method="post">
         <div class="inputT1 usernameE">
-          <input type="text" placeholder="Username" required>
+          <input id="usernameEstReg" type="text" placeholder="Username" required>
         </div>
 
         <div class="inputT1 carnet">
-          <input type="text" placeholder="Carnet" required>
+          <input id="carnetEstReg" type="text" placeholder="Carnet" required>
         </div>
 
         <div class="inputT1 password">
-          <input type="password" placeholder="Password" required>
+          <input id="passwordEstReg" type="password" placeholder="Password" required>
         </div>
 
         <div class="inputT1 email">
-          <input type="email" placeholder="Correo" required>
+          <input id="emailEstReg" type="text" placeholder="Correo" required>
         </div>
 
         <div class="inputT1 phone">
-          <input type="tel" placeholder="Teléfono" required>
+          <input id="phoneEstReg" type="text" placeholder="Teléfono" required>
         </div>
 
         <div class="inputT1 sede">
-          <select name="cars" id="cars">
-            <option value="cartago">Cartago</option>
-            <option value="alajuela">Alajuela</option>
-            <option value="sanJose">San José</option>
-            <option value="sanCarlos">San Carlos</option>
-            <option value="limon">Limón</option>
-          </select>
+          <input id="sedeEstReg" type="text" placeholder="Sede" required>
         </div>
 
         <div>
-          <button class="buttonT1" type="submit">Registrarse</button>
+          <button id="submitEstReg" class="buttonT1" type="submit">Registrarse</button>
         </div>
 
       </form>
     </div>
 
+
+
   </header>
 
-  <script>src = "./javascript/"</script>
+  <script type="module" src = "../javascript/registro.js"></script>
 </body>
 
 </html>
