@@ -36,14 +36,25 @@
             <input id="phoneColReg" type="text" placeholder="Teléfono" required>
           </div>
 
+          <div class="inputT1 usernameA">
+            <input id="asociacionColReg" type="text" placeholder="Username de asociación a la que pertenece. En blanco si no aplica.">
+          </div>
+
           <div>
             <button class="buttonT1" type="submit">Registrarse</button>
           </div>
+          
         </form>
     </div>
   </header>
 
-  <script src = "../javascript/registro.js"></script>
+  <div class="errorContainer">
+    <p class="title">Alerta</p>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
+
+  <script type="module" src="../javascript/registroColaborador.js"></script>
 </body>
 
 </html>

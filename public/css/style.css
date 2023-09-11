@@ -19,7 +19,8 @@ body {
 }
 
 .subtitle {
-  margin-top: 3;
+  margin-top: 3px;
+  padding-top: 10px;
   font-size: 28px;
   font-style: small;
   font-weight: 400;
@@ -111,6 +112,10 @@ select {
   background-image: url("../images/carreerLogo.svg");
 }
 
+.descripcionID input {
+  height: 80%;
+}
+
 .phone input {
   background-image: url("../images/phoneLogo.svg");
 }
@@ -125,6 +130,10 @@ select {
 
 .sede select {
   background-image: url("../images/sedeLogo.svg");
+}
+
+#asociacionColReg::placeholder {
+  font-size: 12px;
 }
 
 .image-button {
@@ -179,6 +188,7 @@ select {
   border: none;
   opacity: 0;
   transition: opacity 0.15s;
+  z-index: -1;
 }
 
 .errorText {

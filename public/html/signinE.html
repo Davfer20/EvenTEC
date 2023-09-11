@@ -41,6 +41,10 @@
           <input id="sedeEstReg" type="text" placeholder="Sede" required>
         </div>
 
+        <div class="inputT1 carrera">
+          <input id="carreraEstReg" type="text" placeholder="Carrera" required>
+        </div>
+
         <div>
           <button id="submitEstReg" class="buttonT1" type="submit">Registrarse</button>
         </div>
@@ -49,11 +53,12 @@
     </div>
   </header>
 
-  <div id="errorContainer" class="errorContainer">
+  <div class="errorContainer">
     <p class="title">Alerta</p>
-    <p class="errorText" id="errorText"></p>
-    <button id="errorButton" class="buttonT1 errorButton">Cerrar</button>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
   </div>
+
   <script type="module" src = "../javascript/registroEstudiante.js"></script>
 </body>
 

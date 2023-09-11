@@ -8,25 +8,51 @@ function loginColaboradorListener(event) {
     event.preventDefault(); // Prevent the default form submission
     console.log("Submitted")
     // Get form input values
-    const username = document.getElementById('usernameEstLog').value;
-    const password = document.getElementById('passwordEstLog').value;
+    const username = document.getElementById('usernameColLog').value;
+    const password = document.getElementById('passwordColLog').value;
 
     const dbref = ref(database);
     get(child(dbref, `colaboradores/${username}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            set(ref(database, `/login`), {
-                username: username,
-                password: password,
-                type: 2
-            })
-            console.log(snapshot.val());
+            if (snapshot.val()['password'] === password){
+                set(ref(database, `/login`), {
+                    username: username,
+                    password: password,
+                    type: 2
+                })
+                console.log(snapshot.val());
+                window.location.href = "eventPage.html"
+            } else {
+                displayError("Contraseña incorrecta");
+            }
         } else {
+            displayError("Colaborador no registrado. Revise su usuario y contraseña.");
             console.log("Colaborador no registrada:");
         }
     })
 }
 
+
+function displayError(error) {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 1
+    errorContainer.style.zIndex = 1;
+
+    const errorText = document.querySelector('.errorText');
+    errorText.textContent = error;
+}
+
+function closeError() {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 0
+    errorContainer.style.zIndex = 1;
+}
+
+
 // Attach an event listener to the form's submit event
 const colaboradorForm = document.getElementById('loginColaboradorForm');
 console.log(colaboradorForm);
 colaboradorForm.addEventListener('submit', loginColaboradorListener);
+
+const errorButton = document.querySelector('.errorButton');
+errorButton.addEventListener('click', closeError);

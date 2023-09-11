@@ -1,7 +1,12 @@
 import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
-import { app } from "./firebaseconfig.js"
+import { app } from "./firebaseconfig.js";
 
 const database = getDatabase(app)
+
+function validateEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/u;
+    return regex.test(email);
+}
 
 // Funcion para manejar el registro de estudiantes
 async function submitEstudianteListener(event) {
@@ -15,9 +20,10 @@ async function submitEstudianteListener(event) {
     const email = document.getElementById('emailEstReg').value;
     const phone = document.getElementById('phoneEstReg').value;
     const sede = document.getElementById('sedeEstReg').value;
+    const carrera = document.getElementById('carreraEstReg').value;
 
-    if (!(isEmail(email) && (email.endsWith("@estudiantec.cr") || email.endsWith("@itcr.ac.cr")))) {
-        displayError("El correo no es válido. Debe ser un correo institucional @estudiantec.cr o @itcr.ac.cr")
+    if (!(validateEmail(email) && (email.endsWith("@estudiantec.cr") || email.endsWith("@itcr.ac.cr")))) {
+        displayError("El correo no es válido. Debe ser un correo institucional @estudiantec.cr o @itcr.ac.cr");
         return;
     } 
 
@@ -33,7 +39,8 @@ async function submitEstudianteListener(event) {
                 password: password,
                 email: email,
                 phone: phone,
-                sede: sede
+                sede: sede,
+                carrera: carrera
             })
             console.log("Registered user: ");
             window.location.href = "loginE.html"
@@ -44,22 +51,25 @@ async function submitEstudianteListener(event) {
 }
 
 function displayError(error) {
-    const errorContainer = document.getElementById('errorContainer');
+    const errorContainer = document.querySelector('.errorContainer');
     errorContainer.style.opacity = 1
+    errorContainer.style.zIndex = 1;
 
-    const errorText = document.getElementById('errorText');
+    const errorText = document.querySelector('.errorText');
     errorText.textContent = error;
 }
 
 function closeError() {
-    const errorContainer = document.getElementById('errorContainer');
+    const errorContainer = document.querySelector('.errorContainer');
     errorContainer.style.opacity = 0
+    errorContainer.style.zIndex = 1;
 }
+
 
 // Attach an event listener to the form's submit event
 const estudianteForm = document.getElementById('registrarEstudianteForm');
 console.log(estudianteForm);
 estudianteForm.addEventListener('submit', submitEstudianteListener);
 
-const errorButton = document.getElementById('errorButton')
+const errorButton = document.querySelector('.errorButton');
 errorButton.addEventListener('click', closeError);

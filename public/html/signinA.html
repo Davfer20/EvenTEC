@@ -18,33 +18,46 @@
       <p class="subtitle">Asociación</p>
       <form id="registrarAsociacionForm" method="post">
         <div class="inputT1 usernameA">
-          <input id="usernameAsoReg" type="text" placeholder="Nombre de asociación" required>
+          <input id="usernameAsoReg" type="text" placeholder="Username de asociación" required>
+        </div>
+
+        <div class="inputT1 usernameA">
+          <input id="displaynameAsoReg" type="text" placeholder="Display name de asociacioo" required>
+        </div>
+        
+        <div class="inputT1 password">
+          <input id="passwordAsoReg" type="password" placeholder="Password" required>
         </div>
 
         <div class="inputT1 carreraID">
           <input id="carreraAsoReg" type="text" placeholder="ID de Carrera" required>
         </div>
 
-        <div class="inputT1 password">
-          <input id="passwordAsoReg" type="password" placeholder="Password" required>
+        <div class="inputT1 descripcionID">
+          <input id="descripcionAsoReg" type="text" placeholder="Descripción" required>
         </div>
 
         <div class="inputT1 email">
-          <input id="emailAsoReg" type="text" placeholder="Correo" required>
+          <input id="emailAsoReg" type="text" placeholder="Correo de contacto" required>
         </div>
 
         <div class="inputT1 phone">
-          <input id="phoneAsoReg" type="text" placeholder="Teléfono" required>
+          <input id="phoneAsoReg" type="text" placeholder="Teléfono de contacto" required>
         </div>
 
         <button class="buttonT1" type="submit">Registrarse</button>
       </form>
     </div>
 
-
   </header>
 
-  <script src = "../javascript/registroAsociacion.js"></script>
+  <div class="errorContainer">
+    <p class="title">Alerta</p>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
+
+  <script type="module" src="../javascript/registroAsociacion.js"></script>
 </body>
 
 </html>

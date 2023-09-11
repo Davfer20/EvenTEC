@@ -14,20 +14,44 @@ function loginEstudianteListener(event) {
     const dbref = ref(database);
     get(child(dbref, `users/${username}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            set(ref(database, `/login`), {
-                username: username,
-                password: password,
-                type: 0
-            })
-            console.log(snapshot.val());
+            if (snapshot.val()['password'] === password){
+                set(ref(database, `/login`), {
+                    username: username,
+                    password: password,
+                    type: 0
+                })
+                console.log(snapshot.val());
+                window.location.href = "eventPage.html"
+            } else {
+                displayError("Contraseña incorrecta");
+            }
         } else {
-            
+            displayError("Usuario no registrado. Revise su carnet y contraseña.");
             console.log("Usuario no registrado:");
         }
     })
+}
+
+function displayError(error) {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 1;
+    errorContainer.style.zIndex = 1;
+
+    const errorText = document.querySelector('.errorText');
+    errorText.textContent = error;
+}
+
+function closeError() {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 0
+    errorContainer.style.zIndex = -1;
 }
 
 // Attach an event listener to the form's submit event
 const estudianteForm = document.getElementById('loginEstudianteForm');
 console.log(estudianteForm);
 estudianteForm.addEventListener('submit', loginEstudianteListener);
+
+const errorButton = document.querySelector('.errorButton');
+console.log(errorButton)
+errorButton.addEventListener('click', closeError);
