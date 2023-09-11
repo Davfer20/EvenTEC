@@ -23,27 +23,59 @@
     </div>
 
     <div class="contact-container">
-      <div>
+      <div class="profile-attribute">
         <p>Nombre</p>
-        <input type="text" class="attribute" placeholder=>
+        <input id="nameProfile" type="text" class="attribute" placeholder=""/>
       </div>
-      
-      <div>
+
+      <div class="profile-attribute">
+        <p>Carnet</p>
+        <input id="carnetProfile" type="text" class="attribute" placeholder="" disabled/>
+      </div>
+
+      <div class="profile-attribute">
+        <p>Contraseña</p>
+        <input id="passwordProfile" type="text" class="attribute" placeholder=""/>
+      </div>
+
+      <div class="profile-attribute">
         <p>Correo</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
+        <input id="emailProfile" type="text" class="attribute" placeholder=""/>
       </div>
-      <div>
-        <p>Nombre</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
+
+      <div class="profile-attribute">
+        <p>Teléfono</p>
+        <input id="phoneProfile" type="text" class="attribute" placeholder=""/>
       </div>
-      <div>
-        <p>Nombre</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
+
+
+      <div class="profile-attribute">
+        <p>Sede</p>
+        <input id="sedeProfile" type="text" class="attribute" placeholder=""/>
+      </div>
+
+      <div class="profile-attribute">
+        <p>Carrera</p>
+        <input id="carreraProfile" type="text" class="attribute" placeholder=""/>
+      </div>
+
+      <div class="profile-attribute">
+        <p>ID de carrera</p>
+        <input id="carreraIdProfile" type="text" class="attribute" placeholder=""/>
+      </div>
+
+      <div class="profile-attribute">
+        <p>Correo</p>
+        <input id="emailProfile" type="text" class="attribute" placeholder=""/>
+      </div>
+
+      <div class="profile-attribute">
+        <p>Username de asociación a la que pertenece. En blanco si no aplica.</p>
+        <input id="asoProfile" type="text" class="attribute" placeholder=""/>
       </div>
     </div>
 
   </div>
-  <script type="module" src = "../javascript/registro.js"></script>
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
     fetch('header.html')
