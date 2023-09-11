@@ -15,11 +15,8 @@ function loginColaboradorListener(event) {
     get(child(dbref, `colaboradores/${username}`)).then((snapshot) => {
         if (snapshot.exists()) {
             if (snapshot.val()['password'] === password){
-                set(ref(database, `/login`), {
-                    username: username,
-                    password: password,
-                    type: 2
-                })
+                localStorage.setItem("type", String(2));
+                localStorage.setItem("userInfo", JSON.stringify(snapshot.val()));
                 console.log(snapshot.val());
                 window.location.href = "eventPage.html"
             } else {

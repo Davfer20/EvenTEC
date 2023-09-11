@@ -15,11 +15,8 @@ function loginAsociacionListener(event) {
     get(child(dbref, `asociaciones/${username}`)).then((snapshot) => {
         if (snapshot.exists()) {
             if (snapshot.val()['password'] === password){
-                set(ref(database, `/login`), {
-                    username: username,
-                    password: password,
-                    type: 1
-                })
+                localStorage.setItem("type", String(1));
+                localStorage.setItem("userInfo", JSON.stringify(snapshot.val()));
                 console.log(snapshot.val());
                 window.location.href = "eventPage.html"
             } else {
