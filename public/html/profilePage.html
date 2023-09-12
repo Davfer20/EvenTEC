@@ -22,7 +22,7 @@
       <button class="buttonT1" id="eliminarProfileButton">Eliminar</button>
     </div>
     <div class="contact-container">
-      <form>
+      <form id="modificarPerfilForm" method="post">
         <div id="nameProfileDiv" class="profile-attribute">
           <p>Nombre</p>
           <input id="nameProfile" type="text" class="attribute" placeholder="" disabled/>
@@ -69,11 +69,18 @@
           <input id="asoProfile" type="text" class="attribute" placeholder="" disabled/>
         </div>
 
-        <button type="submit" class="buttonT1" disabled>Guardar cambios</button>
+        <button type="submit" class="buttonT1" id="saveProfileButton" disabled>Guardar cambios</button>
       </form>
     </div>
 
   </div>
+
+  <div class="errorContainer">
+    <p class="title">Alerta</p>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
+  
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
     fetch('header.html')
