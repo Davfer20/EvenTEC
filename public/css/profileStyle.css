@@ -46,7 +46,7 @@
 }
 
 .contact-container {
-  gap: 30px;
+  gap: 10px;
   flex: 1;
   height: auto;
   flex-direction: column;
@@ -56,10 +56,16 @@
 
 .contact-container input {
   font-size: medium;
-  padding: 10px 20px 10px 20px;
   border: none;
   border-bottom: 2px solid grey;
-  padding: 10px;
+  min-width: 0;
+  width: 60%;
+  transition: width 0.4s ease-in-out;
+}
+
+.contact-container p {
+  font-size: medium;
+  margin-bottom: 5px;
   min-width: 0;
   width: 60%;
   transition: width 0.4s ease-in-out;

@@ -18,32 +18,69 @@
   <div class="content">
     <div class="profile-container">
       <img class="imageUserContainer" src="../images/test.jpg" />
-      <button class="buttonT1">Editar</button>
-      <button class="buttonT1">Eliminar</button>
+      <button class="buttonT1" id="editarProfileButton">Editar</button>
+      <button class="buttonT1" id="eliminarProfileButton">Eliminar</button>
     </div>
-
     <div class="contact-container">
-      <div>
-        <p>Nombre</p>
-        <input type="text" class="attribute" placeholder=>
-      </div>
-      
-      <div>
-        <p>Correo</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
-      </div>
-      <div>
-        <p>Nombre</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
-      </div>
-      <div>
-        <p>Nombre</p>
-        <input type="text" class="attribute" placeholder="Campo 1">
-      </div>
+      <form id="modificarPerfilForm" method="post">
+        <div id="nameProfileDiv" class="profile-attribute">
+          <p>Nombre</p>
+          <input id="nameProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+        <div id="carnetProfileDiv" class="profile-attribute">
+          <p>Carnet</p>
+          <input id="carnetProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+        <div id="passwordProfileDiv" class="profile-attribute">
+          <p>Contraseña</p>
+          <input id="passwordProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+        <div id="emailProfileDiv" class="profile-attribute">
+          <p>Correo</p>
+          <input id="emailProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+        <div id="phoneProfileDiv" class="profile-attribute">
+          <p>Teléfono</p>
+          <input id="phoneProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+  
+        <div id="sedeProfileDiv" class="profile-attribute">
+          <p>Sede</p>
+          <input id="sedeProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+  
+        <div id="carreraProfileDiv" class="profile-attribute">
+          <p>Carrera</p>
+          <input id="carreraProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+
+        <div id="descripcionProfileDiv" class="profile-attribute">
+          <p>Descripción</p>
+          <input id="descripcionProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+
+        <div id="asoProfileDiv" class="profile-attribute">
+          <p>Username de asociación a la que pertenece. En blanco si no aplica.</p>
+          <input id="asoProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+
+        <button type="submit" class="buttonT1" id="saveProfileButton" disabled>Guardar cambios</button>
+      </form>
     </div>
 
   </div>
-  <script type="module" src = "../javascript/registro.js"></script>
+
+  <div class="errorContainer">
+    <p class="title">Alerta</p>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
+  
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
     fetch('header.html')
@@ -53,6 +90,8 @@
         headerContainer.innerHTML = data;
       });
   </script>
+
+  <script type="module" src="../javascript/modificarPerfil.js"></script>
 
 </body>
 

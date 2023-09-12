@@ -16,7 +16,7 @@ function loginEstudianteListener(event) {
         if (snapshot.exists()) {
             if (snapshot.val()['password'] === password){
                 localStorage.setItem("type", String(0));
-                localStorage.setItem("userInfo", snapshot.val());
+                localStorage.setItem("userInfo", JSON.stringify(snapshot.val()));
                 console.log(snapshot.val());
                 window.location.href = "eventPage.html"
             } else {
