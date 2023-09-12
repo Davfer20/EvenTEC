@@ -9,8 +9,7 @@ function Notificacion(subject, message, date, imageUrl) {
 // Método para generar el HTML de la notificación
 Notificacion.prototype.toHTML = function () {
     const notificacionHTML = document.createElement('div');
-    notificacionHTML.className = 'notification';
-
+    notificacionHTML.className = 'profile-item';
     notificacionHTML.innerHTML = `
       <img class="profile-picture" src="${this.imageUrl}" alt="Foto de perfil" />
       <div class="profile-details">
@@ -23,3 +22,5 @@ Notificacion.prototype.toHTML = function () {
 
     return notificacionHTML;
 };
+
+export default Notificacion;

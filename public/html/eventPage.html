@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Página de Eventos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/eventStyle.css" />
+    <script src="../javascript/Evento.js"></script>
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
 
-<head>
-  <title>Página de Eventos</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/eventStyle.css" />
-  <script src="../javascript/Evento.js"></script>
-  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+  <body>
+    <div id="headerContainer"></div>
+    <p class="pageTitle">EvenTEC</p>
+    <p class="pageSubtitle">Eventos más populares</p>
 
-</head>
+    <div class="container" id="container"></div>
 
-<body>
-  <div id="headerContainer"></div>
-  <p class="pageTitle">EvenTEC</p>
-  <p class="pageSubtitle">Eventos más populares</p>
+    <script>
+      // Cargar el encabezado usando fetch y insertarlo en el contenedor
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerContainer = document.getElementById("headerContainer");
+          headerContainer.innerHTML = data;
+        });
+    </script>
 
-  <div class="container" id="container">
-
-  </div>
-
-
-  <script>
-    // Cargar el encabezado usando fetch y insertarlo en el contenedor
-    fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        const headerContainer = document.getElementById('headerContainer');
-        headerContainer.innerHTML = data;
-      });
-  </script>
-
-  <script type="module" src="../javascript/loadEvents.js"></script>
-
-</body>
-
+    <script type="module" src="../javascript/loadEvents.js"></script>
+    <script type="module" src="../javascript/loadNotifications.js"></script>
+  </body>
 </html>
