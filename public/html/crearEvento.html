@@ -12,7 +12,7 @@
 
 <body>
   <div id="headerContainer"></div>
-  <div class="item">
+  <div class="item" id="eventData">
     <div>
       <img id="image" class="image" src="" alt="Imagen Cargada" />
       <input id="eventImage" class="imageInput" type="file" accept="image/*"></input>
@@ -20,16 +20,16 @@
     <div class="content">
       <input class="title" type="text" placeholder="Titulo del Evento" required>
       <div class="categories">
-        <input placeholder="+ Categoria"></input>
-        <input placeholder="+ Categoria"></input>
-        <input placeholder="+ Categoria"></input>
-        <input placeholder="+ Categoria"></input>
+        <input class="cat" placeholder="+ Categoria"></input>
+        <input class="cat" placeholder="+ Categoria"></input>
+        <input class="cat" placeholder="+ Categoria"></input>
+        <input class="cat" placeholder="+ Categoria"></input>
       </div>
       <textarea class="description" placeholder="Descripción del evento" rows="5" cols="54"></textarea>
       <textarea class="requirements" placeholder=" - Requerimientos" rows="5" cols="30"></textarea>
-      <input type="datetime-local" placeholder="Rango de fecha"></input>
+      <input class="startDate" type="datetime-local" placeholder="Rango de fecha"></input>
       <span> - </span>
-      <input type="datetime-local" placeholder="Rango de fecha"></input>
+      <input class="endDate" type="datetime-local" placeholder="Rango de fecha"></input>
 
       <button class="buttonT1" id="buttonSubmit">Publicar Evento</button>
       <input type="number" class="capacity" placeholder="Capacidad"></input>
