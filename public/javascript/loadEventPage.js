@@ -14,6 +14,7 @@ onValue(eventosRef, (snapshot) => {
             if (Object.hasOwnProperty.call(data, key)) {
                 const eventoData = data[key];
                 const evento = new Evento(
+                    key,
                     eventoData.titulo,
                     eventoData.imagenSrc,
                     eventoData.nombreAsociacion,
@@ -30,9 +31,11 @@ onValue(eventosRef, (snapshot) => {
                 container.appendChild(evento.toHTML());
             }
         }
-
     } else {
         // No se encontraron eventos en la base de datos
     }
 
+
+
 });
+
