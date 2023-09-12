@@ -21,7 +21,7 @@ function submitAsociacionListener(event) {
     const email = document.getElementById('emailAsoReg').value;
     const phone = document.getElementById('phoneAsoReg').value;
 
-    if (!(validateEmail(email) && (email.endsWith("@estudiantec.cr") || email.endsWith("@itcr.ac.cr")))) {
+    if (!(validateEmail(email))) {
         displayError("El correo no es válido.");
         return;
     }
@@ -49,7 +49,7 @@ function submitAsociacionListener(event) {
 
 function displayError(error) {
     const errorContainer = document.querySelector('.errorContainer');
-    errorContainer.style.opacity = 1
+    errorContainer.style.opacity = 1;
     errorContainer.style.zIndex = 1;
 
     const errorText = document.querySelector('.errorText');
@@ -58,8 +58,8 @@ function displayError(error) {
 
 function closeError() {
     const errorContainer = document.querySelector('.errorContainer');
-    errorContainer.style.opacity = 0
-    errorContainer.style.zIndex = 1;
+    errorContainer.style.opacity = 0;
+    errorContainer.style.zIndex = -1;
 }
 
 // Attach an event listener to the form's submit event

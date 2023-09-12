@@ -9,7 +9,7 @@ function validateEmail(email) {
 }
 
 // Funcion para manejar el registro de estudiantes
-function submitColaboradorListener(event) {
+async function submitColaboradorListener(event) {
     event.preventDefault(); // Prevent the default form submission
     console.log("Submitted")
     // Get form input values
@@ -29,7 +29,7 @@ function submitColaboradorListener(event) {
 
     if (asociacion.length !== 0){
         let asociacionInvalid = false;
-        get(child(dbref, `asociaciones/${asociacion}`)).then((snapshot) => {
+        await get(child(dbref, `asociaciones/${asociacion}`)).then((snapshot) => {
             if (!snapshot.exists()) {
                 asociacionInvalid = true;
                 displayError("La asociación con el usuario dado no existe");
@@ -62,7 +62,7 @@ function submitColaboradorListener(event) {
 
 function displayError(error) {
     const errorContainer = document.querySelector('.errorContainer');
-    errorContainer.style.opacity = 1
+    errorContainer.style.opacity = 1;
     errorContainer.style.zIndex = 1;
 
     const errorText = document.querySelector('.errorText');
@@ -71,8 +71,8 @@ function displayError(error) {
 
 function closeError() {
     const errorContainer = document.querySelector('.errorContainer');
-    errorContainer.style.opacity = 0
-    errorContainer.style.zIndex = 1;
+    errorContainer.style.opacity = 0;
+    errorContainer.style.zIndex = -1;
 }
 
 
