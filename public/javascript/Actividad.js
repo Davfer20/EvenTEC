@@ -1,4 +1,4 @@
-function Actividad(titulo, imagenSrc, nombreModerador, fecha, userSrc) {
+function Actividad(titulo, imagenSrc, userSrc, nombreModerador, fecha) {
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
   this.userSrc = userSrc;
@@ -25,3 +25,5 @@ Actividad.prototype.toHTML = function () {
 
   return actividadHTML;
 };
+
+export default Actividad;

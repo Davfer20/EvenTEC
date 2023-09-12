@@ -12,51 +12,9 @@
 
 <body>
     <div id="headerContainer"></div>
+    <div id="eventData"></div>
 
-    <div class="item">
-        <img class="eventImage"
-            src="https://i.ytimg.com/vi/M6bSnnjFjN4/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIHhACGAYgATgB&rs=AOn4CLAue1Qi0usKn_3yy0iCKvW0N2qQKA"
-            alt="Evento">
-        <div class="content">
-            <span class="title">Titulo del Evento</span>
-            <div class="categories">
-                <div class="sidebar-item">
-                    <span>Categoria 1</span>
-                </div>
-                <div class="sidebar-item">
-                    <span>Categoria 1</span>
-                </div>
-                <div class="sidebar-item">
-                    <span>Categoria 1</span>
-                </div>
-                <div class="sidebar-item">
-                    <span>Categoria 1</span>
-                </div>
-            </div>
-            <p class="info">Descripción del evento</p>
-            <p class="info">- Requerimientos</p>
-            <span>00/00/00 00:00 am - 00/00/00 00:00 pm</span>
-            <button class="buttonT1">Reservar</button>
-            <p class="info">Cupos: 0/500</p>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="column">
-            <img class="activityImage"
-                src="https://i.ytimg.com/vi/M6bSnnjFjN4/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIHhACGAYgATgB&rs=AOn4CLAue1Qi0usKn_3yy0iCKvW0N2qQKA"
-                alt="Activity">
-            <span class="activityTitle">Titulo de la Actividad</span>
-            <div class="user">
-                <img src="../images/test.jpg" alt="Usuario">
-                <div class="eventDetail">
-                    <span class="Asocia">Nombre del Moderador</span>
-                    <span class="details">Fecha</span>
-                </div>
-            </div>
-        </div>
-
-
+    <div class="container" id="container">
 
     </div>
 
@@ -83,6 +41,10 @@
                 headerContainer.innerHTML = data;
             });
     </script>
+
+    <script type="module" src="../javascript/loadEvent.js"></script>
+
+
 </body>
 
 </html>

@@ -14,93 +14,35 @@
     <div id="headerContainer"></div>
     <div class="comentarios">
         <!-- Caja de comentarios con scroll -->
-        <div class="comentarios-scroll">
-            <div class="comentario">
-                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
-                <div class="contenido-comentario">
-                    <p class="comentario-texto">
-                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <div class="informacion-adicional">
-                        <p class="nombre">Nombre de Usuario</p>
-                        <p class="fecha">10 de Agosto, 2023</p>
-                    </div>
-                    <div class="acciones">
-                        <button class="btn-responder">Responder</button>
-                        <button class="btn-like">Like</button>
-                    </div>
-                </div>
-            </div>
+        <div class="comentarios-scroll" id="comentContainer">
 
-            <!-- Ejemplo de una respuesta a un comentario -->
-            <div class="comentario respuesta">
-                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
-                <div class="contenido-comentario">
-                    <p class="comentario-texto">
-                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <div class="informacion-adicional">
-                        <p class="nombre">Nombre de Usuario</p>
-                        <p class="fecha">10 de Agosto, 2023</p>
-                    </div>
-                    <div class="acciones">
-                        <button class="btn-responder">Responder</button>
-                        <button class="btn-like">Like</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="comentario">
-                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
-                <div class="contenido-comentario">
-                    <p class="comentario-texto">
-                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <div class="informacion-adicional">
-                        <p class="nombre">Nombre de Usuario</p>
-                        <p class="fecha">10 de Agosto, 2023</p>
-                    </div>
-                    <div class="acciones">
-                        <button class="btn-responder">Responder</button>
-                        <button class="btn-like">Like</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="comentario">
-                <img src="../images/test.jpg" alt="Foto de Perfil" class="foto-perfil">
-                <div class="contenido-comentario">
-                    <p class="comentario-texto">
-                        Este es el texto del comentario. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <div class="informacion-adicional">
-                        <p class="nombre">Nombre de Usuario</p>
-                        <p class="fecha">10 de Agosto, 2023</p>
-                    </div>
-                    <div class="acciones">
-                        <button class="btn-responder">Responder</button>
-                        <button class="btn-like">Like</button>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
     </div>
     <div class="formulario-comentario">
-        <textarea placeholder="Escribe un comentario" class="input-comentario" rows="5" cols="54"></textarea></textarea>
-        <button class="btn-enviar">Enviar</button>
+        <textarea id="comentInput" placeholder="Escribe un comentario" class="input-comentario" rows="5"
+            cols="54"></textarea></textarea>
+        <button id="foroButton" class="btn-enviar">Enviar</button>
     </div>
 
     <script>
-        // Cargar el encabezado usando fetch y insertarlo en el contenedor
         fetch('header.html')
             .then(response => response.text())
             .then(data => {
                 const headerContainer = document.getElementById('headerContainer');
                 headerContainer.innerHTML = data;
             });
+
+        function redirectToEvent(eventId) {
+            // Redirige a "verEvento.html" con el identificador del evento en la URL
+            window.location.href = `verEvento.html?eventId=${eventId}`;
+        }
     </script>
+
+    <script type="module" src="../javascript/loadForo.js"></script>
+    <script type="module" src="../javascript/uploadForo.js"></script>
+
 </body>
 
 </html>

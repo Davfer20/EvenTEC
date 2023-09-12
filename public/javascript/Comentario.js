@@ -30,3 +30,4 @@ Comentario.prototype.toHTML = function () {
 
     return comentarioHTML;
 };
+export default Comentario;

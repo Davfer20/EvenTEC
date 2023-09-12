@@ -1,5 +1,6 @@
 // Definir un constructor para el objeto de evento
-function Evento(titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc) {
+function Evento(id, titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating) {
+  this.id = id;
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
   this.nombreAsociacion = nombreAsociacion;
@@ -11,6 +12,7 @@ function Evento(titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categoria
   this.fechaHorario = fechaHorario;
   this.cupos = cupos;
   this.userSrc = userSrc;
+  this.rating = rating;
 }
 
 // Método para generar el HTML del evento
@@ -19,7 +21,7 @@ Evento.prototype.toHTML = function () {
   eventHTML.className = 'column';
 
   eventHTML.innerHTML = `
-      <div class="evento" onclick="location.href = 'verEvento.html';">
+  <div class="evento" onclick="redirectToEvent('${this.id}')">
         <img src="${this.imagenSrc}" alt="${this.titulo}">
         <span class="eventTitle">${this.titulo}</span>
         <div class="user">
@@ -43,6 +45,7 @@ Evento.prototype.toExtendedHTML = function () {
   const eventExtendedHTML = document.createElement('div');
   eventExtendedHTML.className = 'item';
 
+
   eventExtendedHTML.innerHTML = `
       <img class="eventImage" src="${this.imagenSrc}" alt="${this.titulo}">
       <div class="content">
@@ -60,3 +63,6 @@ Evento.prototype.toExtendedHTML = function () {
 
   return eventExtendedHTML;
 };
+
+
+export default Evento;
