@@ -1,5 +1,5 @@
 // Definir un constructor para el objeto de evento
-function Evento(titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc) {
+function Evento(titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating) {
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
   this.nombreAsociacion = nombreAsociacion;
@@ -11,6 +11,7 @@ function Evento(titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categoria
   this.fechaHorario = fechaHorario;
   this.cupos = cupos;
   this.userSrc = userSrc;
+  this.rating = rating;
 }
 
 // Método para generar el HTML del evento
@@ -60,3 +61,6 @@ Evento.prototype.toExtendedHTML = function () {
 
   return eventExtendedHTML;
 };
+
+
+export default Evento;
