@@ -6,7 +6,7 @@ const db = getDatabase(app)
 
 function test3() {
 
-    const mensajesForo = []; 
+    const mensajesForo = [];
 
     const msj1 = new Comentario(
         'Comentario 1',
@@ -31,7 +31,7 @@ function test3() {
 
     mensajesForo.push(msj1);
     mensajesForo.push(msj2);
-    mensajesForo.push(msj3); 
+    mensajesForo.push(msj3);
 
     const foroRef = ref(db, 'foro'); // Reemplaza 'foro' con el nombre de tu nodo en la base de datos
 
@@ -40,10 +40,10 @@ function test3() {
         const newForoRef = push(foroRef); // Genera una referencia con ID automático
         set(newForoRef, comentario); // Sube el objeto evento a la base de datos
     });
-    
+
 }
 
-function foroMsj(){
+function foroMsj() {
 
     var currentDate = new Date();
     const comentario = document.getElementById('comentInput').value;
@@ -53,7 +53,7 @@ function foroMsj(){
     const foroMsj = new Comentario(
         comentario,
         userInfo.username,
-        `${currentDate.getDay()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`,
+        `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`,
         'https://cdn-icons-png.flaticon.com/512/21/21104.png'
     );
 
