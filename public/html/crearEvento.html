@@ -12,9 +12,11 @@
 
 <body>
   <div id="headerContainer"></div>
-
   <div class="item">
-    <input class="image" type="file"></input>
+    <div>
+      <img id="image" class="image" src="" alt="Imagen Cargada" />
+      <input id="eventImage" class="imageInput" type="file" accept="image/*"></input>
+    </div>
     <div class="content">
       <input class="title" type="text" placeholder="Titulo del Evento" required>
       <div class="categories">
@@ -29,23 +31,12 @@
       <span> - </span>
       <input type="datetime-local" placeholder="Rango de fecha"></input>
 
-      <button class="buttonT1" id="button">Publicar Evento</button>
+      <button class="buttonT1" id="buttonSubmit">Publicar Evento</button>
       <input type="number" class="capacity" placeholder="Capacidad"></input>
     </div>
   </div>
 
   <div class="container" id="container">
-    <div class="column">
-      <input class="image" type="file"></input>
-      <input class="title activity" type="text" placeholder="Titulo de la Actividad" required>
-      <div class="user">
-        <img src="../images/test.jpg" alt="Usuario">
-        <div class="eventDetail">
-          <input placeholder="Moderador"></input>
-          <input type="datetime-local" placeholder="Rango de fecha"></input>
-        </div>
-      </div>
-    </div>
 
     <div class="column" id="add">
       <button class="addActivity" id="addActivity">+</button>
@@ -80,6 +71,77 @@
         const headerContainer = document.getElementById("headerContainer");
         headerContainer.innerHTML = data;
       });
+
+    let actividadCounter = 1; // Inicializa el contador de actividad
+
+    // Manejador de evento para agregar actividad
+    document.getElementById('addActivity').addEventListener('click', function () {
+      actividadCounter++; // Incrementa el contador de actividad
+      addActivityBox(actividadCounter);
+    });
+
+    // Manejador de evento para eliminar actividad
+    document.getElementById('delActivity').addEventListener('click', function () {
+      if (actividadCounter > 1) {
+        removeActivityBox(actividadCounter);
+        actividadCounter--; // Decrementa el contador de actividad
+      }
+    });
+
+    // Función para agregar una actividad con un contador específico
+    function addActivityBox(counter) {
+      const buttonColumn = document.getElementById('add');
+      const nuevoElemento = document.createElement('div');
+      nuevoElemento.className = 'column act';
+      nuevoElemento.innerHTML = `
+                <div>
+                    <img class="image" id="actDisplay${counter}" src="" alt="Imagen Cargada" />
+                    <input class="imageInput" type="file" accept="image/*" id="actImage${counter}" data-counter="${counter}"></input>
+                </div>        
+                <input class="title activity" type="text" placeholder="Titulo de la Actividad" required>
+                <div class="user">
+                    <img src="../images/test.jpg" alt="Usuario">
+                    <div class="eventDetail">
+                        <input class="actMod" placeholder="Moderador"></input>
+                        <input class="actDate" type="datetime-local" placeholder="Rango de fecha"></input>
+                    </div>
+                </div>
+            `;
+      container.insertBefore(nuevoElemento, buttonColumn);
+
+      // Agrega un manejador de eventos para el cambio de imagen
+      const inputImagenEvento = document.getElementById(`actImage${counter}`);
+      inputImagenEvento.addEventListener('change', function () {
+        handleImageUpload(this);
+      });
+    }
+
+    // Función para eliminar la última actividad con un contador específico
+    function removeActivityBox(counter) {
+      const lastActivity = document.getElementById(`actDisplay${counter}`);
+      if (lastActivity) {
+        lastActivity.parentNode.parentNode.remove();
+      }
+    }
+
+    // Función para manejar la carga de imágenes
+    function handleImageUpload(input) {
+      const counter = input.getAttribute('data-counter');
+      const imagen = input.files[0];
+
+      if (imagen) {
+        const reader = new FileReader();
+        const imagenMostrada = document.getElementById(`actDisplay${counter}`);
+
+        reader.onload = function () {
+          const imagenBase64 = reader.result;
+          imagenMostrada.src = imagenBase64;
+        };
+
+        reader.readAsDataURL(imagen);
+      }
+    }
+
   </script>
   <script type="module" src="../javascript/uploadEvent.js"></script>
   <script type="module" src="../javascript/loadNotifications.js"></script>
