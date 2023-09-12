@@ -40,7 +40,7 @@ function displayError(error) {
 
 function closeError() {
     const errorContainer = document.querySelector('.errorContainer');
-    errorContainer.style.opacity = 0
+    errorContainer.style.opacity = 0;
     errorContainer.style.zIndex = -1;
 }
 

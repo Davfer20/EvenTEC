@@ -6,6 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/profileStyle.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 
 </head>
@@ -23,6 +24,12 @@
     </div>
     <div class="contact-container">
       <form id="modificarPerfilForm" method="post">
+
+        <div id="userProfileDiv" class="profile-attribute">
+          <p>Nombre de usuario</p>
+          <input id="userProfile" type="text" class="attribute" placeholder="" disabled/>
+        </div>
+
         <div id="nameProfileDiv" class="profile-attribute">
           <p>Nombre</p>
           <input id="nameProfile" type="text" class="attribute" placeholder="" disabled/>
@@ -76,9 +83,16 @@
   </div>
 
   <div class="errorContainer">
-    <p class="title">Alerta</p>
+    <p class="title errorTitle">Alerta</p>
     <p class="errorText"></p>
     <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
+
+  <div class="deleteContainer">
+    <p class="title deleteText">Alerta</p>
+    <p class="deleteText">¿Está seguro que desea borrar su cuenta? Esta acción no puede ser revertida.</p>
+    <button class="buttonT1 deleteButton" id="confirmDelButton">Confirmar</button>
+    <button class="buttonT1 deleteButton" id="cancelDelButton">Cancelar</button>
   </div>
   
   <script>
