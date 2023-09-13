@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="../css/eventPageStyle.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
       rel="shortcut icon"
       href="../images/favicon.png"
       type="image/x-icon"
-    />
+      />
+    <link rel="stylesheet" href="../css/socialStyle.css"></link>
     <script src="../javascript/sendMail.js" type="module"></script>
     <script
       type="text/javascript"
@@ -30,6 +38,14 @@
     <div class="containerActividades" id="container"></div>
 
     <footer class="barra-inferior" id="footer"></footer>
+
+      <div id="share-buttons">
+        <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
+        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a> 
+        <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+        <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+        <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
+      </div>  
 
     <div class="errorContainer">
       <p class="title errorTitle">Alerta</p>
@@ -56,6 +72,7 @@
         });
     </script>
 
+    <script src="../javascript/socialRequest.js"></script>
     <script type="module" src="../javascript/loadEvent.js"></script>
     <script type="module" src=""></script>
   </body>
