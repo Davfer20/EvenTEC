@@ -9,6 +9,7 @@ function Actividad(titulo, imagenSrc, userSrc, nombreModerador, fecha) {
 // Método para generar el HTML de la actividad
 Actividad.prototype.toHTML = function () {
   const actividadHTML = document.createElement('div');
+
   actividadHTML.className = 'column';
 
   actividadHTML.innerHTML = `
