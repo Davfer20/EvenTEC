@@ -2,6 +2,7 @@ import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10
 import { app } from "./firebaseconfig.js"
 import Comentario from './Comentario.js';
 
+
 const db = getDatabase(app)
 
 const foroContainer = document.getElementById('comentContainer');

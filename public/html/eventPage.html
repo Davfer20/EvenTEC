@@ -19,10 +19,10 @@
 
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
-    fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        const headerContainer = document.getElementById('headerContainer');
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerContainer = document.getElementById("headerContainer");
         headerContainer.innerHTML = data;
       });
 
@@ -30,13 +30,10 @@
       // Redirige a "verEvento.html" con el identificador del evento en la URL
       window.location.href = `verEvento.html?eventId=${eventId}`;
     }
-
-
   </script>
 
   <script type="module" src="../javascript/loadEventPage.js"></script>
   <script type="module" src="../javascript/loadNotifications.js"></script>
-
 </body>
 
 </html>

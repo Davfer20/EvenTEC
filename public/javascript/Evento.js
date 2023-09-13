@@ -56,8 +56,9 @@ Evento.prototype.toExtendedHTML = function () {
         <p class="info">${this.descripcion}</p>
         <p class="info">${this.requerimientos}</p>
         <span>${this.fechaHorario}</span>
-        <button class="buttonT1">Reservar</button>
-        <p class="info">Cupos: ${this.cupos}</p>
+        <button class="buttonT1" id="inscribirButton">Inscribirme</button>
+        <button class="buttonT1" id="verListButton">Ver asistentes</button>
+        <p class="info" id="cuposEventPage">Cupos: ${this.cupos}/${this.capacidad}</p>
       </div>
     `;
 

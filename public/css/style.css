@@ -179,7 +179,7 @@ select {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 250px;
+  height: 260px;
   padding: 10px 36px 10px 36px;
   border-radius: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -198,5 +198,7 @@ select {
 }
 
 .errorButton {
+  margin-left: 0px;
+  margin-bottom: 10px;
   display: inline-block;
 }

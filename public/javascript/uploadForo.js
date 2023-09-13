@@ -4,44 +4,6 @@ import Comentario from './Comentario.js';
 
 const db = getDatabase(app)
 
-function test3() {
-
-    const mensajesForo = [];
-
-    const msj1 = new Comentario(
-        'Comentario 1',
-        'User 1',
-        '10/04/23',
-        'https://cdn-icons-png.flaticon.com/512/21/21104.png'
-    );
-
-    const msj2 = new Comentario(
-        'Comentario 2',
-        'User 2',
-        '10/04/23',
-        'https://cdn-icons-png.flaticon.com/512/21/21104.png'
-    );
-
-    let msj3 = new Comentario(
-        'Comentario 3',
-        'User 3',
-        '10/04/23',
-        'https://cdn-icons-png.flaticon.com/512/21/21104.png'
-    );
-
-    mensajesForo.push(msj1);
-    mensajesForo.push(msj2);
-    mensajesForo.push(msj3);
-
-    const foroRef = ref(db, 'foro'); // Reemplaza 'foro' con el nombre de tu nodo en la base de datos
-
-    mensajesForo.forEach((comentario) => {
-        console.log(comentario);
-        const newForoRef = push(foroRef); // Genera una referencia con ID automático
-        set(newForoRef, comentario); // Sube el objeto evento a la base de datos
-    });
-
-}
 
 function foroMsj() {
 
@@ -60,8 +22,39 @@ function foroMsj() {
     const foroRef = ref(db, 'foro');
     const newForoRef = push(foroRef); // Genera una referencia con ID automático
     set(newForoRef, foroMsj);
+
+    clearText();
+    // Enviar mail
+    //sendEmail()
+    //SendMail();
 }
 
-const button = document.getElementById('foroButton');;
+function clearText() {
+    // Contenido del textarea
+    const mensaje = text.value;
+    // Verifica si el mensaje no está vacío antes de procesarlo
+    if (mensaje.trim() !== '') {
+        text.value = '';
+    }
+}
+
+// function SendMail(){
+//     Email.send({
+//       SecureToken : "7901068b-704c-4c23-864a-ae1ab6145053",
+//       To : 'jfernandezs2004@gmail.com',
+//       From : "jfernandezs2004@gmail.com",
+//       Subject : "This is the subject",
+//       Body : "And this is the body"
+//   }).then(
+//     message => alert(message)
+//   );
+// }
+
+const button = document.getElementById('foroButton');
+const text = document.getElementById('comentInput');
+
 button.addEventListener('click', foroMsj);
+
+
+
 

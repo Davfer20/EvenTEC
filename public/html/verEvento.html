@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Evento</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/eventPageStyle.css" />
-    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.png"
+      type="image/x-icon"
+    />
+    <script src="../javascript/sendMail.js" type="module"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("Ob0YS43AlTRno31ra");
+      })();
+    </script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div id="headerContainer"></div>
     <div id="eventData"></div>
 
-    <div class="container" id="container">
+    <div class="containerActividades" id="container"></div>
 
+    <footer class="barra-inferior" id="footer"></footer>
+
+    <div class="errorContainer">
+      <p class="title errorTitle">Alerta</p>
+      <p class="errorText"></p>
+      <button class="buttonT1 errorButton">Cerrar</button>
     </div>
 
-    <footer class="barra-inferior" id="footer">
-
-
-    </footer>
-
-
+    <div class="cancelContainer">
+      <p class="title cancelText">Alerta</p>
+      <p class="cancelText">
+        ¿Está seguro que desea desinscribirse del evento?.
+      </p>
+      <button class="buttonT1 cancelButton" id="confirmCanButton">Sí</button>
+      <button class="buttonT1 cancelButton" id="cancelCanButton">No</button>
+    </div>
 
     <script>
-        // Cargar el encabezado usando fetch y insertarlo en el contenedor
-        fetch("header.html")
-            .then((response) => response.text())
-            .then((data) => {
-                const headerContainer = document.getElementById("headerContainer");
-                headerContainer.innerHTML = data;
-            });
+      // Cargar el encabezado usando fetch y insertarlo en el contenedor
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerContainer = document.getElementById("headerContainer");
+          headerContainer.innerHTML = data;
+        });
     </script>
 
     <script type="module" src="../javascript/loadEvent.js"></script>
-
-
-</body>
-
+    <script type="module" src=""></script>
+  </body>
 </html>
