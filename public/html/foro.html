@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foro</title>
-    <link rel="stylesheet" href="../css/foroStyle.css">
-    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/foroStyle.css" />
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div id="headerContainer"></div>
     <div class="comentarios">
         <!-- Caja de comentarios con scroll -->
         <div class="comentarios-scroll" id="comentContainer">
-
-
         </div>
 
     </div>
@@ -39,10 +39,8 @@
             window.location.href = `verEvento.html?eventId=${eventId}`;
         }
     </script>
-
     <script type="module" src="../javascript/loadForo.js"></script>
     <script type="module" src="../javascript/uploadForo.js"></script>
-
+    <script type="module" src="../javascript/loadNotifications.js"></script>
 </body>
-
 </html>

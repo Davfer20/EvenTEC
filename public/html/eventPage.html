@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Página de Eventos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/eventStyle.css" />
+    <script src="../javascript/Evento.js"></script>
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
 
-<head>
-  <title>Página de Eventos</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/eventStyle.css" />
-  <script src="../javascript/Evento.js"></script>
-  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
-</head>
+  <body>
+    <div id="headerContainer"></div>
+    <p class="pageTitle">EvenTEC</p>
+    <p class="pageSubtitle">Eventos más populares</p>
 
-<body>
-  <div id="headerContainer"></div>
-  <p class="pageTitle">EvenTEC</p>
-  <p class="pageSubtitle">Eventos más populares</p>
+    <div class="container" id="container"></div>
 
-  <div class="container" id="container"></div>
+    <script>
+      // Cargar el encabezado usando fetch y insertarlo en el contenedor
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerContainer = document.getElementById("headerContainer");
+          headerContainer.innerHTML = data;
+        });
 
-  <script>
-    // Cargar el encabezado usando fetch y insertarlo en el contenedor
-    fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        const headerContainer = document.getElementById('headerContainer');
-        headerContainer.innerHTML = data;
-      });
+      function redirectToEvent(eventId) {
+        // Redirige a "verEvento.html" con el identificador del evento en la URL
+        window.location.href = `verEvento.html?eventId=${eventId}`;
+      }
+    </script>
 
-    function redirectToEvent(eventId) {
-      // Redirige a "verEvento.html" con el identificador del evento en la URL
-      window.location.href = `verEvento.html?eventId=${eventId}`;
-    }
-
-
-  </script>
-
-  <script type="module" src="../javascript/loadEventPage.js"></script>
-  <script type="module" src="../javascript/loadNotifications.js"></script>
-
-</body>
-
+    <script type="module" src="../javascript/loadEventPage.js"></script>
+    <script type="module" src="../javascript/loadNotifications.js"></script>
+  </body>
 </html>
