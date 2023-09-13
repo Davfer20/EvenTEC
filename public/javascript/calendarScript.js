@@ -1,3 +1,52 @@
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { app } from "./firebaseconfig.js"
+
+// Obtiene una referencia a la base de datos de Firebase
+const db = getDatabase(app);
+
+// Define una función para cargar y mostrar los eventos
+function loadAndDisplayEvents() {
+    const eventosRef = ref(db, 'eventos'); // Reemplaza 'eventos' con la referencia adecuada en tu base de datos
+
+    // Escucha cambios en los datos de eventos
+    onValue(eventosRef, (snapshot) => {
+        const eventsData = snapshot.val();
+        let events = []
+        if (eventsData) {
+            for (const key in eventsData) {
+                const eventData = eventsData[key];
+                const dateRange = eventData.fechaHorario
+
+                const dateParts = dateRange.split(" - ");
+                const startDateString = dateParts[0]; // "2023-09-15T15:33"
+                const endDateString = dateParts[1];   // "2023-09-16T15:33"
+
+
+                events.push({
+                    eventName: `Inicia: ${eventData.titulo}`,
+                    calendar: 'Start', // Ajusta la categoría según tus necesidades
+                    color: 'green',
+                    date: moment(startDateString) // Convierte la fecha de Firebase a un objeto Moment.js
+                });
+
+                events.push({
+                    eventName: `Termina: ${eventData.titulo}`,
+                    calendar: 'Ends', // Ajusta la categoría según tus necesidades
+                    color: 'orange',
+                    date: moment(endDateString) // Convierte la fecha de Firebase a un objeto Moment.js
+                });
+
+            };
+
+            // Crea el calendario con los eventos cargados desde Firebase
+            const calendar = new Calendar('#calendar', events);
+        }
+    });
+}
+
+// Llama a la función para cargar y mostrar los eventos
+loadAndDisplayEvents();
+
 !function () {
 
     var today = moment();
@@ -53,9 +102,6 @@
     Calendar.prototype.drawMonth = function () {
         var self = this;
 
-        this.events.forEach(function (ev) {
-            ev.date = self.current.clone().date(Math.random() * (29 - 1) + 1);
-        });
 
 
         if (this.month) {
@@ -166,7 +212,7 @@
     }
 
     Calendar.prototype.getDayClass = function (day) {
-        classes = ['day'];
+        var classes = ['day']; // Declarar la variable "classes" aquí
         if (day.month() !== this.current.month()) {
             classes.push('other');
         } else if (today.isSame(day, 'day')) {
@@ -316,33 +362,4 @@
         }
         return ele;
     }
-}();
-
-!function () {
-    var data = [
-        { eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange' },
-        { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange' },
-        { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange' },
-        { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange' },
-
-        { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue' },
-        { eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue' },
-        { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue' },
-        { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue' },
-
-        { eventName: 'School Play', calendar: 'Kids', color: 'yellow' },
-        { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow' },
-        { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow' },
-        { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow' },
-
-        { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green' },
-        { eventName: 'Bowling Team', calendar: 'Other', color: 'green' },
-        { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green' },
-        { eventName: 'Startup Weekend', calendar: 'Other', color: 'green' }
-    ];
-
-
-
-    var calendar = new Calendar('#calendar', data);
-
 }();

@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Calendario</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/calendarStyle.css" />
-    <link
-      rel="shortcut icon"
-      href="../images/favicon.png"
-      type="image/x-icon"
-    />
-  </head>
 
-  <body>
-    <div id="headerContainer"></div>
+<head>
+  <title>Calendario</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/calendarStyle.css" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+</head>
 
-    <p class="pageTitle">Calendario</p>
+<body>
+  <div id="headerContainer"></div>
 
-    <div id="calendar"></div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-    <script src="../javascript/calendarScript.js"></script>
+  <p onclick="load()" class="pageTitle">Calendario</p>
 
-    <script>
-      // Cargar el encabezado usando fetch y insertarlo en el contenedor
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const headerContainer = document.getElementById("headerContainer");
-          headerContainer.innerHTML = data;
-        });
-    </script>
-    <script type="module" src="../javascript/loadNotifications.js"></script>
-  </body>
+  <div id="calendar"></div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script type="module" src="../javascript/calendarScript.js"></script>
+
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerContainer = document.getElementById("headerContainer");
+        headerContainer.innerHTML = data;
+      });
+  </script>
+  <script type="module" src="../javascript/loadNotifications.js"></script>
+</body>
+
 </html>

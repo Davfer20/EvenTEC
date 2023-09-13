@@ -34,8 +34,5 @@ onValue(eventosRef, (snapshot) => {
     } else {
         // No se encontraron eventos en la base de datos
     }
-
-
-
 });
 
