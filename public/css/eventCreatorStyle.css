@@ -142,14 +142,11 @@ body {
 }
 
 .barra-inferior {
-  background-color: #ededed;
-  color: #FFFFFF;
-  display: flex;
-  flex-direction: row;
-  align-items: start;
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   padding: 10px;
   bottom: 0;
-
   width: 100%;
 }
 
@@ -187,9 +184,17 @@ body {
   border-radius: 50px;
   height: 68px;
   width: 68px;
+  border: none;
+  background: rgba(211, 211, 211, 0.337);
+  font-size: 50px;
+  color: lightgray;
+  transition: all 0.4s;
 }
 
-.addPeople img {
-  height: 48px;
-  width: auto;
+.addPeople:hover {
+  color: rgba(211, 211, 211, 0.596);
+}
+
+.addPeople:active {
+  background: rgba(211, 211, 211, 0.537);
 }

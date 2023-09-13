@@ -45,22 +45,17 @@
 
   </div>
 
-  <footer class="barra-inferior">
-    <div class="colabs">
+  <footer class="barra-inferior" id="footer">
+    <div class="colabs" id="user">
       <img src="../images/test.jpg" alt="Usuario">
-      <span>Asocia</span>
+      <span class="username">--</span>
     </div>
 
-    <div class="colabs">
-      <img src="../images/userLogo.svg" alt="Usuario">
-      <input placeholder="Colaborador" type="text"></input>
-    </div>
-
-    <div class="colabs">
-      <button class="addPeople"><img src="../images/addPeople.svg" alt="Usuario"></button>
+    <div class="colabs" id="people">
+      <button class="addPeople" id="addPeople">+</button>
+      <button class="addPeople" id="delPeople">-</button>
     </div>
   </footer>
-
 
 
   <script>
@@ -73,6 +68,7 @@
       });
 
     let actividadCounter = 1; // Inicializa el contador de actividad
+    let colabCounter = 0; // Inicializa el contador de colabs
 
     // Manejador de evento para agregar actividad
     document.getElementById('addActivity').addEventListener('click', function () {
@@ -87,6 +83,21 @@
         actividadCounter--; // Decrementa el contador de actividad
       }
     });
+
+    // Manejador de evento para agregar colaborador
+    document.getElementById('addPeople').addEventListener('click', function () {
+      colabCounter++; // Incrementa el contador de colaborador
+      addColabBox(colabCounter);
+    });
+
+    // Manejador de evento para eliminar colaborador
+    document.getElementById('delPeople').addEventListener('click', function () {
+      if (colabCounter > 0) {
+        removeColabBox(colabCounter);
+        colabCounter--; // Decrementa el contador de colaborador
+      }
+    });
+
 
     // Función para agregar una actividad con un contador específico
     function addActivityBox(counter) {
@@ -116,6 +127,21 @@
       });
     }
 
+    // Función para agregar una colaborador con un contador específico
+    function addColabBox(counter) {
+      const buttonColumn = document.getElementById('people');
+
+      const nuevoElemento = document.createElement('div');
+      nuevoElemento.className = 'colabs user';
+      nuevoElemento.id = `colab${colabCounter}`
+      nuevoElemento.innerHTML = `
+                <img class="userImg" src="../images/userLogo.svg" alt="Usuario">
+                <input class="username" placeholder="Colaborador" type="text"></input>
+            `;
+      footer.insertBefore(nuevoElemento, buttonColumn);
+
+    }
+
     // Función para eliminar la última actividad con un contador específico
     function removeActivityBox(counter) {
       const lastActivity = document.getElementById(`actDisplay${counter}`);
@@ -123,6 +149,14 @@
         lastActivity.parentNode.parentNode.remove();
       }
     }
+    // Función para eliminar el último colaborador con un contador específico
+    function removeColabBox(counter) {
+      const lastActivity = document.getElementById(`colab${counter}`);
+      if (lastActivity) {
+        lastActivity.remove();
+      }
+    }
+
 
     // Función para manejar la carga de imágenes
     function handleImageUpload(input) {

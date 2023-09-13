@@ -18,7 +18,7 @@ body {
 
 .eventImage {
   width: 355px;
-  height: auto;
+  height: 200px;
   background-color: #f0f0f0;
   margin-right: 10px;
   margin-top: 10px;
@@ -26,7 +26,7 @@ body {
 
 .activityImage {
   width: 340px;
-  height: auto;
+  height: 200px;
   background-color: #f0f0f0;
   margin-right: 10px;
   margin-top: 10px;

@@ -7,13 +7,16 @@ const db = getDatabase(app)
 
 const eventosRef = ref(db, 'eventos');
 const newEventoRef = push(eventosRef) // Genera una referencia con ID automático
+const userDisplay = document.getElementById('user');
 
+let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+userDisplay.querySelector('.username').textContent = userInfo.username;
 
 
 function submitEvento() {
     const item = document.getElementById('eventData')
-    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
 
     const titulo = item.querySelector('.title').value;
     const imagenSrc = item.querySelector('.image').getAttribute('src')
@@ -49,10 +52,11 @@ function submitEvento() {
         cupos,
         userSrc,
         5,
-    )
+    );
 
     set(newEventoRef, nuevoEvento); // Sube el objeto evento a la base de datos
-    subirTodasLasActividades()
+    subirTodasLasActividades();
+    subirTodosLosColabs();
 }
 
 function subirTodasLasActividades() {
@@ -88,8 +92,29 @@ function subirTodasLasActividades() {
     });
 }
 
+
+function subirTodosLosColabs() {
+    const eventoRef = ref(db, `eventos/${newEventoRef.key}/colabs`);
+
+    const colabs = document.querySelectorAll('.colabs.user');
+
+    let colabList = []
+    colabs.forEach((colab) => {
+        const colabName = colab.querySelector('.username').value;
+
+        // Validar si el colaborador existe 
+
+        colabList.push(colabName)
+    });
+
+    set(eventoRef, colabList)
+}
+
+
+
+
 const submitButton = document.getElementById('buttonSubmit')
-submitButton.addEventListener('click', submitEvento);
+submitButton.addEventListener('click', subirTodosLosColabs);
 
 
 function submitImage() {
@@ -118,4 +143,4 @@ function submitImage() {
 
 
 const inputImagenEvento = document.getElementById('eventImage')
-inputImagenEvento.addEventListener('change', submitImage);
+inputImagenEvento.addEventListener('change', submitEvento);
