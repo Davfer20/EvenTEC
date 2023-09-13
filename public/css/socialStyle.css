@@ -1,6 +1,6 @@
 #share-buttons {
   display: block;
-  align-items: center; /* Centra horizontalmente los elementos */
+  align-items: center;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -44,4 +44,87 @@
 }
 #share-buttons span:hover {
   opacity: 0.9;
+}
+
+.rateButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.rateButton {
+  background-color: #45a049;
+}
+
+.rateContainer {
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  padding: 10px 36px 10px 36px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-size: 20px;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: -1;
+}
+
+.titleRateEvent {
+  font-weight: bold;
+  color: black;
+}
+.rateEvent {
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.ratingContainer input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.coment-rate {
+  margin-top: 10px;
+  width: 380px;
+  height: 240px;
+}
+
+.buttonR1 {
+  margin-top: 10px;
+}
+
+.buttonR1 {
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: border-color 0.8s;
+  background-color: var(--accentColorBG);
+  border-color: var(--accentColorBD);
+}
+
+.shadow-button {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s;
 }

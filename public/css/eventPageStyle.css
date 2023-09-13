@@ -47,7 +47,7 @@ body {
 }
 
 .sidebar-item {
-  padding: 3px 8PX;
+  padding: 3px 8px;
   min-width: 90px;
   height: fit-content;
   border-radius: 0px 7px 7px 7px;
@@ -81,7 +81,6 @@ body {
   border-color: lightskyblue;
 }
 
-
 .containerActividades {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -107,7 +106,6 @@ body {
   display: flex;
   align-items: center;
   margin: 7px 0px;
-
 }
 
 .user img {
@@ -128,7 +126,6 @@ body {
   font-weight: bold;
 }
 
-
 .eventDetail {
   display: flex;
   flex-direction: column;
@@ -136,7 +133,6 @@ body {
   height: auto;
   gap: 5px;
 }
-
 
 .barra-inferior {
   border: 1px solid #ccc;

@@ -4,7 +4,6 @@ import Comentario from './Comentario.js';
 
 const db = getDatabase(app)
 
-
 function foroMsj() {
 
     var currentDate = new Date();
@@ -24,37 +23,18 @@ function foroMsj() {
     set(newForoRef, foroMsj);
 
     clearText();
-    // Enviar mail
-    //sendEmail()
-    //SendMail();
+
 }
 
 function clearText() {
     // Contenido del textarea
     const mensaje = text.value;
-    // Verifica si el mensaje no está vacío antes de procesarlo
     if (mensaje.trim() !== '') {
         text.value = '';
     }
 }
 
-// function SendMail(){
-//     Email.send({
-//       SecureToken : "7901068b-704c-4c23-864a-ae1ab6145053",
-//       To : 'jfernandezs2004@gmail.com',
-//       From : "jfernandezs2004@gmail.com",
-//       Subject : "This is the subject",
-//       Body : "And this is the body"
-//   }).then(
-//     message => alert(message)
-//   );
-// }
-
 const button = document.getElementById('foroButton');
 const text = document.getElementById('comentInput');
 
 button.addEventListener('click', foroMsj);
-
-
-
-

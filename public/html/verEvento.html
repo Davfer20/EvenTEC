@@ -39,13 +39,48 @@
 
     <footer class="barra-inferior" id="footer"></footer>
 
-      <div id="share-buttons">
-        <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
-        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a> 
-        <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
-        <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
-        <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
-      </div>  
+    <div id="share-buttons">
+      <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
+      <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a> 
+      <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+      <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+      <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
+      <button class="rateButton" id="sendButton">Calificar el evento</button>
+    </div>  
+
+    <div class="rateContainer">
+      <p class="titleRateEvent">Calificar un evento</p>
+      <p class="rateEvent">Ingrese del 1 al 5 su satisfacción</p>
+      <form id="ratingForm">
+        <label>
+            <input type="radio" name="rating" value="1" class = "ratingContianer">
+            <span class="rating-number">1</span>
+        </label>
+
+        <label >
+            <input type="radio" name="rating" value="2" class = "ratingContianer">
+            <span class="rating-number">2</span>
+        </label>
+
+        <label >
+            <input type="radio" name="rating" value="3" class = "ratingContianer">
+            <span class="rating-number">3</span>
+        </label>
+
+        <label >
+            <input type="radio" name="rating" value="4" class = "ratingContianer">
+            <span class="rating-number">4</span>
+        </label>
+
+        <label >
+            <input type="radio" name="rating" value="5" class = "ratingContianer">
+            <span class="rating-number">5</span>
+        </label>
+      </form>
+        <textarea id="commentRate" placeholder="Escribe un comentario" class="coment-rate" rows="5"
+        cols="54"></textarea>
+        <button class="buttonR1" id="sendButton2">Enviar</button>
+    </div>
 
     <div class="errorContainer">
       <p class="title errorTitle">Alerta</p>
@@ -72,8 +107,9 @@
         });
     </script>
 
-    <script src="../javascript/socialRequest.js"></script>
     <script type="module" src="../javascript/loadEvent.js"></script>
-    <script type="module" src=""></script>
+    <script src="../javascript/socialRequest.js"></script>
+    <script type="module" src="../javascript/rateEvent.js"></script>
+
   </body>
 </html>
