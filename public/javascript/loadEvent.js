@@ -58,25 +58,48 @@ function inscribirUsuario(){
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     console.log(loggedUser, cupos, capacidad);
     if (cupos < capacidad) {
-        const eventKey = push(child(ref(db), `inscritos/${eventId}`)).key;
-        const userKey = push(child(ref(db), `userEventos/${loggedUser}`)).key;
         const updates = {};
-        updates[`/inscritos/${eventId}/` + eventKey] = loggedUser;
-        updates[`/userEventos/${loggedUser}/` + userKey] = eventKey;
+        updates[`/inscritos/${eventId}/` + loggedUser] = true;
+        updates[`/userEventos/${loggedUser}/` + eventId] = true;
         updates[`/eventos/${eventId}/cupos`] = cupos + 1;
         update(ref(db), updates);
         displayMessage("Éxito", "¡Felicitaciones, ha sido inscrito al evento! Revise su correo.");
         inscribirButton.removeEventListener('click', inscribirUsuario);
         inscribirButton.textContent = "Cancelar";
-        inscribirButton.addEventListener('click', desincribirUsuario);
+        inscribirButton.addEventListener('click', desinscribirUsuario);
     } else {
         displayError("Lo lamentamos. Ya no hay cupo para el evento.");
     }
 }
 
-function desincribirUsuario(){
-    console.log("Desinscribir");
+function desinscribirUsuario(){
+    const cancelContainer = document.querySelector('.cancelContainer');
+    cancelContainer.style.opacity = 1;
+    cancelContainer.style.zIndex = 1;
 }
+
+async function confirmCancel(){
+    const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
+    const updates = {};
+    updates[`/inscritos/${eventId}/` + loggedUser] = false;
+    updates[`/userEventos/${loggedUser}/` + eventId] = false;
+    updates[`/eventos/${eventId}/cupos`] = cupos - 1;
+    update(ref(db), updates);
+    displayMessage("Éxito", "Se ha desinscrito del evento.");
+    inscribirButton.removeEventListener('click', desinscribirUsuario);
+    inscribirButton.textContent = "Inscribirme";
+    inscribirButton.addEventListener('click', inscribirUsuario);
+    const cancelContainer = document.querySelector('.cancelContainer');
+    cancelContainer.style.opacity = 0;
+    cancelContainer.style.zIndex = -1;
+}
+
+function cancelCancel(){
+    const cancelContainer = document.querySelector('.cancelContainer');
+    cancelContainer.style.opacity = 0;
+    cancelContainer.style.zIndex = -1;
+}
+
 
 function displayMessage(title, message){
     const errorTitle = document.querySelector('.errorTitle');
@@ -109,6 +132,11 @@ function closeError() {
 const errorButton = document.querySelector('.errorButton');
 errorButton.addEventListener('click', closeError);
 
+const confirmCanButton = document.getElementById('confirmCanButton');
+confirmCanButton.addEventListener('click', confirmCancel);
+
+const cancelCanButton = document.getElementById('cancelCanButton');
+cancelCanButton.addEventListener('click', cancelCancel);
 console.log("here");
 const inscribirButton = document.getElementById('inscribirButton');
 
@@ -121,11 +149,12 @@ if (type === 0){
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     get(ref(db, `userEventos/${loggedUser}`)).then((snapshot) => {
         const eventos = snapshot.val();
+        console.log(loggedUser, eventos);
         if (eventos){
             for (const key in eventos) {
                 if (Object.hasOwnProperty.call(eventos, key)) {
-                    const eventoInscrito = eventos[key];
-                    if (eventoInscrito === eventId){
+                    console.log(eventos[key]);
+                    if (key === eventId && eventos[key]){
                         inscrito = true;
                         break;
                     }
@@ -133,8 +162,10 @@ if (type === 0){
             };
         }
         if (inscrito){
-            inscribirButton.addEventListener('click', desincribirUsuario);
+            inscribirButton.textContent = "Cancelar";
+            inscribirButton.addEventListener('click', desinscribirUsuario);
         } else {
+            inscribirButton.textContent = "Inscribirme";
             inscribirButton.addEventListener('click', inscribirUsuario);
         }
     });

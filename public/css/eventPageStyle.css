@@ -170,3 +170,35 @@ body {
   font-weight: bold;
   color: black;
 }
+
+.cancelContainer {
+  margin: auto;
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  padding: 10px 36px 10px 36px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-size: 20px;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: -1;
+}
+
+.cancelText {
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.cancelButton {
+  margin-top: 0px;
+  margin-left: 0px;
+  display: inline-block;
+}
