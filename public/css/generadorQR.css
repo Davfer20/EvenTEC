@@ -1,0 +1,51 @@
+label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: lightslategray;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Estilos para el div contenedor */
+div {
+  margin: 10px; /* Espacio entre los divs */
+  padding: 10px; /* Espacio dentro de los divs */
+}
+
+input[type="text"] {
+  width: 1520px; /* Ancho completo del contenedor */
+  padding: 10px;
+  font-size: 24px;
+  margin-top: 30px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Estilos para el botón */
+button {
+  background-color: lightslategrey;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box; /* Incluye el padding en el ancho total */
+  font-size: 24px; /* Tamaño del texto */
+  font-weight: bold; /* Texto en negrita */
+  width: 100%; /* Ancho completo del contenedor */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 0; /* Elimina el redondeo del botón */
+  margin-top: 10px; /* Espacio entre el botón y el label */
+  cursor: pointer; /* Cambia el cursor a pointer cuando se pasa sobre el botón */
+}
+
+#qrcode {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 200px; /* Establecer el alto del elemento al 100% del viewport height */
+}

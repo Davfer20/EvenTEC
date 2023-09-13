@@ -2,6 +2,8 @@ import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByV
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
+import sendMail from "./sendMail.js";
+
 
 const db = getDatabase(app)
 
@@ -89,7 +91,9 @@ function getTimestamp() {
 }
   
 function inscribirUsuario(){
-    const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const loggedUser = userInfo['carnet'];
+    const email = userInfo['email'];
     console.log(loggedUser, cupos, capacidad);
     if (cupos < capacidad) {
         const updates = {};
@@ -98,6 +102,8 @@ function inscribirUsuario(){
         updates[`/eventos/${eventId}/cupos`] = cupos + 1;
         update(ref(db), updates);
         displayMessage("Éxito", "¡Felicitaciones, ha sido inscrito al evento! Revise su correo.");
+        
+        sendMail('EvenTEC Corporation', 'WERTY31678D32S', email);
         inscribirButton.removeEventListener('click', inscribirUsuario);
         inscribirButton.textContent = "Cancelar";
         inscribirButton.addEventListener('click', desinscribirUsuario);

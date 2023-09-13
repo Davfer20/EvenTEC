@@ -1,0 +1,47 @@
+#share-buttons {
+  display: block;
+  align-items: center; /* Centra horizontalmente los elementos */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#share-buttons span {
+  opacity: 0.6;
+}
+#share-buttons i {
+  font-size: 40px;
+  margin: 10px;
+}
+.facebook {
+  color: #3b5998;
+}
+.twitter {
+  color: #55acee;
+}
+
+.reddit {
+  color: #cb2027;
+}
+.whatsapp {
+  color: #25d366;
+}
+.telegram {
+  color: #229ed9;
+}
+.facebook,
+.twitter,
+.reddit,
+.whatsapp,
+.telegram {
+  opacity: 0.6;
+}
+.facebook:hover,
+.twitter:hover,
+.reddit:hover,
+.whatsapp:hover,
+.telegram:hover {
+  opacity: 0.9;
+}
+#share-buttons span:hover {
+  opacity: 0.9;
+}
