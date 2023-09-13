@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Divs con Label, Text Field y Botón</title>
+    <link rel="stylesheet" href="../css/generadorQR.css" />
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <!-- <script src="generatorQR.js"></script> -->
+
+    <script type="module" src="../javascript/generatorQR.js"></script>
+  </head>
+  <body>
+    <div>
+      <label for="campoTexto">QR Generator</label>
+    </div>
+    <div>
+      <input type="text" id="campoTexto" name="campoTexto" />
+    </div>
+    <div>
+      <button type="button" onclick="generateQRCode()">Generar QR</button>
+    </div>
+
+    <div id="qrcode"></div>
+    <script>
+      var dataToEncode = "fdafsdafd124343"; //Numeros para el ID
+
+      // Obtén una referencia al elemento HTML donde se mostrará el código QR
+      var qrcodeContainer = document.getElementById("qrcode");
+
+      // Crea una instancia de QRCode
+      var qrcode = new QRCode(qrcodeContainer, {
+        width: 200, // Ancho del código QR
+        height: 200, // Altura del código QR
+      });
+
+      // Función para generar el código QR cuando se haga clic en el botón
+      function generateQRCode() {
+        var inputData = document.getElementById("campoTexto").value; // Obtén el valor del campo de texto
+        qrcode.makeCode(inputData); // Genera el código QR con los datos del campo de texto
+      }
+
+      // Función para enviar correo (debes definirla en sendMail.js)
+      function sendMail() {
+        console.log("Enviando correo...");
+        // Coloca aquí la lógica para enviar el correo usando email.js
+      }
+    </script>
+  </body>
+</html>
