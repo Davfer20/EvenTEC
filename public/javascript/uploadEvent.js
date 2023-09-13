@@ -23,10 +23,10 @@ function submitEvento() {
     const nombreAsociacion = userInfo.username;
     const fecha = item.querySelector('.startDate').value;
     const fechaHorario = `${item.querySelector('.startDate').value} - ${item.querySelector('.endDate').value}`;
-    const capacidad = item.querySelector('.capacity').value;
+    const capacidad = parseInt(item.querySelector('.capacity').value);
     const descripcion = item.querySelector('.description').value;
     const requerimientos = item.querySelector('.requirements').value;
-    const cupos = '0/' + capacidad;
+    const cupos = 0;
     const userSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOW34PFNB2wJ1Hf5AP88UYB4d-LDcOsC7i4g&usqp=CAU";
     const inputCategories = item.querySelectorAll('.cat');
 
