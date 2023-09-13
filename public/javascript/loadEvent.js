@@ -1,4 +1,4 @@
-import { getDatabase, get, ref, onValue, child, update, push } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByValue, query } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
@@ -14,12 +14,25 @@ const eventosRef = ref(db, 'eventos'); // Reemplaza 'eventos' con la ubicación 
 
 const eventoRef = child(eventosRef, eventId);
 const container = document.getElementById('eventData');
+const informeEvento = document.getElementById('informeEvento');
+const type = parseInt(localStorage.getItem('type'));
 
 const colabsRef = child(eventoRef, 'colabs');
 const footer = document.getElementById('footer');
 let cupos = 0;
 let capacidad = 0;
 
+function incrementClicks(eventId){
+    runTransaction(ref(db, `/eventos/${eventId}/clicks`), (clicks) => {
+        if (clicks) {
+            return clicks + 1;
+        } else {
+            return 1;
+        }
+    });
+}
+
+incrementClicks(eventId);
 await get(eventoRef).then((snapshot) => {
     const eventoData = snapshot.val();
     console.log(eventoData);
@@ -37,7 +50,8 @@ await get(eventoRef).then((snapshot) => {
             eventoData.fechaHorario,
             eventoData.cupos,
             eventoData.userSrc,
-            eventoData.rating
+            eventoData.rating,
+            eventoData.clicks
         );
         container.appendChild(evento.toExtendedHTML())
         const colabHTML = document.createElement('div');
@@ -49,13 +63,33 @@ await get(eventoRef).then((snapshot) => {
         footer.appendChild(colabHTML)
         cupos = eventoData.cupos;
         capacidad = eventoData.capacidad;
+        if (type) {
+            informeEvento.appendChild(evento.toInformeHTML());
+        }
         console.log("evento loaded");
+
     } else {
         // Maneja el caso en el que no se encuentre el evento
         console.log('Evento no encontrado');
     }
 });
 
+function getTimestamp() {
+    const date = new Date();
+  
+    // obtenemos el dia, mes y año, horas minutos y segudndos, y
+    // los formateamos para que queden en formato
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+  
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
+  
 function inscribirUsuario(){
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const loggedUser = userInfo['carnet'];
@@ -63,7 +97,7 @@ function inscribirUsuario(){
     console.log(loggedUser, cupos, capacidad);
     if (cupos < capacidad) {
         const updates = {};
-        updates[`/inscritos/${eventId}/` + loggedUser] = true;
+        updates[`/inscritos/${eventId}/` + loggedUser] = getTimestamp();
         updates[`/userEventos/${loggedUser}/` + eventId] = true;
         updates[`/eventos/${eventId}/cupos`] = cupos + 1;
         update(ref(db), updates);
@@ -135,6 +169,88 @@ function closeError() {
     errorContainer.style.zIndex = -1;
 }
 
+async function actualizarInforme() {
+    const cuposEventPage = document.getElementById("cuposEventPage");
+    cuposEventPage.innerHTML = `Cupos: ${cupos}/${capacidad}`;
+    const porcentajeAsistencia = document.getElementById("porcentajeAsistencia");
+    porcentajeAsistencia.innerHTML = `Porcentaje de asistencia: ${Math.round(cupos / capacidad * 10000) / 100}%`;
+
+    const listaInscritos = document.getElementById('listaInscritos');
+    
+    const rowsInscritos = listaInscritos.querySelectorAll("td");
+    console.log(rowsInscritos);
+    rowsInscritos.forEach((row) => {
+        console.log(row);
+        row.remove();
+    })
+
+    const usersSnap = await get(ref(db, 'users'));
+    const inscritosSnap = await get(ref(db, `inscritos/${eventId}`));
+
+    const carreras = {};
+    let cancelaciones = 0;
+    if (usersSnap.exists() && inscritosSnap.exists()){
+        const users = usersSnap.val();
+        const inscritos = inscritosSnap.val();
+        for (const user in inscritos) {
+            if (!inscritos[user]) {
+                cancelaciones += 1;
+                continue;
+            }
+            console.log(user)
+            const newRow = listaInscritos.insertRow();
+            const nombre = newRow.insertCell(0);
+            nombre.innerHTML = users[user]["username"];
+            const carnet = newRow.insertCell(1);
+            carnet.innerHTML = users[user]["carnet"];
+            const correo = newRow.insertCell(2);
+            correo.innerHTML = users[user]["email"];
+            correo.className = "correoElement";
+            const telefono = newRow.insertCell(3);
+            telefono.innerHTML = users[user]["phone"];
+            const carrera = newRow.insertCell(4);
+            carrera.innerHTML = users[user]["carrera"];
+            const sede = newRow.insertCell(5);
+            sede.innerHTML = users[user]["sede"];
+            const fecha = newRow.insertCell(6);
+            fecha.innerHTML = inscritos[user];
+            if (carreras.hasOwnProperty(users[user]["carrera"])){
+                carreras[users[user]["carrera"]] += 1;
+            } else {
+                carreras[users[user]["carrera"]] = 1;
+            }
+        }
+    }
+    const estudiantesCarreras = document.getElementById('estudiantesCarreras');
+    const rowsCarreras = estudiantesCarreras.querySelectorAll("td");
+    console.log(rowsCarreras);
+    rowsCarreras.forEach((row) => {
+        console.log(row);
+        row.remove();
+    })
+    for(const carrera in carreras){
+        const newRow = estudiantesCarreras.insertRow();
+        const nombre = newRow.insertCell(0);
+        nombre.innerHTML = carrera;
+        const cantidad = newRow.insertCell(1);
+        cantidad.innerHTML = carreras[carrera];
+    }
+
+    const cancelacionesText = document.getElementById('cancelaciones');
+    cancelacionesText.innerHTML = `Cantidad de cancelaciones: ${cancelaciones}`;
+}
+
+function abrirInforme(){
+    informeEvento.style.zIndex = 1;
+    informeEvento.style.opacity = 1;
+    actualizarInforme();
+}
+
+function cerrarInforme(){
+    informeEvento.style.zIndex = -1;
+    informeEvento.style.opacity = 0;
+}
+
 const errorButton = document.querySelector('.errorButton');
 errorButton.addEventListener('click', closeError);
 
@@ -148,9 +264,9 @@ const inscribirButton = document.getElementById('inscribirButton');
 
 const verListButton = document.getElementById('verListButton');
 
-const type = parseInt(localStorage.getItem('type'));
 if (type === 0){
     verListButton.remove();
+    informeEvento.remove();
     let inscrito = false;
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     get(ref(db, `userEventos/${loggedUser}`)).then((snapshot) => {
@@ -177,6 +293,9 @@ if (type === 0){
     });
 } else {
     inscribirButton.remove();
+    verListButton.addEventListener('click', abrirInforme);
+    const cerrarInformeButton = document.getElementById('cerrarInformeButton');
+    cerrarInformeButton.addEventListener('click', cerrarInforme);
 }
 
 onValue(child(eventoRef, 'cupos'), (snapshot) => {

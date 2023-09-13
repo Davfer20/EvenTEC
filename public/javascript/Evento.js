@@ -1,5 +1,5 @@
 // Definir un constructor para el objeto de evento
-function Evento(id, titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating) {
+function Evento(id, titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating, clicks) {
   this.id = id;
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
@@ -13,6 +13,7 @@ function Evento(id, titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categ
   this.cupos = cupos;
   this.userSrc = userSrc;
   this.rating = rating;
+  this.clicks = clicks;
 }
 
 // Método para generar el HTML del evento
@@ -65,5 +66,51 @@ Evento.prototype.toExtendedHTML = function () {
   return eventExtendedHTML;
 };
 
+Evento.prototype.toInformeHTML = function () {
+  const eventExtendedHTML = document.createElement('div');
+  eventExtendedHTML.className = 'content';
+
+
+  eventExtendedHTML.innerHTML = `
+  <span class="title">${this.titulo}</span>
+  <p class="informeText">${this.descripcion}</p>
+  <p class="informeText">${this.requerimientos}</p>
+  <p class="informeText">${this.fechaHorario}</p>
+  <p class="informeText" id="cantidadClicks">Cantidad de clicks en el evento: ${this.clicks}</p>
+  <p class="informeText" id="cuposEventPage">Cupos: ${this.cupos}/${this.capacidad}</p>
+  <p class="informeText" id="porcentajeAsistencia"></p>
+  <p class="informeText" id="listaDeUsuarios">Lista de usuarios inscritos: </p>
+  <div class="tableContainer">
+      <table class="listaInscritos" id="listaInscritos">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Carnet</th>
+              <th>Correo</th>
+              <th>Teléfono</th>
+              <th>Carrera</th>
+              <th>Sede</th>
+              <th>Fecha de registro</th>
+          </tr>
+        </thead>
+      </table>
+  </div>
+  <p class="informeText" id="carrerasText">Cantidad de estudiantes por carrera: </p>
+  <div class="tableContainer">
+      <table class="listaInscritos" id="estudiantesCarreras">
+          <tr>
+              <th>Carrera</th>
+              <th>Cantidad de estudiantes</th>
+          </tr>
+      </table>
+  </div>
+  <p class="informeText" id="cancelaciones">Cantidad de cancelaciones: </p>
+  <p class="informeText" id="ratingInforme">Rating: ${this.rating} </p>
+  <p class="informeText" id="cantidadComentarios">Cantidad de comentarios: </p>
+  <button class="buttonT1" id="cerrarInformeButton">Cerrar</button>
+    `;
+
+  return eventExtendedHTML;
+};
 
 export default Evento;

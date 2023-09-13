@@ -3,10 +3,12 @@ import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js'
 
-const db = getDatabase(app)
+const db = getDatabase(app);
 
-const eventosRef = ref(db, 'eventos');
-const newEventoRef = push(eventosRef) // Genera una referencia con ID automático
+let refName;
+let eventosRef;
+let newEventoRef;
+
 const userDisplay = document.getElementById('user');
 
 let userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -14,10 +16,21 @@ let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 userDisplay.querySelector('.username').textContent = userInfo.username;
 
 
+function submit() {
+    if (userInfo.type == 1) {
+        refName = 'eventos';
+    }
+    else {
+        refName = 'propuestas';
+    }
+    eventosRef = ref(db, refName);
+    newEventoRef = push(eventosRef); // Genera una referencia con ID automático
+    submitEvento();
+}
+
+
 function submitEvento() {
     const item = document.getElementById('eventData')
-
-
     const titulo = item.querySelector('.title').value;
     const imagenSrc = item.querySelector('.image').getAttribute('src')
     const nombreAsociacion = userInfo.username;
@@ -61,7 +74,7 @@ function submitEvento() {
 
 function subirTodasLasActividades() {
 
-    const eventoRef = ref(db, `eventos/${newEventoRef.key}/activities`);
+    const eventoRef = ref(db, `${refName}/${newEventoRef.key}/activities`);
 
     // Obtén una lista de todos los elementos de actividad en el contenedor
     const actividades = document.querySelectorAll('.column.act');
@@ -94,7 +107,7 @@ function subirTodasLasActividades() {
 
 
 function subirTodosLosColabs() {
-    const eventoRef = ref(db, `eventos/${newEventoRef.key}/colabs`);
+    const eventoRef = ref(db, `${refName}/${newEventoRef.key}/colabs`);
 
     const colabs = document.querySelectorAll('.colabs.user');
 
@@ -111,10 +124,8 @@ function subirTodosLosColabs() {
 }
 
 
-
-
 const submitButton = document.getElementById('buttonSubmit')
-submitButton.addEventListener('click', subirTodosLosColabs);
+submitButton.addEventListener('click', submit);
 
 
 function submitImage() {
@@ -122,17 +133,13 @@ function submitImage() {
     if (imagen) {
         // Crea un objeto FileReader para leer la imagen
         const reader = new FileReader();
-
         // Define una función para manejar la carga de la imagen
         reader.onload = function () {
             const imagenBase64 = reader.result; // Contiene la imagen en formato Base64
 
-
-
             const imagenMostrada = document.getElementById('image');
             imagenMostrada.src = imagenBase64;
         };
-
         // Lee la imagen como Base64
         reader.readAsDataURL(imagen);
     } else {
@@ -141,6 +148,5 @@ function submitImage() {
     }
 }
 
-
 const inputImagenEvento = document.getElementById('eventImage')
-inputImagenEvento.addEventListener('change', submitEvento);
+inputImagenEvento.addEventListener('change', submitImage);
