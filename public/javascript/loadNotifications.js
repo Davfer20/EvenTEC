@@ -7,7 +7,7 @@ const db = getDatabase(app)
 const notiContainer = document.getElementById('notiContainer');
 
 const notiRef = ref(db, 'notificaciones'); // Referencia a este lugar de la database
-onValue(notiRef, (snapshot) => { 
+onValue(notiRef, (snapshot) => {
     const data = snapshot.val();
     if (data) {
         for (const key in data) {
@@ -20,7 +20,6 @@ onValue(notiRef, (snapshot) => {
                     notiData.imageUrl,
                 );
                 notiContainer.appendChild(notificacion.toHTML());
-                console.log(notificacion)
             }
         }
 
