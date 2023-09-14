@@ -40,4 +40,5 @@ function test2() {
         set(newNotiRef, notificacion); // Sube el objeto evento a la base de datos
     });
 }
+
 test2();
