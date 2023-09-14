@@ -70,6 +70,7 @@ Evento.prototype.toExtendedHTML = function () {
 Evento.prototype.toInformeHTML = function () {
   const eventExtendedHTML = document.createElement('div');
   eventExtendedHTML.className = 'content';
+  eventExtendedHTML.id = "informeContent";
 
 
   eventExtendedHTML.innerHTML = `
@@ -108,6 +109,10 @@ Evento.prototype.toInformeHTML = function () {
   <p class="informeText" id="cancelaciones">Cantidad de cancelaciones: </p>
   <p class="informeText" id="ratingInforme">Rating: ${this.rating} </p>
   <p class="informeText" id="cantidadComentarios">Cantidad de comentarios: </p>
+  <p><span class="title">Análisis de resultados</span></p>
+  <p>Ratings de actividades</p>
+  <p id="comentariosSubtitle">Comentarios</p>
+  <div id="comentariosDiv"></div>
   <button class="buttonT1" id="cerrarInformeButton">Cerrar</button>
     `;
 

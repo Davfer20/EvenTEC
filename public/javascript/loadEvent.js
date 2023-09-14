@@ -1,9 +1,10 @@
-import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByValue, query } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByValue, query, push, remove } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
 import Rating from "./Rating.js";
 import sendMail from "./sendMail.js";
+import Comentario from './Comentario.js';
 
 
 const db = getDatabase(app)
@@ -243,6 +244,55 @@ async function actualizarInforme() {
 
     const cancelacionesText = document.getElementById('cancelaciones');
     cancelacionesText.innerHTML = `Cantidad de cancelaciones: ${cancelaciones}`;
+
+    const ratingInforme = document.getElementById('ratingInforme');
+    const ratingSnap = await get(ref(db, `ratings/${eventId}`));
+    let ratings = {};
+    if (ratingSnap.exists()){
+        ratings = ratingSnap.val();
+        const ratingGeneral = ratings["Evento en general"];
+        console.log(ratingGeneral);
+        ratingInforme.innerHTML = `Rating: ${ratingGeneral['suma']/ratingGeneral['cantidad']}`;
+    } else {
+        ratingInforme.innerHTML = "Rating: No hay ratings";
+    }
+
+    const cantidadComentarios = document.getElementById("cantidadComentarios");
+    const comentariosSnap = await get(ref(db, `comments/${eventId}`));
+    let comments = {};
+    if (comentariosSnap.exists()){
+        comments = comentariosSnap.val();
+        const cantidadCom = Object.keys(comments).length;
+        console.log("Cantidad comentarios", cantidadCom);
+        cantidadComentarios.innerHTML = `Cantidad de comentarios: ${cantidadCom}`;
+    }
+
+    const comentariosSubtitle = document.getElementById('comentariosSubtitle');
+    const informeContent = document.getElementById('informeContent');
+    for (const actividad in ratings){
+        const actividadRatingHTML = document.createElement('div');
+        actividadRatingHTML.className = "info";
+
+        actividadRatingHTML.innerHTML = `<p style="text-align: left"><strong>${actividad}:</strong>  ${ratings[actividad]["suma"]/ratings[actividad]["cantidad"]}  con ${ratings[actividad]["suma"]} ratings.</p>`;
+        informeContent.insertBefore(actividadRatingHTML, comentariosSubtitle);
+    }
+    
+    const comentariosDiv = document.getElementById('comentariosDiv');
+    for (const comentario in comments){
+        const comentarioObj = new Comentario(
+            comments[comentario]["comment"],
+            comments[comentario]["userInfo"],
+            comments[comentario]['timestamp']
+        );
+        comentariosDiv.appendChild(comentarioObj.toHTMLInforme());
+        // const actividadRatingHTML = document.createElement('div');
+        // actividadRatingHTML.className = "info";
+
+        // actividadRatingHTML.innerHTML = `<p style="text-align: left"><strong>${actividad}:</strong>  ${ratings[actividad]["suma"]/ratings[actividad]["cantidad"]}  con ${ratings[actividad]["suma"]} ratings.</p>`;
+        // informeContent.insertBefore(actividadRatingHTML, comentariosSubtitle);
+    }
+    
+
 }
 
 function abrirInforme() {
@@ -266,12 +316,15 @@ const cancelCanButton = document.getElementById('cancelCanButton');
 cancelCanButton.addEventListener('click', cancelCancel);
 console.log("here");
 const inscribirButton = document.getElementById('inscribirButton');
+const delButton = document.getElementById('delButton')
+
 
 const verListButton = document.getElementById('verListButton');
 
 if (type === 0) {
     verListButton.remove();
     informeEvento.remove();
+    delButton.remove();
     let inscrito = false;
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     get(ref(db, `userEventos/${loggedUser}`)).then((snapshot) => {
@@ -297,6 +350,7 @@ if (type === 0) {
         }
     });
 } else if (type === 1) {
+
     inscribirButton.remove();
     if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["username"]) {
         verListButton.addEventListener('click', abrirInforme);
@@ -304,9 +358,11 @@ if (type === 0) {
         cerrarInformeButton.addEventListener('click', cerrarInforme);
     } else {
         verListButton.remove();
+        delButton.remove();
     }
 } else {
     inscribirButton.remove();
+    delButton.remove();
     if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["asociacion"]) {
         verListButton.addEventListener('click', abrirInforme);
         const cerrarInformeButton = document.getElementById('cerrarInformeButton');
@@ -337,10 +393,24 @@ const containerA = document.getElementById('container');
 
 
 
-const comment = document.getElementById('commentRate');
+let comment = document.getElementById('commentRate');
 const containerR = document.getElementById('rateContainer');
 
 onValue(activitiesRef, (snapshot) => {
+    containerR.innerHTML = `<p class="titleRateEvent">Calificar un evento</p>
+    <p class="rateEvent">Ingrese del 1 al 5 su satisfacción</p>
+
+    <textarea id="commentRate" placeholder="Escribe un comentario" class="coment-rate" rows="5" cols="54"></textarea>
+    <button class="buttonR1" id="sendButton2">Enviar</button>
+    <button class="buttonR1" id="closeButton2">Cerrar</button>`;
+    comment = document.getElementById('commentRate');
+    const sendButton2 = document.getElementById('sendButton2');
+    sendButton2.addEventListener('click', rateUpload);
+
+    const closeButton2 = document.getElementById('closeButton2');
+    closeButton2.addEventListener('click', closeRateEmail);
+    containerR.insertBefore(CreateRatingHTML('Evento en general'), comment);
+
     const activitiesData = snapshot.val();
     if (activitiesData) {
         for (const key in activitiesData) {
@@ -354,7 +424,7 @@ onValue(activitiesRef, (snapshot) => {
                     activitiyData.fecha
                 );
 
-
+                
                 containerR.insertBefore(CreateRatingHTML(activitiyData.titulo), comment);
                 containerA.appendChild(actividad.toHTML());
             };
@@ -392,7 +462,9 @@ onValue(colabsRef, (snapshot) => {
 //|////////////////////////////////| RATING |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\
 //|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
 
+/*
 let ratingValue;
+*/
 
 function openRateEmail() {
     const rateContainer = document.querySelector('.rateContainer');
@@ -406,44 +478,78 @@ function closeRateEmail() {
     rateContainer.style.zIndex = -1;
 }
 
-function rateUpload() {
+async function rateUpload() {
     console.log('Comienza upload');
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+    const resultsActivities = document.querySelectorAll("form");
+    const text = document.getElementById('commentRate');
+
+
+    const results = {};
+
+    resultsActivities.forEach((form) => {
+        console.log(form.id);
+        const titleHead = form.querySelector("h3");
+        const title = titleHead.innerHTML;
+        const selected = form.querySelector('input[name=rating]:checked');
+        console.log(title, selected.value);
+        results[title] = parseInt(selected.value);
+    });
+    console.log(results);
+    
     console.log(eventId);
     console.log(userInfo.username);
-    console.log(ratingValue);
     console.log(text.value);
 
-    const rateEvent = new Rating(
-        eventId,
-        userInfo.username,
-        ratingValue,
-        text.value
-    )
+    const actividadRef = ref(db, `ratings/${eventId}`);
+    const snapshot = await get(actividadRef);
+    let actividades = {};
+    let newItem = {};
+    if (snapshot.exists()) {
+        actividades = snapshot.val();
+        for (const key in results){
+            if (actividades.hasOwnProperty(key)){
+                actividades[key]["suma"] += results[key];
+                actividades[key]["cantidad"] += 1;
+            } else {
+                newItem = {
+                    "suma": results[key],
+                    "cantidad": 1
+                }
+                actividades[key] = newItem;
+            }
+        }
+    } else {
+        for (const key in results){
+            newItem = {
+                "suma": results[key],
+                "cantidad": 1
+            }
+            actividades[key] = newItem;
+        }
+    }
+    console.log(actividades);
 
-    const rateRed = ref(db, 'rating');
-    const newForoRef = push(rateRed); // Genera una referencia con ID automático
-    set(newForoRef, rateEvent);
+    set(actividadRef, actividades);
 
+    if (text.value != ""){
+        const commentRef = ref(db, `comments/${eventId}`);
+        const newCommentRef = push(commentRef);
+        set(newCommentRef, {
+            "comment": text.value,
+            "userInfo": userInfo.username,
+            "eventId": eventId,
+            "timestamp": getTimestamp()
+        })
+    }
     closeRateEmail()
 }
 
 const sendButton = document.getElementById('sendButton');
 sendButton.addEventListener('click', openRateEmail);
 
-const sendButton2 = document.getElementById('sendButton2');
-sendButton2.addEventListener('click', rateUpload);
-
-
-const closeButton2 = document.getElementById('closeButton2');
-closeButton2.addEventListener('click', closeRateEmail);
-
-const text = document.getElementById('commentRate');
-
-const ratingInputs = document.querySelectorAll('input[name="rating"]');
-
-
+/*
 ratingInputs.forEach(input => {
     input.addEventListener('change', function () {
         const selectedRating = document.querySelector('input[name="rating"]:checked');
@@ -458,13 +564,15 @@ ratingInputs.forEach(input => {
 
 
 });
+*/
+
 
 function CreateRatingHTML(value) {
     const ratingHTML = document.createElement('form');
-    ratingHTML.id = 'ratingForm';
+    ratingHTML.id = `${value}Form`;
 
     ratingHTML.innerHTML = `
-    <h2>${value}</h3>
+    <h3>${value}</h3>
     <label>
       <input type="radio" name="rating" value="1" class="ratingContianer">
       <span class="rating-number">1</span>
@@ -474,7 +582,7 @@ function CreateRatingHTML(value) {
       <span class="rating-number">2</span>
     </label>
     <label>
-      <input type="radio" name="rating" value="3" class="ratingContianer">
+      <input type="radio" name="rating" value="3" class="ratingContianer" checked>
       <span class="rating-number">3</span>
     </label>
     <label>
@@ -489,3 +597,38 @@ function CreateRatingHTML(value) {
 
     return ratingHTML
 }
+
+
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+//|////////////////////////////////| Borrar |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+
+
+
+function deleteAccount() {
+    const deleteContainer = document.querySelector('.deleteContainer');
+    deleteContainer.style.opacity = 1;
+    deleteContainer.style.zIndex = 1;
+}
+
+async function confirmDelete() {
+
+    await remove(ref(db, `eventos/${eventId}`));
+
+    window.location.href = "./eventPage.html";
+}
+
+function cancelDelete() {
+    const deleteContainer = document.querySelector('.deleteContainer');
+    deleteContainer.style.opacity = 0;
+    deleteContainer.style.zIndex = -1;
+}
+
+const eliminarProfileButton = document.getElementById('delButton');
+eliminarProfileButton.addEventListener('click', deleteAccount);
+
+const confirmDelButton = document.getElementById('confirmDelButton');
+confirmDelButton.addEventListener('click', confirmDelete);
+
+const cancelDelButton = document.getElementById('cancelDelButton');
+cancelDelButton.addEventListener('click', cancelDelete);

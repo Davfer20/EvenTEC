@@ -30,4 +30,23 @@ Comentario.prototype.toHTML = function () {
 
     return comentarioHTML;
 };
+
+Comentario.prototype.toHTMLInforme = function () {
+    const comentarioHTML = document.createElement('div');
+    comentarioHTML.className = 'comentario';
+
+    comentarioHTML.innerHTML = `
+      <div class="contenido-comentario">
+          <p class="comentario-texto">
+              ${this.texto}
+          </p>
+          <div class="informacion-adicional">
+              <p class="nombre">${this.nombreUsuario}</p>
+              <p class="fecha">${this.fecha}</p>
+          </div>
+      </div>
+    `;
+
+    return comentarioHTML;
+};
 export default Comentario;

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
     integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/foroStyle.css" />
   <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="../css/socialStyle.css">
   </link>
@@ -37,6 +38,7 @@
     <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
     <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
     <button class="rateButton" id="sendButton"><img class="buttonImage" src="../images/rate.svg" alt="rate"></button>
+    <button class="deleteButton" id="delButton"><img class="buttonImage" src="../images/del.svg" alt="delete"></button>
   </div>
 
   <div class="rateContainer" id="rateContainer">
@@ -65,6 +67,21 @@
 
   <div class="informeEvento" id="informeEvento"></div>
 
+
+  <div class="deleteContainer">
+    <p class="title deleteText">Alerta</p>
+    <p class="deleteText">
+      ¿Está seguro que desea borrar el evento? Esta acción no puede ser
+      revertida.
+    </p>
+    <button class="buttonT1 deleteButton2" id="confirmDelButton">
+      Confirmar
+    </button>
+    <button class="buttonT1 deleteButton2" id="cancelDelButton">
+      Cancelar
+    </button>
+  </div>
+
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
     fetch("header.html")
@@ -77,7 +94,7 @@
 
   <script type="module" src="../javascript/loadEvent.js"></script>
   <script src="../javascript/socialRequest.js"></script>
-  <script type="module" src="../javascript/rateEvent.js"></script>
+  <script type="module" src="../javascript/Rating.js"></script>
 
 </body>
 
