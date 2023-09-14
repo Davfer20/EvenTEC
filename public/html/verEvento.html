@@ -1,117 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Evento</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/eventPageStyle.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
-      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="shortcut icon"
-      href="../images/favicon.png"
-      type="image/x-icon"
-      />
-    <link rel="stylesheet" href="../css/socialStyle.css"></link>
-    <script src="../javascript/sendMail.js" type="module"></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    ></script>
-    <script type="text/javascript">
-      (function () {
-        emailjs.init("Ob0YS43AlTRno31ra");
-      })();
-    </script>
-  </head>
 
-  <body>
-    <div id="headerContainer"></div>
-    <div id="eventData"></div>
+<head>
+  <title>Evento</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/eventPageStyle.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/socialStyle.css">
+  </link>
+  <script src="../javascript/sendMail.js" type="module"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("Ob0YS43AlTRno31ra");
+    })();
+  </script>
+</head>
 
-    <div class="containerActividades" id="container"></div>
+<body>
+  <div id="headerContainer"></div>
+  <div id="eventData"></div>
 
-    <footer class="barra-inferior" id="footer"></footer>
+  <div class="containerActividades" id="container"></div>
 
-    <div id="share-buttons">
-      <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
-      <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a> 
-      <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
-      <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
-      <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
-      <button class="rateButton" id="sendButton">Calificar el evento</button>
-    </div>  
+  <footer class="barra-inferior" id="footer"></footer>
 
-    <div class="rateContainer">
-      <p class="titleRateEvent">Calificar un evento</p>
-      <p class="rateEvent">Ingrese del 1 al 5 su satisfacción</p>
-      <form id="ratingForm">
-        <label>
-            <input type="radio" name="rating" value="1" class = "ratingContianer">
-            <span class="rating-number">1</span>
-        </label>
+  <div id="share-buttons">
+    <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
+    <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
+    <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+    <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+    <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
+    <button class="rateButton" id="sendButton"><img class="buttonImage" src="../images/rate.svg" alt="rate"></button>
+  </div>
 
-        <label >
-            <input type="radio" name="rating" value="2" class = "ratingContianer">
-            <span class="rating-number">2</span>
-        </label>
+  <div class="rateContainer" id="rateContainer">
+    <p class="titleRateEvent">Calificar un evento</p>
+    <p class="rateEvent">Ingrese del 1 al 5 su satisfacción</p>
 
-        <label >
-            <input type="radio" name="rating" value="3" class = "ratingContianer">
-            <span class="rating-number">3</span>
-        </label>
+    <textarea id="commentRate" placeholder="Escribe un comentario" class="coment-rate" rows="5" cols="54"></textarea>
+    <button class="buttonR1" id="sendButton2">Enviar</button>
+    <button class="buttonR1" id="closeButton2">Cerrar</button>
+  </div>
 
-        <label >
-            <input type="radio" name="rating" value="4" class = "ratingContianer">
-            <span class="rating-number">4</span>
-        </label>
+  <div class="errorContainer">
+    <p class="title errorTitle">Alerta</p>
+    <p class="errorText"></p>
+    <button class="buttonT1 errorButton">Cerrar</button>
+  </div>
 
-        <label >
-            <input type="radio" name="rating" value="5" class = "ratingContianer">
-            <span class="rating-number">5</span>
-        </label>
-      </form>
-        <textarea id="commentRate" placeholder="Escribe un comentario" class="coment-rate" rows="5"
-        cols="54"></textarea>
-        <button class="buttonR1" id="sendButton2">Enviar</button>
-    </div>
+  <div class="cancelContainer">
+    <p class="title cancelText">Alerta</p>
+    <p class="cancelText">
+      ¿Está seguro que desea desinscribirse del evento?.
+    </p>
+    <button class="buttonT1 cancelButton" id="confirmCanButton">Sí</button>
+    <button class="buttonT1 cancelButton" id="cancelCanButton">No</button>
+  </div>
 
-    <div class="errorContainer">
-      <p class="title errorTitle">Alerta</p>
-      <p class="errorText"></p>
-      <button class="buttonT1 errorButton">Cerrar</button>
-    </div>
+  <div class="informeEvento" id="informeEvento"></div>
 
-    <div class="cancelContainer">
-      <p class="title cancelText">Alerta</p>
-      <p class="cancelText">
-        ¿Está seguro que desea desinscribirse del evento?.
-      </p>
-      <button class="buttonT1 cancelButton" id="confirmCanButton">Sí</button>
-      <button class="buttonT1 cancelButton" id="cancelCanButton">No</button>
-    </div>
+  <script>
+    // Cargar el encabezado usando fetch y insertarlo en el contenedor
+    fetch("header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerContainer = document.getElementById("headerContainer");
+        headerContainer.innerHTML = data;
+      });
+  </script>
 
-    <div class="informeEvento" id="informeEvento"></div>
+  <script type="module" src="../javascript/loadEvent.js"></script>
+  <script src="../javascript/socialRequest.js"></script>
+  <script type="module" src="../javascript/rateEvent.js"></script>
 
-    <script>
-      // Cargar el encabezado usando fetch y insertarlo en el contenedor
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const headerContainer = document.getElementById("headerContainer");
-          headerContainer.innerHTML = data;
-        });
-    </script>
+</body>
 
-    <script type="module" src="../javascript/loadEvent.js"></script>
-    <script src="../javascript/socialRequest.js"></script>
-    <script type="module" src="../javascript/rateEvent.js"></script>
-
-  </body>
 </html>

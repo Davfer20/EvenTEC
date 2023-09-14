@@ -2,6 +2,7 @@ import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByV
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
+import Rating from "./Rating.js";
 import sendMail from "./sendMail.js";
 
 
@@ -22,7 +23,7 @@ const footer = document.getElementById('footer');
 let cupos = 0;
 let capacidad = 0;
 
-function incrementClicks(eventId){
+function incrementClicks(eventId) {
     runTransaction(ref(db, `/eventos/${eventId}/clicks`), (clicks) => {
         if (clicks) {
             return clicks + 1;
@@ -76,21 +77,21 @@ await get(eventoRef).then((snapshot) => {
 
 function getTimestamp() {
     const date = new Date();
-  
+
     // obtenemos el dia, mes y año, horas minutos y segudndos, y
     // los formateamos para que queden en formato
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-  
+
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-  
+
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 }
-  
-function inscribirUsuario(){
+
+function inscribirUsuario() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const loggedUser = userInfo['carnet'];
     const email = userInfo['email'];
@@ -102,7 +103,7 @@ function inscribirUsuario(){
         updates[`/eventos/${eventId}/cupos`] = cupos + 1;
         update(ref(db), updates);
         displayMessage("Éxito", "¡Felicitaciones, ha sido inscrito al evento! Revise su correo.");
-        
+
         sendMail('EvenTEC Corporation', 'WERTY31678D32S', email);
         inscribirButton.removeEventListener('click', inscribirUsuario);
         inscribirButton.textContent = "Cancelar";
@@ -112,13 +113,13 @@ function inscribirUsuario(){
     }
 }
 
-function desinscribirUsuario(){
+function desinscribirUsuario() {
     const cancelContainer = document.querySelector('.cancelContainer');
     cancelContainer.style.opacity = 1;
     cancelContainer.style.zIndex = 1;
 }
 
-async function confirmCancel(){
+async function confirmCancel() {
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     const updates = {};
     updates[`/inscritos/${eventId}/` + loggedUser] = false;
@@ -134,14 +135,14 @@ async function confirmCancel(){
     cancelContainer.style.zIndex = -1;
 }
 
-function cancelCancel(){
+function cancelCancel() {
     const cancelContainer = document.querySelector('.cancelContainer');
     cancelContainer.style.opacity = 0;
     cancelContainer.style.zIndex = -1;
 }
 
 
-function displayMessage(title, message){
+function displayMessage(title, message) {
     const errorTitle = document.querySelector('.errorTitle');
     const errorContainer = document.querySelector('.errorContainer');
     errorContainer.style.opacity = 1;
@@ -176,7 +177,7 @@ async function actualizarInforme() {
     porcentajeAsistencia.innerHTML = `Porcentaje de asistencia: ${Math.round(cupos / capacidad * 10000) / 100}%`;
 
     const listaInscritos = document.getElementById('listaInscritos');
-    
+
     const rowsInscritos = listaInscritos.querySelectorAll("td");
     console.log(rowsInscritos);
     rowsInscritos.forEach((row) => {
@@ -189,7 +190,7 @@ async function actualizarInforme() {
 
     const carreras = {};
     let cancelaciones = 0;
-    if (usersSnap.exists() && inscritosSnap.exists()){
+    if (usersSnap.exists() && inscritosSnap.exists()) {
         const users = usersSnap.val();
         const inscritos = inscritosSnap.val();
         for (const user in inscritos) {
@@ -214,7 +215,7 @@ async function actualizarInforme() {
             sede.innerHTML = users[user]["sede"];
             const fecha = newRow.insertCell(6);
             fecha.innerHTML = inscritos[user];
-            if (carreras.hasOwnProperty(users[user]["carrera"])){
+            if (carreras.hasOwnProperty(users[user]["carrera"])) {
                 carreras[users[user]["carrera"]] += 1;
             } else {
                 carreras[users[user]["carrera"]] = 1;
@@ -228,7 +229,7 @@ async function actualizarInforme() {
         console.log(row);
         row.remove();
     })
-    for(const carrera in carreras){
+    for (const carrera in carreras) {
         const newRow = estudiantesCarreras.insertRow();
         const nombre = newRow.insertCell(0);
         nombre.innerHTML = carrera;
@@ -240,13 +241,13 @@ async function actualizarInforme() {
     cancelacionesText.innerHTML = `Cantidad de cancelaciones: ${cancelaciones}`;
 }
 
-function abrirInforme(){
+function abrirInforme() {
     informeEvento.style.zIndex = 1;
     informeEvento.style.opacity = 1;
     actualizarInforme();
 }
 
-function cerrarInforme(){
+function cerrarInforme() {
     informeEvento.style.zIndex = -1;
     informeEvento.style.opacity = 0;
 }
@@ -264,7 +265,7 @@ const inscribirButton = document.getElementById('inscribirButton');
 
 const verListButton = document.getElementById('verListButton');
 
-if (type === 0){
+if (type === 0) {
     verListButton.remove();
     informeEvento.remove();
     let inscrito = false;
@@ -272,18 +273,18 @@ if (type === 0){
     get(ref(db, `userEventos/${loggedUser}`)).then((snapshot) => {
         const eventos = snapshot.val();
         console.log(loggedUser, eventos);
-        if (eventos){
+        if (eventos) {
             for (const key in eventos) {
                 if (Object.hasOwnProperty.call(eventos, key)) {
                     console.log(eventos[key]);
-                    if (key === eventId && eventos[key]){
+                    if (key === eventId && eventos[key]) {
                         inscrito = true;
                         break;
                     }
                 };
             };
         }
-        if (inscrito){
+        if (inscrito) {
             inscribirButton.textContent = "Cancelar";
             inscribirButton.addEventListener('click', desinscribirUsuario);
         } else {
@@ -318,6 +319,10 @@ const activitiesRef = child(eventoRef, 'activities');
 const containerA = document.getElementById('container');
 
 
+
+const comment = document.getElementById('commentRate');
+const containerR = document.getElementById('rateContainer');
+
 onValue(activitiesRef, (snapshot) => {
     const activitiesData = snapshot.val();
     if (activitiesData) {
@@ -331,6 +336,9 @@ onValue(activitiesRef, (snapshot) => {
                     activitiyData.nombreModerador,
                     activitiyData.fecha
                 );
+
+
+                containerR.insertBefore(CreateRatingHTML(activitiyData.titulo), comment);
                 containerA.appendChild(actividad.toHTML());
             };
         };
@@ -362,3 +370,105 @@ onValue(colabsRef, (snapshot) => {
         console.log('Actividad no encontrado');
     }
 });
+
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+//|////////////////////////////////| RATING |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+
+let ratingValue;
+
+function openRateEmail() {
+    const rateContainer = document.querySelector('.rateContainer');
+    rateContainer.style.opacity = 1;
+    rateContainer.style.zIndex = 1;
+}
+
+function closeRateEmail() {
+    const rateContainer = document.querySelector('.rateContainer');
+    rateContainer.style.opacity = 0;
+    rateContainer.style.zIndex = -1;
+}
+
+function rateUpload() {
+    console.log('Comienza upload');
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+    console.log(eventId);
+    console.log(userInfo.username);
+    console.log(ratingValue);
+    console.log(text.value);
+
+    const rateEvent = new Rating(
+        eventId,
+        userInfo.username,
+        ratingValue,
+        text.value
+    )
+
+    const rateRed = ref(db, 'rating');
+    const newForoRef = push(rateRed); // Genera una referencia con ID automático
+    set(newForoRef, rateEvent);
+
+    closeRateEmail()
+}
+
+const sendButton = document.getElementById('sendButton');
+sendButton.addEventListener('click', openRateEmail);
+
+const sendButton2 = document.getElementById('sendButton2');
+sendButton2.addEventListener('click', rateUpload);
+
+
+const closeButton2 = document.getElementById('closeButton2');
+closeButton2.addEventListener('click', closeRateEmail);
+
+const text = document.getElementById('commentRate');
+
+const ratingInputs = document.querySelectorAll('input[name="rating"]');
+
+
+ratingInputs.forEach(input => {
+    input.addEventListener('change', function () {
+        const selectedRating = document.querySelector('input[name="rating"]:checked');
+
+        if (selectedRating) {
+            ratingValue = selectedRating.value;
+            console.log('Rating seleccionado:', ratingValue);
+            // Puedes realizar las acciones que desees con el valor del rating aquí.
+        } else {
+        }
+    });
+
+
+});
+
+function CreateRatingHTML(value) {
+    const ratingHTML = document.createElement('form');
+    ratingHTML.id = 'ratingForm';
+
+    ratingHTML.innerHTML = `
+    <h2>${value}</h3>
+    <label>
+      <input type="radio" name="rating" value="1" class="ratingContianer">
+      <span class="rating-number">1</span>
+    </label>
+    <label>
+      <input type="radio" name="rating" value="2" class="ratingContianer">
+      <span class="rating-number">2</span>
+    </label>
+    <label>
+      <input type="radio" name="rating" value="3" class="ratingContianer">
+      <span class="rating-number">3</span>
+    </label>
+    <label>
+      <input type="radio" name="rating" value="4" class="ratingContianer">
+      <span class="rating-number">4</span>
+    </label>
+    <label>
+      <input type="radio" name="rating" value="5" class="ratingContianer">
+      <span class="rating-number">5</span>
+    </label>
+    `;
+
+    return ratingHTML
+}
