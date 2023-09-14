@@ -392,7 +392,9 @@ onValue(colabsRef, (snapshot) => {
 //|////////////////////////////////| RATING |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\
 //|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
 
+/*
 let ratingValue;
+*/
 
 function openRateEmail() {
     const rateContainer = document.querySelector('.rateContainer');
@@ -417,8 +419,10 @@ function rateUpload() {
 
     const rateEvent = new Rating(
         eventId,
+        // [actividadKey,]
+        // [rating,]
         userInfo.username,
-        ratingValue,
+        ratingValue, // useless
         text.value
     )
 
@@ -432,18 +436,20 @@ function rateUpload() {
 const sendButton = document.getElementById('sendButton');
 sendButton.addEventListener('click', openRateEmail);
 
+
 const sendButton2 = document.getElementById('sendButton2');
 sendButton2.addEventListener('click', rateUpload);
 
-
 const closeButton2 = document.getElementById('closeButton2');
 closeButton2.addEventListener('click', closeRateEmail);
+
+
 
 const text = document.getElementById('commentRate');
 
 const ratingInputs = document.querySelectorAll('input[name="rating"]');
 
-
+/*
 ratingInputs.forEach(input => {
     input.addEventListener('change', function () {
         const selectedRating = document.querySelector('input[name="rating"]:checked');
@@ -458,13 +464,14 @@ ratingInputs.forEach(input => {
 
 
 });
+*/
 
 function CreateRatingHTML(value) {
     const ratingHTML = document.createElement('form');
     ratingHTML.id = 'ratingForm';
 
     ratingHTML.innerHTML = `
-    <h2>${value}</h3>
+    <h3>${value}</h3>
     <label>
       <input type="radio" name="rating" value="1" class="ratingContianer">
       <span class="rating-number">1</span>
