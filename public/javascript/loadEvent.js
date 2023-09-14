@@ -1,4 +1,4 @@
-import { getDatabase, get, set, ref, onValue, child, update, runTransaction, orderByValue, query, push } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByValue, query, push, remove } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
@@ -266,12 +266,15 @@ const cancelCanButton = document.getElementById('cancelCanButton');
 cancelCanButton.addEventListener('click', cancelCancel);
 console.log("here");
 const inscribirButton = document.getElementById('inscribirButton');
+const delButton = document.getElementById('delButton')
+
 
 const verListButton = document.getElementById('verListButton');
 
 if (type === 0) {
     verListButton.remove();
     informeEvento.remove();
+    delButton.remove();
     let inscrito = false;
     const loggedUser = JSON.parse(localStorage.getItem("userInfo"))["carnet"];
     get(ref(db, `userEventos/${loggedUser}`)).then((snapshot) => {
@@ -297,6 +300,7 @@ if (type === 0) {
         }
     });
 } else if (type === 1) {
+
     inscribirButton.remove();
     if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["username"]) {
         verListButton.addEventListener('click', abrirInforme);
@@ -304,9 +308,11 @@ if (type === 0) {
         cerrarInformeButton.addEventListener('click', cerrarInforme);
     } else {
         verListButton.remove();
+        delButton.remove();
     }
 } else {
     inscribirButton.remove();
+    delButton.remove();
     if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["asociacion"]) {
         verListButton.addEventListener('click', abrirInforme);
         const cerrarInformeButton = document.getElementById('cerrarInformeButton');
@@ -513,6 +519,7 @@ ratingInputs.forEach(input => {
 });
 */
 
+
 function CreateRatingHTML(value) {
     const ratingHTML = document.createElement('form');
     ratingHTML.id = `${value}Form`;
@@ -543,3 +550,38 @@ function CreateRatingHTML(value) {
 
     return ratingHTML
 }
+
+
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+//|////////////////////////////////| Borrar |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\
+//|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|        |////////////////////////////////|\\
+
+
+
+function deleteAccount() {
+    const deleteContainer = document.querySelector('.deleteContainer');
+    deleteContainer.style.opacity = 1;
+    deleteContainer.style.zIndex = 1;
+}
+
+async function confirmDelete() {
+
+    await remove(ref(db, `eventos/${eventId}`));
+
+    window.location.href = "./eventPage.html";
+}
+
+function cancelDelete() {
+    const deleteContainer = document.querySelector('.deleteContainer');
+    deleteContainer.style.opacity = 0;
+    deleteContainer.style.zIndex = -1;
+}
+
+const eliminarProfileButton = document.getElementById('delButton');
+eliminarProfileButton.addEventListener('click', deleteAccount);
+
+const confirmDelButton = document.getElementById('confirmDelButton');
+confirmDelButton.addEventListener('click', confirmDelete);
+
+const cancelDelButton = document.getElementById('cancelDelButton');
+cancelDelButton.addEventListener('click', cancelDelete);

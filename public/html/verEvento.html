@@ -37,6 +37,7 @@
     <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
     <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
     <button class="rateButton" id="sendButton"><img class="buttonImage" src="../images/rate.svg" alt="rate"></button>
+    <button class="deleteButton" id="delButton"><img class="buttonImage" src="../images/del.svg" alt="delete"></button>
   </div>
 
   <div class="rateContainer" id="rateContainer">
@@ -64,6 +65,21 @@
   </div>
 
   <div class="informeEvento" id="informeEvento"></div>
+
+
+  <div class="deleteContainer">
+    <p class="title deleteText">Alerta</p>
+    <p class="deleteText">
+      ¿Está seguro que desea borrar el evento? Esta acción no puede ser
+      revertida.
+    </p>
+    <button class="buttonT1 deleteButton2" id="confirmDelButton">
+      Confirmar
+    </button>
+    <button class="buttonT1 deleteButton2" id="cancelDelButton">
+      Cancelar
+    </button>
+  </div>
 
   <script>
     // Cargar el encabezado usando fetch y insertarlo en el contenedor
