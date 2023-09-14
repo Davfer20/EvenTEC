@@ -14,7 +14,7 @@ function loginEstudianteListener(event) {
     const dbref = ref(database);
     get(child(dbref, `users/${username}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            if (snapshot.val()['password'] === password){
+            if (snapshot.val()['password'] === password && snapshot.val()['enable'] === true) {
                 localStorage.setItem("type", String(0));
                 localStorage.setItem("userInfo", JSON.stringify(snapshot.val()));
                 console.log(snapshot.val());
