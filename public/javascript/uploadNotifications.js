@@ -40,5 +40,31 @@ function test2() {
         set(newNotiRef, notificacion); // Sube el objeto evento a la base de datos
     });
 }
+//test2();
 
-test2();
+function uploadNotif(title, content){
+
+    const currentDate = new Date();
+
+
+    const year = currentDate.getFullYear().toString().slice(-2);
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
+
+    // Create the formatted date string
+    const date = `${month}/${day}/${year}`;
+
+    const noti = new Notificacion(
+        title,
+        content,
+        date,
+        'https://cdn-icons-png.flaticon.com/512/21/21104.png'
+    );
+
+    const notiRef = ref(db, 'notificaciones'); // Reemplaza 'eventos' con el nombre de tu nodo en la base de datos
+
+    const newNotiRef = push(notiRef); // Genera una referencia con ID automático
+    set(newNotiRef, noti); // Sube el objeto evento a la base de datos
+}
+
+export default uploadNotif;
