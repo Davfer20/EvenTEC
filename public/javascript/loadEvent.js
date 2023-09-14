@@ -4,6 +4,7 @@ import Evento from './Evento.js';
 import Actividad from './Actividad.js';
 import Rating from "./Rating.js";
 import sendMail from "./sendMail.js";
+import Comentario from './Comentario.js';
 
 
 const db = getDatabase(app)
@@ -243,6 +244,55 @@ async function actualizarInforme() {
 
     const cancelacionesText = document.getElementById('cancelaciones');
     cancelacionesText.innerHTML = `Cantidad de cancelaciones: ${cancelaciones}`;
+
+    const ratingInforme = document.getElementById('ratingInforme');
+    const ratingSnap = await get(ref(db, `ratings/${eventId}`));
+    let ratings = {};
+    if (ratingSnap.exists()){
+        ratings = ratingSnap.val();
+        const ratingGeneral = ratings["Evento en general"];
+        console.log(ratingGeneral);
+        ratingInforme.innerHTML = `Rating: ${ratingGeneral['suma']/ratingGeneral['cantidad']}`;
+    } else {
+        ratingInforme.innerHTML = "Rating: No hay ratings";
+    }
+
+    const cantidadComentarios = document.getElementById("cantidadComentarios");
+    const comentariosSnap = await get(ref(db, `comments/${eventId}`));
+    let comments = {};
+    if (comentariosSnap.exists()){
+        comments = comentariosSnap.val();
+        const cantidadCom = Object.keys(comments).length;
+        console.log("Cantidad comentarios", cantidadCom);
+        cantidadComentarios.innerHTML = `Cantidad de comentarios: ${cantidadCom}`;
+    }
+
+    const comentariosSubtitle = document.getElementById('comentariosSubtitle');
+    const informeContent = document.getElementById('informeContent');
+    for (const actividad in ratings){
+        const actividadRatingHTML = document.createElement('div');
+        actividadRatingHTML.className = "info";
+
+        actividadRatingHTML.innerHTML = `<p style="text-align: left"><strong>${actividad}:</strong>  ${ratings[actividad]["suma"]/ratings[actividad]["cantidad"]}  con ${ratings[actividad]["suma"]} ratings.</p>`;
+        informeContent.insertBefore(actividadRatingHTML, comentariosSubtitle);
+    }
+    
+    const comentariosDiv = document.getElementById('comentariosDiv');
+    for (const comentario in comments){
+        const comentarioObj = new Comentario(
+            comments[comentario]["comment"],
+            comments[comentario]["userInfo"],
+            comments[comentario]['timestamp']
+        );
+        comentariosDiv.appendChild(comentarioObj.toHTMLInforme());
+        // const actividadRatingHTML = document.createElement('div');
+        // actividadRatingHTML.className = "info";
+
+        // actividadRatingHTML.innerHTML = `<p style="text-align: left"><strong>${actividad}:</strong>  ${ratings[actividad]["suma"]/ratings[actividad]["cantidad"]}  con ${ratings[actividad]["suma"]} ratings.</p>`;
+        // informeContent.insertBefore(actividadRatingHTML, comentariosSubtitle);
+    }
+    
+
 }
 
 function abrirInforme() {
@@ -498,9 +548,6 @@ async function rateUpload() {
 
 const sendButton = document.getElementById('sendButton');
 sendButton.addEventListener('click', openRateEmail);
-console.log("load buttons");
-
-const ratingInputs = document.querySelectorAll('input[name="rating"]');
 
 /*
 ratingInputs.forEach(input => {
