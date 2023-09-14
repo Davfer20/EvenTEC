@@ -1,14 +1,14 @@
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
-import sendMail from "./sendMail.js";
-
+import sendMailBody from "./sendMailBody.js";
+import uploadNotif from "./uploadNotifications.js";
 
 const db = getDatabase(app)
 
 const container = document.getElementById('container');
 
-const eventosRef = ref(db, 'eventos'); // Reemplaza 'eventos' con la ubicación correcta en tu base de datos
+const eventosRef = await ref(db, 'eventos'); // Reemplaza 'eventos' con la ubicación correcta en tu base de datos
 onValue(eventosRef, (snapshot) => {
     container.innerHTML = "";
     const data = snapshot.val();
@@ -39,33 +39,53 @@ onValue(eventosRef, (snapshot) => {
     } else {
         // No se encontraron eventos en la base de datos
     }
+    checkDates();
 });
 
 // Prueba para enviar correos
 async function checkDates(){
+    console.log("here");
     const listaFechas = document.querySelectorAll(".fechaEvento");
-    
+    console.log(listaFechas);
     const usersSnap = await get(ref(db, 'users'));
-    let users = usersSnap.val();
+    let users;
+    if (usersSnap.exists()){
+        users = usersSnap.val()
+    } else {
+        return;
+    }
 
-    const inscritosSnap = await get(ref(db, 'users'));
-    let inscritos = inscritosSnap.val();
+    const inscritosSnap = await get(ref(db, 'inscritos'));
+    let inscritos;
+    if (inscritosSnap.exists()){
+        inscritos = inscritosSnap.val();
+    } else {
+        return;
+    }
 
-
+    console.log(users, inscritos);
     listaFechas.forEach(span => {
-        const eventID = span.id;
+        const eventId = span.id;
         const dateParts = span.innerHTML;
         const fecha1 = new Date(dateParts);
         const fecha2 = new Date(); 
         const value = (calcularDistanciaEnMinutos(fecha1, fecha2)) ;
         if (value > 170 && value <180){
-            
-            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-            const loggedUser = userInfo['carnet'];
-            const email = userInfo['email'];
-            sendMail('EvenTEC Corporation', 'WERTY31678D32S', email);
+            uploadNotif("Recordatorio", "Un evento iniciará en 3 horas.");
+            for (const evento in inscritos){
+                for (const user in inscritos[evento]){
+                    console.log(user);
+                    if (inscritos[evento][user]){
+                        console.log(users[user]);
+                        const email = users[user]['email'];
+                        console.log(email);
+                        sendMailBody("EvenTEC Corporation", "Su evento iniciará en 3 horas", email);
+                        console.log("emailSent");
+                    }
+                    
+                }
+            }
         }
-
     });
 }
 
@@ -80,29 +100,6 @@ function calcularDistanciaEnMinutos(fecha1, fecha2) {
 
 }
 
-function ejecutarFuncion() {
-
-    console.log("La función se ha llamado bien");
-  }
-
-function comprobarHora() {
-    console.log("La función se ha ejecutado a la hora deseada.");
-    checkDates()
-    const ahora = new Date();
-    const horaDeseada = new Date(
-        ahora.getFullYear(),
-        ahora.getMonth(),
-        ahora.getDate(),
-        20,
-        45,
-        0
-      );
-    
-    if (horaDeseada === horaDeseada) {
-      // La hora actual coincide con la hora deseada, ejecutar la función.
-      ejecutarFuncion();
-    }
-  }
 // Para el gmail
-setInterval(comprobarHora, 600000); // 60000 ms = 1 minuto
+setInterval(checkDates, 600000); // 60000 ms = 1 minuto
 

@@ -5,7 +5,7 @@ import Actividad from './Actividad.js';
 import Rating from "./Rating.js";
 import sendMail from "./sendMail.js";
 import Comentario from './Comentario.js';
-
+import uploadNotif from "./uploadNotifications.js";
 
 const db = getDatabase(app)
 
@@ -25,6 +25,8 @@ let cupos = 0;
 let capacidad = 0;
 
 let creatorAsociacion;
+
+let eventTitle;
 
 function incrementClicks(eventId) {
     runTransaction(ref(db, `/eventos/${eventId}/clicks`), (clicks) => {
@@ -72,6 +74,7 @@ await get(eventoRef).then((snapshot) => {
             creatorAsociacion = eventoData.userAsociacion;
             informeEvento.appendChild(evento.toInformeHTML());
         }
+        eventTitle = eventoData.titulo;
         console.log("evento loaded");
 
     } else {
@@ -109,7 +112,7 @@ function inscribirUsuario() {
         update(ref(db), updates);
         displayMessage("Éxito", "¡Felicitaciones, ha sido inscrito al evento! Revise su correo.");
 
-        sendMail('EvenTEC Corporation', 'WERTY31678D32S', email);
+        sendMail('EvenTEC Corporation', `${eventId}${loggedUser}`, email);
         inscribirButton.removeEventListener('click', inscribirUsuario);
         inscribirButton.textContent = "Cancelar";
         inscribirButton.addEventListener('click', desinscribirUsuario);
@@ -378,6 +381,9 @@ onValue(child(eventoRef, 'cupos'), (snapshot) => {
     cupos = snapshot.val();
     const cuposEventPage = document.getElementById("cuposEventPage");
     cuposEventPage.textContent = `Cupos: ${cupos}/${capacidad}`;
+    if (cupos == capacidad){
+        uploadNotif(eventTitle, "Se acabaron los cupos.");
+    }
 });
 
 onValue(child(eventoRef, 'capacidad'), (snapshot) => {
@@ -386,6 +392,7 @@ onValue(child(eventoRef, 'capacidad'), (snapshot) => {
     capacidad = snapshot.val();
     const cuposEventPage = document.getElementById("cuposEventPage");
     cuposEventPage.textContent = `Cupos: ${cupos}/${capacidad}`;
+    uploadNotif(eventTitle, "Se modificó la capacidad.");
 });
 
 const activitiesRef = child(eventoRef, 'activities');

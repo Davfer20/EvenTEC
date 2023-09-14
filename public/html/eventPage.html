@@ -11,6 +11,13 @@
       href="../images/favicon.png"
       type="image/x-icon"
     />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("Ob0YS43AlTRno31ra");
+      })();
+    </script>
+    <script type="module" src="../javascript/sendMailBody.js"></script>
   </head>
 
   <body>
@@ -37,5 +44,6 @@
 
     <script type="module" src="../javascript/loadEventPage.js"></script>
     <script type="module" src="../javascript/loadNotifications.js"></script>
+    
   </body>
 </html>
