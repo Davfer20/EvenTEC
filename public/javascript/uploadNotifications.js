@@ -4,11 +4,11 @@ import Notificacion from './Notificacion.js';
 
 const db = getDatabase(app)
 
-function test2() {
+function test2() { // Una forma de subir mensajes por parametro
 
     const notificaciones = []; 
 
-    const noti1 = new Notificacion(
+    const noti1 = new Notificacion( //Se ingresan parametros para construir las notificaciones
         'Notificacion 1',
         'Esta es una prueba nada mas',
         '10/04/23',
@@ -28,7 +28,7 @@ function test2() {
         '10/04/23',
         'https://cdn-icons-png.flaticon.com/512/21/21104.png'
     );
-
+    // Se meten dentro de una lista todas las notificaciones
     notificaciones.push(noti1);
     notificaciones.push(noti2);
     notificaciones.push(noti3); 
@@ -43,17 +43,17 @@ function test2() {
 //test2();
 
 function uploadNotif(title, content){
-
+    //Recibe titulo y mensaje para subir una notificación
     const currentDate = new Date();
-
 
     const year = currentDate.getFullYear().toString().slice(-2);
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     const day = currentDate.getDate().toString().padStart(2, '0');
 
-    // Create the formatted date string
+    // Se crea un string en formato de dia
     const date = `${month}/${day}/${year}`;
 
+    // Se mete la información al constructor
     const noti = new Notificacion(
         title,
         content,

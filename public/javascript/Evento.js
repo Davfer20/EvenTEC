@@ -67,6 +67,7 @@ Evento.prototype.toExtendedHTML = function () {
   return eventExtendedHTML;
 };
 
+// Método para generar el HTML del informe de análisis
 Evento.prototype.toInformeHTML = function () {
   const eventExtendedHTML = document.createElement('div');
   eventExtendedHTML.className = 'content';

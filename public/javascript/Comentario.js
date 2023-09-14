@@ -31,6 +31,7 @@ Comentario.prototype.toHTML = function () {
     return comentarioHTML;
 };
 
+// Método para generar el infrme en base a a los comentarios del foro
 Comentario.prototype.toHTMLInforme = function () {
     const comentarioHTML = document.createElement('div');
     comentarioHTML.className = 'comentario';

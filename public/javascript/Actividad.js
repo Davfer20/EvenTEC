@@ -1,4 +1,4 @@
-function Actividad(titulo, imagenSrc, userSrc, nombreModerador, fecha) {
+function Actividad(titulo, imagenSrc, userSrc, nombreModerador, fecha) { //Constructor objeto Actvidad
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
   this.userSrc = userSrc;
@@ -8,7 +8,7 @@ function Actividad(titulo, imagenSrc, userSrc, nombreModerador, fecha) {
 
 // Método para generar el HTML de la actividad
 Actividad.prototype.toHTML = function () {
-  const actividadHTML = document.createElement('div');
+  const actividadHTML = document.createElement('div'); // Toma el div donde debe ir
 
   actividadHTML.className = 'column';
 

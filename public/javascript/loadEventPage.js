@@ -13,7 +13,7 @@ onValue(eventosRef, (snapshot) => {
     container.innerHTML = "";
     const data = snapshot.val();
     if (data) {
-        for (const key in data) {
+        for (const key in data) { // Por cada evento crea un evento con el constructor con toda la información requerida
             if (Object.hasOwnProperty.call(data, key)) {
                 const eventoData = data[key];
                 const evento = new Evento(
@@ -42,7 +42,7 @@ onValue(eventosRef, (snapshot) => {
     checkDates();
 });
 
-// Prueba para enviar correos
+// Envia mensajes para los recordatorios de cuando faltan 3 horas para subir el evento, modificar cupos o sin cupos
 async function checkDates(){
     console.log("here");
     const listaFechas = document.querySelectorAll(".fechaEvento");
@@ -63,24 +63,27 @@ async function checkDates(){
         return;
     }
 
+    // Se toman los users y los inscritos
+
     console.log(users, inscritos);
-    listaFechas.forEach(span => {
+    listaFechas.forEach(span => { // Ahora recorre todas las listas de fechas de eventos
         const eventId = span.id;
         const dateParts = span.innerHTML;
-        const fecha1 = new Date(dateParts);
-        const fecha2 = new Date(); 
-        const value = (calcularDistanciaEnMinutos(fecha1, fecha2)) ;
+        const fecha1 = new Date(dateParts); // Fecha del evento
+        const fecha2 = new Date(); // Fecha actual
+        const value = (calcularDistanciaEnMinutos(fecha1, fecha2)) ; // Calcula diferencia de horas con un rango
         if (value > 170 && value <180){
-            uploadNotif("Recordatorio", "Un evento iniciará en 3 horas.");
+            uploadNotif("Recordatorio", "Un evento iniciará en 3 horas."); // Recordatorio
             for (const evento in inscritos){
                 for (const user in inscritos[evento]){
                     console.log(user);
                     if (inscritos[evento][user]){
                         console.log(users[user]);
                         const email = users[user]['email'];
-                        console.log(email);
+                        console.log(email); // sendMailBody es una plantilla para envir recordatorios
                         sendMailBody("EvenTEC Corporation", "Su evento iniciará en 3 horas", email);
                         console.log("emailSent");
+                        // Se confirmae en consola que se mando
                     }
                     
                 }
@@ -89,6 +92,7 @@ async function checkDates(){
     });
 }
 
+// Funcion par calcular la diferencia de tiempo 
 function calcularDistanciaEnMinutos(fecha1, fecha2) {
     const milisegundosPorMinuto = 60 * 1000;
   
@@ -101,5 +105,5 @@ function calcularDistanciaEnMinutos(fecha1, fecha2) {
 }
 
 // Para el gmail
-setInterval(checkDates, 600000); // 60000 ms = 1 minuto
+setInterval(checkDates, 600000); // Revisa cada 10 min
 

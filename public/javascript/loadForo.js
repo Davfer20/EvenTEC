@@ -6,7 +6,7 @@ const db = getDatabase(app)
 
 const foroContainer = document.getElementById('comentContainer');
 
-const foroRef = ref(db, 'foro'); // Referencia a este lugar de la database
+const foroRef = ref(db, 'foro'); // Referencia a este lugar de la database creando esta tabla
 onValue(foroRef, (snapshot) => { 
     const data = snapshot.val();
     if (data) {
@@ -14,7 +14,7 @@ onValue(foroRef, (snapshot) => {
         while (foroContainer.firstChild) {
             foroContainer.removeChild(foroContainer.firstChild);
         }
-        
+        // Por cada mensaje del foro que lee lo va creando como html
         for (const key in data) {
             if (Object.hasOwnProperty.call(data, key)) {
                 const foroData = data[key];
