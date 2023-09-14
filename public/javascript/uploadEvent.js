@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, ref, get, set, push } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js'
@@ -12,12 +12,13 @@ let newEventoRef;
 const userDisplay = document.getElementById('user');
 
 let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
+const type = parseInt(localStorage.getItem('type'));
+console.log(userInfo);
 userDisplay.querySelector('.username').textContent = userInfo.username;
 
 
 function submit() {
-    if (userInfo.type == 1) {
+    if (type === 1) {
         refName = 'eventos';
     }
     else {
@@ -29,21 +30,25 @@ function submit() {
 }
 
 
-function submitEvento() {
+async function submitEvento() {
     const item = document.getElementById('eventData')
     const titulo = item.querySelector('.title').value;
     const imagenSrc = item.querySelector('.image').getAttribute('src')
-    const nombreAsociacion = userInfo.username;
+    const nombreAsociacion = userInfo.displayname;
+    const userAsociacion = userInfo.username;
+
     const fecha = item.querySelector('.startDate').value;
     const fechaHorario = `${item.querySelector('.startDate').value} - ${item.querySelector('.endDate').value}`;
-    const capacidad = parseInt(item.querySelector('.capacity').value);
+    const capacidad = isNaN(item.querySelector('.capacity').value) ? 0 : item.querySelector('.capacity').value;
     const descripcion = item.querySelector('.description').value;
     const requerimientos = item.querySelector('.requirements').value;
     const cupos = 0;
     const userSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOW34PFNB2wJ1Hf5AP88UYB4d-LDcOsC7i4g&usqp=CAU";
     const inputCategories = item.querySelectorAll('.cat');
+    const rating = 0;
+    const clicks = 0;
 
-    let categorias = []
+    let categorias = [];
     inputCategories.forEach((inputElement) => {
         const categoria = inputElement.value;
         if (categoria) {
@@ -51,11 +56,18 @@ function submitEvento() {
         }
     });
 
+    const colabList = await validarTodosLosColabs();
+    console.log(colabList);
+    if (!colabList) {
+        return;
+    }
+
     let nuevoEvento = new Evento(
         newEventoRef.key,
         titulo,
         imagenSrc,
         nombreAsociacion,
+        userAsociacion,
         fecha,
         capacidad,
         categorias,
@@ -64,12 +76,15 @@ function submitEvento() {
         fechaHorario,
         cupos,
         userSrc,
-        5,
+        rating,
+        clicks
     );
 
     set(newEventoRef, nuevoEvento); // Sube el objeto evento a la base de datos
     subirTodasLasActividades();
-    subirTodosLosColabs();
+    const eventoRef = ref(db, `${refName}/${newEventoRef.key}/colabs`);
+    set(eventoRef, colabList);
+    window.location.href = "eventPage.html";
 }
 
 function subirTodasLasActividades() {
@@ -106,21 +121,39 @@ function subirTodasLasActividades() {
 }
 
 
-function subirTodosLosColabs() {
-    const eventoRef = ref(db, `${refName}/${newEventoRef.key}/colabs`);
-
+async function validarTodosLosColabs() {
     const colabs = document.querySelectorAll('.colabs.user');
+    console.log(colabs);
 
-    let colabList = []
+    const snapshot = await get(ref(db, 'colaboradores'));
+    const colaboradores = snapshot.val();
+
+    console.log("OUT", colaboradores);
+    let colabList = [];
+    let invalid = false;
     colabs.forEach((colab) => {
+        let valid = false;
         const colabName = colab.querySelector('.username').value;
-
-        // Validar si el colaborador existe 
-
-        colabList.push(colabName)
+        console.log("colabName", colabName);
+        Object.keys(colaboradores).forEach((username) => {
+            console.log(username, colabName, (username == colabName), (username == colabName))
+            if ((username == colabName) || (colaboradores[username]["fullname"] == colabName)) {
+                colabList.push(colabName);
+                valid = true;
+            }
+        })
+        if (!valid) {
+            displayError("Ha ingresado colaboradores que no existen. Ingrese el nombre de usuario o el nombre completo.");
+            invalid = true;
+            return;
+        }
     });
-
-    set(eventoRef, colabList)
+    if (!invalid){
+        return colabList;
+    } else {
+        return null;
+    }
+    
 }
 
 
@@ -150,3 +183,21 @@ function submitImage() {
 
 const inputImagenEvento = document.getElementById('eventImage')
 inputImagenEvento.addEventListener('change', submitImage);
+
+function displayError(error) {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 1;
+    errorContainer.style.zIndex = 1;
+
+    const errorText = document.querySelector('.errorText');
+    errorText.textContent = error;
+}
+
+function closeError() {
+    const errorContainer = document.querySelector('.errorContainer');
+    errorContainer.style.opacity = 0;
+    errorContainer.style.zIndex = -1;
+}
+
+const errorButton = document.querySelector('.errorButton');
+errorButton.addEventListener('click', closeError);
