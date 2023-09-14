@@ -49,7 +49,7 @@ body {
 }
 
 .sidebar-item {
-  padding: 3px 8PX;
+  padding: 3px 8px;
   min-width: 90px;
   height: fit-content;
   border-radius: 0px 7px 7px 7px;
@@ -83,7 +83,6 @@ body {
   border-color: lightskyblue;
 }
 
-
 .containerActividades {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -109,7 +108,6 @@ body {
   display: flex;
   align-items: center;
   margin: 7px 0px;
-
 }
 
 .user img {
@@ -130,7 +128,6 @@ body {
   font-weight: bold;
 }
 
-
 .eventDetail {
   display: flex;
   flex-direction: column;
@@ -138,7 +135,6 @@ body {
   height: auto;
   gap: 5px;
 }
-
 
 .barra-inferior {
   border: 1px solid #ccc;
@@ -222,10 +218,9 @@ body {
   margin-bottom: 10px;
 }
 
-.tableContainer{
+.tableContainer {
   max-height: 300px; /* Set a maximum height for the container */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
-
 }
 
 .listaInscritos {
@@ -242,7 +237,6 @@ th {
   top: 0;
   border: 2px solid #ddd; /* Set a specific border style and color */
   background-color: white;
-
 }
 
 td {
@@ -251,7 +245,7 @@ td {
   word-wrap: break-word;
 }
 
-.correoElement{
+.correoElement {
   font-size: 14px;
   width: 200px;
 }
