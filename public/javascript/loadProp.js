@@ -28,6 +28,7 @@ await get(eventoRef).then((snapshot) => {
             eventoData.titulo,
             eventoData.imagenSrc,
             eventoData.nombreAsociacion,
+            eventoData.userAsociacion,
             eventoData.fecha,
             eventoData.capacidad,
             eventoData.categorias,
@@ -36,7 +37,8 @@ await get(eventoRef).then((snapshot) => {
             eventoData.fechaHorario,
             eventoData.cupos,
             eventoData.userSrc,
-            eventoData.rating
+            eventoData.rating,
+            eventoData.clicks
         );
         container.appendChild(evento.toExtendedHTML())
         const colabHTML = document.createElement('div');

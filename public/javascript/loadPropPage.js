@@ -18,6 +18,7 @@ onValue(eventosRef, (snapshot) => {
                     eventoData.titulo,
                     eventoData.imagenSrc,
                     eventoData.nombreAsociacion,
+                    eventoData.userAsociacion,
                     eventoData.fecha,
                     eventoData.capacidad,
                     eventoData.categorias,
@@ -26,7 +27,8 @@ onValue(eventosRef, (snapshot) => {
                     eventoData.fechaHorario,
                     eventoData.cupos,
                     eventoData.userSrc,
-                    eventoData.rating
+                    eventoData.rating,
+                    eventoData.clicks
                 );
                 container.appendChild(evento.toHTML());
             }
