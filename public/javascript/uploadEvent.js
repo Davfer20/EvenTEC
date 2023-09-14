@@ -39,7 +39,7 @@ async function submitEvento() {
 
     const fecha = item.querySelector('.startDate').value;
     const fechaHorario = `${item.querySelector('.startDate').value} - ${item.querySelector('.endDate').value}`;
-    const capacidad = isNaN(item.querySelector('.capacity').value) ? 0 : item.querySelector('.capacity').value;
+    const capacidad = isNaN(item.querySelector('.capacity').value) ? 100 : item.querySelector('.capacity').value;
     const descripcion = item.querySelector('.description').value;
     const requerimientos = item.querySelector('.requirements').value;
     const cupos = 0;
