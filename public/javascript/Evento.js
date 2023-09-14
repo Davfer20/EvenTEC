@@ -1,9 +1,10 @@
 // Definir un constructor para el objeto de evento
-function Evento(id, titulo, imagenSrc, nombreAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating, clicks) {
+function Evento(id, titulo, imagenSrc, nombreAsociacion, userAsociacion, fecha, capacidad, categorias, descripcion, requerimientos, fechaHorario, cupos, userSrc, rating, clicks) {
   this.id = id;
   this.titulo = titulo;
   this.imagenSrc = imagenSrc;
   this.nombreAsociacion = nombreAsociacion;
+  this.userAsociacion = userAsociacion;
   this.fecha = fecha;
   this.capacidad = capacidad;
   this.categorias = categorias;
@@ -29,7 +30,7 @@ Evento.prototype.toHTML = function () {
           <img src="${this.userSrc}" alt="Usuario">
           <div class="eventDetail">
             <span class="Asocia">${this.nombreAsociacion}</span>
-            <span class="details">${this.fecha} · ${this.capacidad}</span>
+            <span class="details">${this.fecha} · ${this.cupos}/${this.capacidad}</span>
           </div>
         </div>
       </div>

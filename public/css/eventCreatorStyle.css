@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,600&display=swap");
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -31,10 +33,11 @@ body {
 }
 
 .title {
-  font-size: 20px;
+  font-size: 36px;
   font-style: normal;
-  padding: 7px 5px;
-  width: 50%;
+  font-weight: 700;
+  line-height: 0.7;
+  margin-top: 40px;
 }
 
 .categories input {
@@ -48,7 +51,7 @@ body {
 
 .capacity {
   display: block;
-  width: 88px;
+  width: 150px;
 }
 
 
@@ -197,4 +200,36 @@ body {
 
 .addPeople:active {
   background: rgba(211, 211, 211, 0.537);
+}
+
+.errorContainer {
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 260px;
+  padding: 10px 36px 10px 36px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-size: 20px;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: -1;
+}
+
+.errorText {
+  padding: 10px;
+  padding-bottom: 20px;
+
+}
+
+.errorButton {
+  margin-left: 0px;
+  margin-bottom: 10px;
+  display: inline-block;
 }

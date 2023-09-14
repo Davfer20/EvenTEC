@@ -8,6 +8,7 @@ const container = document.getElementById('container');
 
 const eventosRef = ref(db, 'eventos'); // Reemplaza 'eventos' con la ubicación correcta en tu base de datos
 onValue(eventosRef, (snapshot) => {
+    container.innerHTML = "";
     const data = snapshot.val();
     if (data) {
         for (const key in data) {
@@ -18,6 +19,7 @@ onValue(eventosRef, (snapshot) => {
                     eventoData.titulo,
                     eventoData.imagenSrc,
                     eventoData.nombreAsociacion,
+                    eventoData.userAsociacion,
                     eventoData.fecha,
                     eventoData.capacidad,
                     eventoData.categorias,
@@ -26,7 +28,8 @@ onValue(eventosRef, (snapshot) => {
                     eventoData.fechaHorario,
                     eventoData.cupos,
                     eventoData.userSrc,
-                    eventoData.rating
+                    eventoData.rating,
+                    eventoData.clicks
                 );
                 container.appendChild(evento.toHTML());
             }

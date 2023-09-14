@@ -23,6 +23,8 @@ const footer = document.getElementById('footer');
 let cupos = 0;
 let capacidad = 0;
 
+let creatorAsociacion;
+
 function incrementClicks(eventId) {
     runTransaction(ref(db, `/eventos/${eventId}/clicks`), (clicks) => {
         if (clicks) {
@@ -43,6 +45,7 @@ await get(eventoRef).then((snapshot) => {
             eventoData.titulo,
             eventoData.imagenSrc,
             eventoData.nombreAsociacion,
+            eventoData.userAsociacion,
             eventoData.fecha,
             eventoData.capacidad,
             eventoData.categorias,
@@ -65,6 +68,7 @@ await get(eventoRef).then((snapshot) => {
         cupos = eventoData.cupos;
         capacidad = eventoData.capacidad;
         if (type) {
+            creatorAsociacion = eventoData.userAsociacion;
             informeEvento.appendChild(evento.toInformeHTML());
         }
         console.log("evento loaded");
@@ -292,11 +296,24 @@ if (type === 0) {
             inscribirButton.addEventListener('click', inscribirUsuario);
         }
     });
+} else if (type === 1) {
+    inscribirButton.remove();
+    if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["username"]) {
+        verListButton.addEventListener('click', abrirInforme);
+        const cerrarInformeButton = document.getElementById('cerrarInformeButton');
+        cerrarInformeButton.addEventListener('click', cerrarInforme);
+    } else {
+        verListButton.remove();
+    }
 } else {
     inscribirButton.remove();
-    verListButton.addEventListener('click', abrirInforme);
-    const cerrarInformeButton = document.getElementById('cerrarInformeButton');
-    cerrarInformeButton.addEventListener('click', cerrarInforme);
+    if (creatorAsociacion === JSON.parse(localStorage.getItem("userInfo"))["asociacion"]) {
+        verListButton.addEventListener('click', abrirInforme);
+        const cerrarInformeButton = document.getElementById('cerrarInformeButton');
+        cerrarInformeButton.addEventListener('click', cerrarInforme);
+    } else {
+        verListButton.remove();
+    }
 }
 
 onValue(child(eventoRef, 'cupos'), (snapshot) => {
