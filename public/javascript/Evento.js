@@ -30,7 +30,7 @@ Evento.prototype.toHTML = function () {
           <img src="${this.userSrc}" alt="Usuario">
           <div class="eventDetail">
             <span class="Asocia">${this.nombreAsociacion}</span>
-            <span class="details">${this.fecha} · ${this.cupos}/${this.capacidad}</span>
+            <span class="details"><span class="fechaEvento" id="${this.id}">${this.fecha}</span> · ${this.cupos}/${this.capacidad}</span>
           </div>
         </div>
       </div>
