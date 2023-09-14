@@ -25,12 +25,12 @@ async function submitEstudianteListener(event) {
     if (!(validateEmail(email) && (email.endsWith("@estudiantec.cr") || email.endsWith("@itcr.ac.cr")))) {
         displayError("El correo no es válido. Debe ser un correo institucional @estudiantec.cr o @itcr.ac.cr");
         return;
-    } 
+    }
 
     const dbref = ref(database);
     try {
         const snapshot = await get(child(dbref, `users/${carnet}`));
-        if (snapshot.exists()) {
+        if (snapshot.exists() && snapshot.val().enable) {
             displayError("Usuario ya registrado. No puede registrarse otra vez")
             console.log(snapshot.val());
         } else {
@@ -41,7 +41,8 @@ async function submitEstudianteListener(event) {
                 email: email,
                 phone: phone,
                 sede: sede,
-                carrera: carrera
+                carrera: carrera,
+                enable: true
             })
             console.log("Registered user: ");
             window.location.href = "loginE.html"

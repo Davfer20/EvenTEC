@@ -31,7 +31,7 @@ const carreraProfileDiv = document.getElementById('carreraProfileDiv');
 const descripcionProfileDiv = document.getElementById('descripcionProfileDiv');
 const asoProfileDiv = document.getElementById('asoProfileDiv');
 
-function loadPlaceholders(){
+function loadPlaceholders() {
     // Estudiante
     if (type === 0) {
         let username = userInfo.username;
@@ -95,7 +95,7 @@ function loadPlaceholders(){
 }
 
 // funcion para activar la edicion del perfil
-function activarEdit(){
+function activarEdit() {
     nameProfile.disabled = false;
     passwordProfile.disabled = false;
     emailProfile.disabled = false;
@@ -134,13 +134,14 @@ async function editPerfilListener(event) {
 
         try {
             await set(ref(database, `users/${carnet}`), {
-                username: username,
                 carnet: carnet,
+                username: username,
                 password: password,
                 email: email,
                 phone: phone,
                 sede: sede,
-                carrera: carrera
+                carrera: carrera,
+                enable: true
             })
             userInfo.username = username;
             userInfo.email = email;
@@ -166,7 +167,7 @@ async function editPerfilListener(event) {
             displayError("El correo no es válido.");
             return;
         }
-        
+
         set(ref(database, `asociaciones/${username}`), {
             username,
             displayname,
@@ -203,7 +204,7 @@ async function editPerfilListener(event) {
 
         const dbref = ref(database);
 
-        if (asociacion.length !== 0){
+        if (asociacion.length !== 0) {
             let asociacionInvalid = false;
             await get(child(dbref, `asociaciones/${asociacion}`)).then((snapshot) => {
                 if (!snapshot.exists()) {
@@ -249,7 +250,7 @@ async function editPerfilListener(event) {
     displayMessage("Aviso", "Su perfil se ha modificado correctamente.");
 }
 
-function displayMessage(title, message){
+function displayMessage(title, message) {
     const errorTitle = document.querySelector('.errorTitle');
     const errorContainer = document.querySelector('.errorContainer');
     errorContainer.style.opacity = 1;
@@ -277,16 +278,31 @@ function closeError() {
     errorContainer.style.zIndex = -1;
 }
 
-function deleteAccount(){
+function deleteAccount() {
     const deleteContainer = document.querySelector('.deleteContainer');
     deleteContainer.style.opacity = 1;
     deleteContainer.style.zIndex = 1;
 }
 
-async function confirmDelete(){
+async function confirmDelete() {
     if (type === 0) {
-        console.log(userInfo.carnet);
-        await remove(ref(database, `users/${userInfo.carnet}`));
+        let username = (nameProfile.value || userInfo.username);
+        let email = (emailProfile.value || userInfo.email);
+        let phone = (phoneProfile.value || userInfo.phone);
+        let carnet = userInfo.carnet;
+        let sede = (sedeProfile.value || userInfo.sede);
+        let password = (passwordProfile.value || userInfo.password);
+        let carrera = (carreraProfile.value || userInfo.carrera);
+        await set(ref(database, `users/${carnet}`), {
+            carnet: carnet,
+            username: username,
+            password: password,
+            email: email,
+            phone: phone,
+            sede: sede,
+            carrera: carrera,
+            enable: false
+        });
     } else if (type === 1) {
         console.log(userInfo.username);
         await remove(ref(database, `asociaciones/${userInfo.username}`));
@@ -298,7 +314,7 @@ async function confirmDelete(){
     window.location.href = "../index.html";
 }
 
-function cancelDelete(){
+function cancelDelete() {
     const deleteContainer = document.querySelector('.deleteContainer');
     deleteContainer.style.opacity = 0;
     deleteContainer.style.zIndex = -1;
