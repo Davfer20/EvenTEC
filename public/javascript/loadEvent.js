@@ -1,4 +1,4 @@
-import { getDatabase, get, ref, onValue, child, update, runTransaction, remove } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+import { getDatabase, get, ref, onValue, child, update, runTransaction, orderByValue, query, push, remove } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 import { app } from "./firebaseconfig.js"
 import Evento from './Evento.js';
 import Actividad from './Actividad.js';
@@ -343,10 +343,24 @@ const containerA = document.getElementById('container');
 
 
 
-const comment = document.getElementById('commentRate');
+let comment = document.getElementById('commentRate');
 const containerR = document.getElementById('rateContainer');
 
 onValue(activitiesRef, (snapshot) => {
+    containerR.innerHTML = `<p class="titleRateEvent">Calificar un evento</p>
+    <p class="rateEvent">Ingrese del 1 al 5 su satisfacción</p>
+
+    <textarea id="commentRate" placeholder="Escribe un comentario" class="coment-rate" rows="5" cols="54"></textarea>
+    <button class="buttonR1" id="sendButton2">Enviar</button>
+    <button class="buttonR1" id="closeButton2">Cerrar</button>`;
+    comment = document.getElementById('commentRate');
+    const sendButton2 = document.getElementById('sendButton2');
+    sendButton2.addEventListener('click', rateUpload);
+
+    const closeButton2 = document.getElementById('closeButton2');
+    closeButton2.addEventListener('click', closeRateEmail);
+    containerR.insertBefore(CreateRatingHTML('Evento en general'), comment);
+
     const activitiesData = snapshot.val();
     if (activitiesData) {
         for (const key in activitiesData) {
@@ -360,7 +374,7 @@ onValue(activitiesRef, (snapshot) => {
                     activitiyData.fecha
                 );
 
-
+                
                 containerR.insertBefore(CreateRatingHTML(activitiyData.titulo), comment);
                 containerA.appendChild(actividad.toHTML());
             };
@@ -414,44 +428,77 @@ function closeRateEmail() {
     rateContainer.style.zIndex = -1;
 }
 
-function rateUpload() {
+async function rateUpload() {
     console.log('Comienza upload');
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+    const resultsActivities = document.querySelectorAll("form");
+    const text = document.getElementById('commentRate');
+
+
+    const results = {};
+
+    resultsActivities.forEach((form) => {
+        console.log(form.id);
+        const titleHead = form.querySelector("h3");
+        const title = titleHead.innerHTML;
+        const selected = form.querySelector('input[name=rating]:checked');
+        console.log(title, selected.value);
+        results[title] = parseInt(selected.value);
+    });
+    console.log(results);
+    
     console.log(eventId);
     console.log(userInfo.username);
-    console.log(ratingValue);
     console.log(text.value);
 
-    const rateEvent = new Rating(
-        eventId,
-        // [actividadKey,]
-        // [rating,]
-        userInfo.username,
-        ratingValue, // useless
-        text.value
-    )
+    const actividadRef = ref(db, `ratings/${eventId}`);
+    const snapshot = await get(actividadRef);
+    let actividades = {};
+    let newItem = {};
+    if (snapshot.exists()) {
+        actividades = snapshot.val();
+        for (const key in results){
+            if (actividades.hasOwnProperty(key)){
+                actividades[key]["suma"] += results[key];
+                actividades[key]["cantidad"] += 1;
+            } else {
+                newItem = {
+                    "suma": results[key],
+                    "cantidad": 1
+                }
+                actividades[key] = newItem;
+            }
+        }
+    } else {
+        for (const key in results){
+            newItem = {
+                "suma": results[key],
+                "cantidad": 1
+            }
+            actividades[key] = newItem;
+        }
+    }
+    console.log(actividades);
 
-    const rateRed = ref(db, 'rating');
-    const newForoRef = push(rateRed); // Genera una referencia con ID automático
-    set(newForoRef, rateEvent);
+    set(actividadRef, actividades);
 
+    if (text.value != ""){
+        const commentRef = ref(db, `comments/${eventId}`);
+        const newCommentRef = push(commentRef);
+        set(newCommentRef, {
+            "comment": text.value,
+            "userInfo": userInfo.username,
+            "eventId": eventId,
+            "timestamp": getTimestamp()
+        })
+    }
     closeRateEmail()
 }
 
 const sendButton = document.getElementById('sendButton');
 sendButton.addEventListener('click', openRateEmail);
-
-
-const sendButton2 = document.getElementById('sendButton2');
-sendButton2.addEventListener('click', rateUpload);
-
-const closeButton2 = document.getElementById('closeButton2');
-closeButton2.addEventListener('click', closeRateEmail);
-
-
-
-const text = document.getElementById('commentRate');
+console.log("load buttons");
 
 const ratingInputs = document.querySelectorAll('input[name="rating"]');
 
@@ -475,7 +522,7 @@ ratingInputs.forEach(input => {
 
 function CreateRatingHTML(value) {
     const ratingHTML = document.createElement('form');
-    ratingHTML.id = 'ratingForm';
+    ratingHTML.id = `${value}Form`;
 
     ratingHTML.innerHTML = `
     <h3>${value}</h3>
@@ -488,7 +535,7 @@ function CreateRatingHTML(value) {
       <span class="rating-number">2</span>
     </label>
     <label>
-      <input type="radio" name="rating" value="3" class="ratingContianer">
+      <input type="radio" name="rating" value="3" class="ratingContianer" checked>
       <span class="rating-number">3</span>
     </label>
     <label>
