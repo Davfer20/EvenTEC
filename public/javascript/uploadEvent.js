@@ -8,6 +8,7 @@ const db = getDatabase(app);
 let refName;
 let eventosRef;
 let newEventoRef;
+let userDisplayName;
 
 const userDisplay = document.getElementById('user');
 
@@ -20,9 +21,11 @@ userDisplay.querySelector('.username').textContent = userInfo.username;
 function submit() {
     if (type === 1) {
         refName = 'eventos';
+        userDisplayName = userInfo.displayname;
     }
     else {
         refName = 'propuestas';
+        userDisplayName = userInfo.username;
     }
     eventosRef = ref(db, refName);
     newEventoRef = push(eventosRef); // Genera una referencia con ID automático
@@ -34,7 +37,6 @@ async function submitEvento() {
     const item = document.getElementById('eventData')
     const titulo = item.querySelector('.title').value;
     const imagenSrc = item.querySelector('.image').getAttribute('src')
-    const nombreAsociacion = userInfo.displayname;
     const userAsociacion = userInfo.username;
 
     const fecha = item.querySelector('.startDate').value;
@@ -66,7 +68,7 @@ async function submitEvento() {
         newEventoRef.key,
         titulo,
         imagenSrc,
-        nombreAsociacion,
+        userDisplayName,
         userAsociacion,
         fecha,
         capacidad,
@@ -80,10 +82,12 @@ async function submitEvento() {
         clicks
     );
 
+    console.log('newEvento')
+    console.log(newEventoRef)
     set(newEventoRef, nuevoEvento); // Sube el objeto evento a la base de datos
     subirTodasLasActividades();
     const eventoRef = ref(db, `${refName}/${newEventoRef.key}/colabs`);
-    set(eventoRef, colabList);
+    await set(eventoRef, colabList);
     window.location.href = "eventPage.html";
 }
 
@@ -148,12 +152,12 @@ async function validarTodosLosColabs() {
             return;
         }
     });
-    if (!invalid){
+    if (!invalid) {
         return colabList;
     } else {
         return null;
     }
-    
+
 }
 
 
